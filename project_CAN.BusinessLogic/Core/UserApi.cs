@@ -10,30 +10,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
-//using project_CAN.BusinessLogic.DBModel;
-//using project_CAN.Domain.Entities.User;
-//using project_CAN.Helpers;
 
 namespace project_CAN.BusinessLogic.Core
 {
     public class UserApi
     {
-        internal UResponseLogin UserLoginAction(ULoginData dataUserView)
+        internal UResponseLogin UserLoginAction(ULoginData dataUserDomain)
         {
             UDBTable userTable;
-            var validate = new EmailAddressAttribute();
-            if (validate.IsValid(dataUserView.email))
+            var validate = new System.ComponentModel.DataAnnotations.EmailAddressAttribute();
+            if (validate.IsValid(dataUserDomain.credential))
             {
-                //var pass = LoginHelper.HashGen(dataUserView.password);
+                //var pass = LoginHelper.HashGen(dataUserDomain.password);
                 using (var db = new DBUserContext())
                 {
-                    //result = db.Users.FirstOrDefault(itemDB => itemDB.email == dataUserView.email && itemDB.password == pass);
-                    userTable = db.Users.FirstOrDefault(itemDB => itemDB.email == dataUserView.email && itemDB.password == dataUserView.password);
-                }
-
-                if (userTable.isBlocked)
-                {
-                    return new UResponseLogin { Status = false, StatusMsg = "You are blocked!" };
+                    //result = db.Users.FirstOrDefault(itemDB => itemDB.email == dataUserDomain.email && itemDB.password == pass);
+                    userTable = db.Users.FirstOrDefault(itemDB => itemDB.email.ToString() == dataUserDomain.credential && itemDB.password.ToString() == dataUserDomain.password);
                 }
 
                 if (userTable == null)
@@ -41,9 +33,14 @@ namespace project_CAN.BusinessLogic.Core
                     return new UResponseLogin { Status = false, StatusMsg = "The Username or Password is Incorrect" };
                 }
 
+                if (userTable.isBlocked)
+                {
+                    return new UResponseLogin { Status = false, StatusMsg = "You are blocked!" };
+                }
+
                 using (var todo = new DBUserContext())
                 {
-                    userTable.lastLogin = dataUserView.lastLogin;
+                    userTable.lastLogin = dataUserDomain.lastLogin;
                     todo.Entry(userTable).State = EntityState.Modified;
                     todo.SaveChanges();
                 }
@@ -53,16 +50,11 @@ namespace project_CAN.BusinessLogic.Core
             // When user logins with username
             else
             {
-                //var pass = LoginHelper.HashGen(dataUserView.password);
+                //var pass = LoginHelper.HashGen(dataUserDomain.password);
                 using (var db = new DBUserContext())
                 {
-                    //userTable = db.Users.FirstOrDefault(itemDB => itemDB.userName == dataUserView.userName && itemDB.password == pass);
-                    userTable = db.Users.FirstOrDefault(itemDB => itemDB.userName == dataUserView.userName && itemDB.password == dataUserView.password);
-                }
-
-                if (userTable.isBlocked)
-                {
-                    return new UResponseLogin { Status = false, StatusMsg = "You are blocked!" };
+                    //userTable = db.Users.FirstOrDefault(itemDB => itemDB.userName == dataUserDomain.userName && itemDB.password == pass);
+                    userTable = db.Users.FirstOrDefault(itemDB => itemDB.userName == dataUserDomain.credential && itemDB.password == dataUserDomain.password);
                 }
 
                 if (userTable == null)
@@ -70,9 +62,14 @@ namespace project_CAN.BusinessLogic.Core
                     return new UResponseLogin { Status = false, StatusMsg = "The Username or Password is Incorrect" };
                 }
 
+                if (userTable.isBlocked)
+                {
+                    return new UResponseLogin { Status = false, StatusMsg = "You are blocked!" };
+                }
+
                 using (var todo = new DBUserContext())
                 {
-                    userTable.lastLogin = dataUserView.lastLogin;
+                    userTable.lastLogin = dataUserDomain.lastLogin;
                     todo.Entry(userTable).State = EntityState.Modified;
                     todo.SaveChanges();
                 }
@@ -151,6 +148,7 @@ namespace project_CAN.BusinessLogic.Core
             }
 
             if (curentUser == null) return null;
+            Mapper.Reset();
             Mapper.Initialize(cfg => cfg.CreateMap<UDBTable, UserMinimal>());
             var userminimal = Mapper.Map<UserMinimal>(curentUser);
 

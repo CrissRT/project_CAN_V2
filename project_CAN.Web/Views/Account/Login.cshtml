@@ -11,6 +11,7 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css/bootstrap")
     @Styles.Render("~/Content/css/login")
+    @Scripts.Render("~/bundles/bootstrap")
 </head>
 <body class="loginPage">
     @using (Html.BeginForm("Login", "Account", FormMethod.Post))
@@ -20,8 +21,8 @@
         <h1>Logare</h1>
         <div class="login">
             <p>Login-ul:</p>
-            @Html.TextBoxFor(model => model.userName)
-            @Html.ValidationMessageFor(model => model.userName, "")
+            @Html.TextBoxFor(model => model.credential)
+            @Html.ValidationMessageFor(model => model.credential, "")
         </div>
         <div class="parola">
             <p>Parola:</p>
@@ -31,6 +32,5 @@
         <button type="submit" class="btn btn-secondary btn-lg">Logare</button>
     </div>
     }
-    @Scripts.Render("~/bundles/bootstrap")
 </body>
 </html>

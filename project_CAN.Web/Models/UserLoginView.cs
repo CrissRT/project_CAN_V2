@@ -6,16 +6,17 @@ namespace project_CAN.Web.Models
     public class UserLoginView
     {
         [Required]
-        [Display(Name = "Email")]
-        public string Username { get; set; }
+        [Display(Name = "Email or Username")]
+        public string credential { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
-        public string Password { get; set; }
+        public string password { get; set; }
 
+        [Required]
         [DataType(DataType.DateTime)]
-        public DateTime LastLogin { get; set; }
+        public DateTime lastLogin { get; set; }
 
     }
 }

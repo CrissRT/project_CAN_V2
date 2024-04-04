@@ -28,6 +28,11 @@ namespace project_CAN.Web.Controllers
         // GET: Account
         public ActionResult Profile()
         {
+            SessionStatus();
+            if ((string)System.Web.HttpContext.Current.Session["LoginStatus"] != "login")
+            {
+                return RedirectToAction("Login", "Account");
+            }
             return View();
         }
         public ActionResult SignUp()
@@ -46,6 +51,7 @@ namespace project_CAN.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                Mapper.Reset();
                 Mapper.Initialize(cfg => cfg.CreateMap<UserLoginView, ULoginData>());
                 var data = Mapper.Map<ULoginData>(login);
 
@@ -54,10 +60,10 @@ namespace project_CAN.Web.Controllers
                 var userLogin = _session.UserLoginView(data);
                 if (userLogin.Status)
                 {
-                    HttpCookie cookie = _session.GenCookie(login.Credential);
+                    HttpCookie cookie = _session.GenCookie(login.credential);
                     ControllerContext.HttpContext.Response.Cookies.Add(cookie);
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Main");
                 }
                 else
                 {
