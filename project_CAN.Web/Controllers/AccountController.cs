@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+//using project_CAN.Web.Extension;
+using project_CAN.Web.Models;
 
 namespace project_CAN.Web.Controllers
 {
@@ -23,9 +25,11 @@ namespace project_CAN.Web.Controllers
             return View();
         }
 
-        public ActionResult test()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(UserLogin data)
         {
-            return View();
+            return RedirectToAction("Index", "Main");
         }
     }
 }

@@ -6,37 +6,30 @@
     ViewBag.Title = "Csbabgbang";
 }
 
+<!DOCTYPE html>
 <html>
 <head>
     <title>@ViewBag.Title</title>
-    @Scripts.Render("~/bundles/bootstrap")
     @Styles.Render("~/Content/css/bootstrap")
     @Styles.Render("~/Content/css/login")
 </head>
-
 <body class="loginPage">
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "loginContent" }))
     {
         @Html.AntiForgeryToken()
-        <div class="loginContent">
-            <h1>Logare</h1>
-            <div class="login">
-                <p>Login-ul:</p>
-                @Html.EditorFor(model => model.Username)
-                @Html.ValidationMessageFor(model => model.Username)
-            </div>
-            <div class="parola">
-                <p>Parola:</p>
-                @Html.EditorFor(model => model.Password)
-                @Html.ValidationMessageFor(model => model.Password)
-            </div>
-            <button type="button" class="btn btn-secondary btn-lg">Logare</button>
+        <h1>Logare</h1>
+        <div class="login">
+            <p>Login-ul:</p>
+            @Html.TextBoxFor(model => model.Username, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
         </div>
+        <div class="parola">
+            <p>Parola:</p>
+            @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+        </div>
+        <button type="submit" class="btn btn-secondary btn-lg">Logare</button>
     }
-
+    @Scripts.Render("~/bundles/bootstrap")
 </body>
-
 </html>
-
-
-
