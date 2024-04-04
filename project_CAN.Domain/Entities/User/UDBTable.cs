@@ -9,25 +9,25 @@ namespace project_CAN.Domain.Entities.User
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public int userID { get; set; }
 
         [Required]
         [Display(Name = "Username")]
         [StringLength(30, MinimumLength = 5, ErrorMessage = "Username cannot be longer than 30 characters.")]
-        public string Username { get; set; }
+        public string userName { get; set; }
 
         [Required]
         [Display(Name = "Password")]
         [StringLength(50, MinimumLength = 8, ErrorMessage = "Password cannot be shorter than 8 characters.")]
-        public string Password { get; set; }
+        public string password { get; set; }
 
         [Required]
         [Display(Name = "Email Address")]
         [StringLength(30)]
-        public string Email { get; set; }
+        public string email { get; set; }
 
         public URole privilegies { get; set; }
 
-        public bool blocked { get; set; }
+        public bool isBlocked { get; set; }
     }
 }

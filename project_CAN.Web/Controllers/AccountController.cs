@@ -29,7 +29,11 @@ namespace project_CAN.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(UserLogin data)
         {
-            return RedirectToAction("Index", "Main");
+            if (data == null && ModelState.IsValid) 
+            {
+                return RedirectToAction("Index", "Main");
+            }
+            
         }
     }
 }
