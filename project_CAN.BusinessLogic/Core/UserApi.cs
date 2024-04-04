@@ -25,7 +25,8 @@ namespace project_CAN.BusinessLogic.Core
                 using (var db = new DBUserContext())
                 {
                     //result = db.Users.FirstOrDefault(itemDB => itemDB.email == dataUserDomain.email && itemDB.password == pass);
-                    userTable = db.Users.FirstOrDefault(itemDB => itemDB.email.ToString() == dataUserDomain.credential && itemDB.password.ToString() == dataUserDomain.password);
+                    //userTable = db.GetUserByEmailAndPassword(dataUserDomain.credential, dataUserDomain.password);
+                    userTable = db.Users.FirstOrDefault(itemDB => itemDB.email == dataUserDomain.credential);
                 }
 
                 if (userTable == null)
