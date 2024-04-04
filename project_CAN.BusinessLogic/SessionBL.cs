@@ -7,7 +7,7 @@ namespace project_CAN.BusinessLogic
 {
     public class SessionBL : UserApi, ISession
     {
-        public UResponseLogin UserLogin(ULoginData data)
+        public UResponseLogin UserLoginView(ULoginData data)
         {
             return UserLoginAction(data);
         }

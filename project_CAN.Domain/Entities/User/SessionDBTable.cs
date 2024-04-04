@@ -15,12 +15,13 @@ namespace project_CAN.Domain.Entities.User
         public int sessionId { get; set; }
 
         [Required]
-        [Display(Name = "Username")]
-        [StringLength(30, MinimumLength = 5, ErrorMessage = "Username cannot be longer than 30 characters.")]
-        public string userId { get; set; }
+        [StringLength(30)]
+        public string userName { get; set; }
 
         [Required]
-        [DataType(DataType.Date)]
-        public DateTime startTime { get; set; }
+        public string cookieValue { get; set; }
+
+        [Required]
+        public DateTime expireTime { get; set; }
     }
 }

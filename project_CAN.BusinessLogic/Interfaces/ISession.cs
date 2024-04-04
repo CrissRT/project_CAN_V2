@@ -5,8 +5,8 @@ namespace project_CAN.BusinessLogic.Interfaces
 {
     public interface ISession
     {
-        UResponseLogin UserLogin(ULoginData data);
+        UResponseLogin UserLoginView(ULoginData data);
         HttpCookie GenCookie(string loginCredential);
-        //UserMinimal GetUserByCookie(string apiCookieValue);
+        UserMinimal GetUserByCookie(string apiCookieValue);
     }
 }

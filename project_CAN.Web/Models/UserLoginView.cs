@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace project_CAN.Web.Models
 {
-    public class UserLogin
+    public class UserLoginView
     {
         [Required]
         [Display(Name = "Email")]
@@ -14,8 +14,8 @@ namespace project_CAN.Web.Models
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        //[DataType(DataType.DateTime)]
-        //public DateTime LastLogin { get; set; }
+        [DataType(DataType.DateTime)]
+        public DateTime LastLogin { get; set; }
 
     }
 }

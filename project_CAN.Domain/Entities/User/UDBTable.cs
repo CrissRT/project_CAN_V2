@@ -29,5 +29,7 @@ namespace project_CAN.Domain.Entities.User
         public URole privilegies { get; set; }
 
         public bool isBlocked { get; set; }
+
+        public DateTime lastLogin {  get; set; }
     }
 }

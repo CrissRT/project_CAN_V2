@@ -1,11 +1,10 @@
-﻿@model project_CAN.Web.Models.UserLogin
-@using System.Web.Optimization
-@using System.Web.UI.WebControls
-@{
+﻿@{
     Layout = null;
     ViewBag.Title = "Csbabgbang";
 }
 
+@model project_CAN.Web.Models.UserLoginView
+@using System.Web.Optimization
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,21 +13,23 @@
     @Styles.Render("~/Content/css/login")
 </head>
 <body class="loginPage">
-    @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "loginContent" }))
+    @using (Html.BeginForm("Login", "Account", FormMethod.Post))
     {
-        @Html.AntiForgeryToken()
+    @Html.AntiForgeryToken()
+    <div class="loginContent">
         <h1>Logare</h1>
         <div class="login">
             <p>Login-ul:</p>
-            @Html.TextBoxFor(model => model.Username, new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+            @Html.TextBoxFor(model => model.userName)
+            @Html.ValidationMessageFor(model => model.userName, "")
         </div>
         <div class="parola">
             <p>Parola:</p>
-            @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            @Html.PasswordFor(model => model.password)
+            @Html.ValidationMessageFor(model => model.password, "")
         </div>
         <button type="submit" class="btn btn-secondary btn-lg">Logare</button>
+    </div>
     }
     @Scripts.Render("~/bundles/bootstrap")
 </body>

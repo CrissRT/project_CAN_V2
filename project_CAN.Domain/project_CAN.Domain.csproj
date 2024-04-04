@@ -43,11 +43,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Enums\URole.cs" />
-    <Compile Include="Entities\User\SessionData.cs" />
     <Compile Include="Entities\User\SessionDBTable.cs" />
     <Compile Include="Entities\User\UDBTable.cs" />
     <Compile Include="Entities\User\ULoginData.cs" />
     <Compile Include="Entities\User\UResponseLogin.cs" />
+    <Compile Include="Entities\User\UserMinimal.cs" />
     <Compile Include="project_CANDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
