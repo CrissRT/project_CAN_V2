@@ -1,0 +1,67 @@
+﻿@using System.Web.Optimization
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_LayoutPageUser.cshtml";
+}
+@Styles.Render("~/Content/css/profile")
+
+<div class="profile">
+
+    <img src="../../images/person-circle.svg"/>
+
+    <div class="profileContent">
+
+        <h1>Name</h1>
+
+        <div class="valuedCourses">
+            <p>Cursuri apreciate</p>
+            <div class="profileLine">
+
+                <div class="lineButton">
+                    <button type="button" class="btn btn-secondary btn-lg">Deschide</button>
+                </div>
+
+                <div class="lineContent">
+                    <p>Cursuri apreciate:</p>
+                    <h2>3</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="generalSeting">
+            <p>Setari generale</p>
+            <div class="profileLine">
+                <div class="lineButton">
+                    <button type="button" class="btn btn-secondary btn-lg">Aplica</button>
+                </div>
+
+                <div class="lineContent">
+                    <p>Schimba numele</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="contats">
+
+            <div class="contactROW">
+                <i class="bi bi-instagram"></i>
+                <a href="https://www.instagram.com/numele_utilizatorului/">Instagramul nostru</a>
+            </div>
+
+            <div class="contactROW">
+                <i class="bi bi-facebook"></i>
+                <a href="https://www.instagram.com/numele_utilizatorului/">Facebook-ul nostru</a>
+            </div>
+
+            <div class="contactROW">
+                <i class="bi bi-telegram"></i>
+                <a href="https://www.instagram.com/numele_utilizatorului/">Telegramul nostru</a>
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+</div>

@@ -1,0 +1,42 @@
+﻿@model project_CAN.Web.Models.UserLogin
+@using System.Web.Optimization
+@using System.Web.UI.WebControls
+@{
+    Layout = null;
+    ViewBag.Title = "Csbabgbang";
+}
+
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    @Scripts.Render("~/bundles/bootstrap")
+    @Styles.Render("~/Content/css/bootstrap")
+    @Styles.Render("~/Content/css/login")
+</head>
+
+<body class="loginPage">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="loginContent">
+            <h1>Logare</h1>
+            <div class="login">
+                <p>Login-ul:</p>
+                @Html.EditorFor(model => model.Username)
+                @Html.ValidationMessageFor(model => model.Username)
+            </div>
+            <div class="parola">
+                <p>Parola:</p>
+                @Html.EditorFor(model => model.Password)
+                @Html.ValidationMessageFor(model => model.Password)
+            </div>
+            <button type="button" class="btn btn-secondary btn-lg">Logare</button>
+        </div>
+    }
+
+</body>
+
+</html>
+
+
+
