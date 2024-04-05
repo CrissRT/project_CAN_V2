@@ -10,7 +10,6 @@ namespace project_CAN.Domain.Entities.User
     {
         public string password { get; set; }
         public string credential { get; set; }
-
         public URole privilegies { get; set; }
         public DateTime lastLogin { get; set; }
     }

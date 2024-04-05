@@ -107,11 +107,8 @@ namespace project_CAN.BusinessLogic.Core
                 {
                     currentSession.cookieValue = apiCookie.Value;
                     currentSession.expireTime = DateTime.Now.AddMinutes(60);
-                    using (var todo = new DBSessionContext())
-                    {
-                        todo.Entry(currentSession).State = EntityState.Modified;
-                        todo.SaveChanges();
-                    }
+                    db.Entry(currentSession).State = EntityState.Modified;
+                    db.SaveChanges(); // Save changes here
                 }
                 // If currentSession does not exist
                 else
