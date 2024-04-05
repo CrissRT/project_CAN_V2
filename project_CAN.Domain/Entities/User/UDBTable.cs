@@ -38,5 +38,7 @@ namespace project_CAN.Domain.Entities.User
 
         [Required]
         public DateTime lastLogin { get; set; }
+
+        //public SessionDBTable Sessions { get; set; }
     }
 }

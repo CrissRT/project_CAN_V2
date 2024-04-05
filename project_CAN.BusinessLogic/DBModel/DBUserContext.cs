@@ -16,11 +16,5 @@ namespace project_CAN.BusinessLogic.DBModel
         }
 
         public virtual DbSet<UDBTable> Users { get; set; }
-
-        // Method to retrieve user by email and password
-        public UDBTable GetUserByEmailAndPassword(string email, string password)
-        {
-            return Users.FirstOrDefault(u => u.email == email && u.password == password);
-        }
     }
 }

@@ -85,35 +85,53 @@ namespace project_CAN.BusinessLogic.Core
             {
                 Value = CookieGenerator.Create(loginCredential)
             };
-
+            SessionDBTable currentSession = null;
+            UDBTable currentUserNoSession = null;
             using (var db = new DBSessionContext())
             {
-                SessionDBTable curent;
+                // If user logins wih Email
                 var validate = new EmailAddressAttribute();
                 if (validate.IsValid(loginCredential))
                 {
-                    curent = (from e in db.Sessions where e.userName == loginCredential select e).FirstOrDefault();
+                    currentSession = db.Sessions.FirstOrDefault(itemDB => itemDB.User.email == loginCredential);
                 }
+                // If user logins wih Username
                 else
                 {
-                    curent = (from e in db.Sessions where e.userName == loginCredential select e).FirstOrDefault();
+                    currentSession = db.Sessions.FirstOrDefault(itemDB => itemDB.User.userName == loginCredential);
+
                 }
 
-                if (curent != null)
+                // If currentSession exists
+                if (currentSession != null)
                 {
-                    curent.cookieValue = apiCookie.Value;
-                    curent.expireTime = DateTime.Now.AddMinutes(60);
+                    currentSession.cookieValue = apiCookie.Value;
+                    currentSession.expireTime = DateTime.Now.AddMinutes(60);
                     using (var todo = new DBSessionContext())
                     {
-                        todo.Entry(curent).State = EntityState.Modified;
+                        todo.Entry(currentSession).State = EntityState.Modified;
                         todo.SaveChanges();
                     }
                 }
+                // If currentSession does not exist
                 else
                 {
+                    using (var dbUser = new DBUserContext())
+                    {
+                        // If user logins wih Email
+                        if (validate.IsValid(loginCredential))
+                        {
+                            currentUserNoSession = dbUser.Users.FirstOrDefault(itemDB => itemDB.email == loginCredential);
+                        }
+                        // If user logins wih Username
+                        else
+                        {
+                            currentUserNoSession = dbUser.Users.FirstOrDefault(itemDB => itemDB.userName == loginCredential);
+                        }
+                    }
                     db.Sessions.Add(new SessionDBTable
                     {
-                        userName = loginCredential,
+                        userId = currentUserNoSession.userId,
                         cookieValue = apiCookie.Value,
                         expireTime = DateTime.Now.AddMinutes(60)
                     });
@@ -126,34 +144,36 @@ namespace project_CAN.BusinessLogic.Core
 
         internal UserMinimal UserCookie(string cookie)
         {
-            SessionDBTable session;
-            UDBTable curentUser;
+            SessionDBTable session = null;
+            UDBTable currentUser = null;
 
             using (var db = new DBSessionContext())
             {
-                session = db.Sessions.FirstOrDefault(itemDB => itemDB.cookieValue == cookie && itemDB.expireTime > DateTime.Now);
+                session = db.Sessions.Include(s => s.User)
+                                     .FirstOrDefault(itemDB => itemDB.cookieValue == cookie && itemDB.expireTime > DateTime.Now);
             }
 
             if (session == null) return null;
             using (var db = new DBUserContext())
             {
                 var validate = new EmailAddressAttribute();
-                if (validate.IsValid(session.userName))
+                if (validate.IsValid(session.User.email))
                 {
-                    curentUser = db.Users.FirstOrDefault(u => u.email == session.userName);
+                    currentUser = db.Users.FirstOrDefault(u => u.email == session.User.email);
                 }
                 else
                 {
-                    curentUser = db.Users.FirstOrDefault(u => u.userName == session.userName);
+                    currentUser = db.Users.FirstOrDefault(u => u.userName == session.User.userName);
                 }
             }
 
-            if (curentUser == null) return null;
+            if (currentUser == null) return null;
             Mapper.Reset();
             Mapper.Initialize(cfg => cfg.CreateMap<UDBTable, UserMinimal>());
-            var userminimal = Mapper.Map<UserMinimal>(curentUser);
+            var userminimal = Mapper.Map<UserMinimal>(currentUser);
 
             return userminimal;
         }
+
     }
 }
