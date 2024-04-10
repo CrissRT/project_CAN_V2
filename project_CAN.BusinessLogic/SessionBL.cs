@@ -7,7 +7,7 @@ namespace project_CAN.BusinessLogic
 {
     public class SessionBL : UserApi, ISession
     {
-        public UResponseLogin UserLoginView(ULoginData data)
+        public UResponseLogin UserLoginSessionBL(ULoginData data)
         {
             return UserLoginAction(data);
         }
@@ -20,6 +20,11 @@ namespace project_CAN.BusinessLogic
         public UserMinimal GetUserByCookie(string apiCookieValue)
         {
             return UserCookie(apiCookieValue);
+        }
+
+        public UResponseLogin UserRegistrationSessionBL(URegistrationData data)
+        {
+            return UserRegistrationAction(data);
         }
     }
 }

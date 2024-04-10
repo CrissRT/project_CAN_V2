@@ -10,23 +10,61 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using project_CAN.Domain.Enums;
 
 namespace project_CAN.BusinessLogic.Core
 {
     public class UserApi
     {
+        internal UResponseLogin UserRegistrationAction(URegistrationData dataUserDomain)
+        {
+            UDBTable userTable;
+
+            var validate = new System.ComponentModel.DataAnnotations.EmailAddressAttribute();
+            if (!validate.IsValid(dataUserDomain.email))
+            {
+                return new UResponseLogin { Status = false, StatusMsg = "Invalid email format" };
+            }
+            var pass = LoginHelper.HashGen(dataUserDomain.password);
+
+            if (LoginHelper.HashGen(dataUserDomain.repeatPassword) != pass)
+            {
+                return new UResponseLogin { Status = false, StatusMsg = "Repeat Password is incorrect" };
+            }
+            
+            using (var db = new DBUserContext())
+            {
+                if (db.Users.Any(u => u.email == dataUserDomain.email) || db.Users.Any(u => u.userName == dataUserDomain.username))
+                {
+                    return new UResponseLogin {Status = false, StatusMsg = "User already exists"};
+                }
+
+                var newUser = new UDBTable
+                {
+                    userName = dataUserDomain.username,
+                    email = dataUserDomain.email,
+                    password = pass,
+                    privilegies = URole.user,
+                    lastLogin = dataUserDomain.lastLogin,
+                    isBlocked = false
+                };
+
+                db.Users.Add(newUser);
+                db.SaveChanges();
+            }
+            return new UResponseLogin { Status = true, StatusMsg = "Registration successful"};
+        }
         internal UResponseLogin UserLoginAction(ULoginData dataUserDomain)
         {
             UDBTable userTable;
+            var pass = LoginHelper.HashGen(dataUserDomain.password);
             var validate = new System.ComponentModel.DataAnnotations.EmailAddressAttribute();
             if (validate.IsValid(dataUserDomain.credential))
             {
-                //var pass = LoginHelper.HashGen(dataUserDomain.password);
                 using (var db = new DBUserContext())
                 {
                     //result = db.Users.FirstOrDefault(itemDB => itemDB.email == dataUserDomain.email && itemDB.password == pass);
-                    //userTable = db.GetUserByEmailAndPassword(dataUserDomain.credential, dataUserDomain.password);
-                    userTable = db.Users.FirstOrDefault(itemDB => itemDB.email == dataUserDomain.credential);
+                    userTable = db.Users.FirstOrDefault(itemDB => itemDB.email == dataUserDomain.credential && itemDB.password == pass);
                 }
 
                 if (userTable == null)
@@ -46,7 +84,7 @@ namespace project_CAN.BusinessLogic.Core
                     todo.SaveChanges();
                 }
 
-                return new UResponseLogin { Status = true };
+                return new UResponseLogin { Status = true , StatusMsg = "Success Login"};
             }
             // When user logins with username
             else
@@ -54,8 +92,7 @@ namespace project_CAN.BusinessLogic.Core
                 //var pass = LoginHelper.HashGen(dataUserDomain.password);
                 using (var db = new DBUserContext())
                 {
-                    //userTable = db.Users.FirstOrDefault(itemDB => itemDB.userName == dataUserDomain.userName && itemDB.password == pass);
-                    userTable = db.Users.FirstOrDefault(itemDB => itemDB.userName == dataUserDomain.credential && itemDB.password == dataUserDomain.password);
+                    userTable = db.Users.FirstOrDefault(itemDB => itemDB.userName == dataUserDomain.credential && itemDB.password == pass);
                 }
 
                 if (userTable == null)
@@ -75,7 +112,7 @@ namespace project_CAN.BusinessLogic.Core
                     todo.SaveChanges();
                 }
 
-                return new UResponseLogin { Status = true };
+                return new UResponseLogin { Status = true , StatusMsg = "Success Login"};
             }
         }
 
@@ -99,7 +136,6 @@ namespace project_CAN.BusinessLogic.Core
                 else
                 {
                     currentSession = db.Sessions.FirstOrDefault(itemDB => itemDB.User.userName == loginCredential);
-
                 }
 
                 // If currentSession exists

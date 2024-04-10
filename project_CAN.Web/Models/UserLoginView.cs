@@ -13,10 +13,5 @@ namespace project_CAN.Web.Models
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string password { get; set; }
-
-        [Required]
-        [DataType(DataType.DateTime)]
-        public DateTime lastLogin { get; set; }
-
     }
 }

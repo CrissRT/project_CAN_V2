@@ -40,6 +40,34 @@ namespace project_CAN.Web.Controllers
             return View();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SignUp(UserRegistrationView registrationViewData)
+        {
+            if (ModelState.IsValid)
+            {
+                Mapper.Reset();
+                Mapper.Initialize(cfg => cfg.CreateMap<UserRegistrationView, URegistrationData>());
+                var data = Mapper.Map<URegistrationData>(registrationViewData);
+
+                data.lastLogin = DateTime.Now;
+                var userRegister = _session.UserRegistrationSessionBL(data);
+                if (userRegister.Status)
+                {
+                    HttpCookie cookie = _session.GenCookie(registrationViewData.email);
+                    ControllerContext.HttpContext.Response.Cookies.Add(cookie);
+
+                    return RedirectToAction("Index", "Main");
+                }
+                else
+                {
+                    ModelState.AddModelError("", userRegister.StatusMsg);
+                }
+            }
+
+            return View();
+        }
+
         public ActionResult Login()
         {
             return View();
@@ -57,7 +85,7 @@ namespace project_CAN.Web.Controllers
 
                 data.lastLogin = DateTime.Now;
 
-                var userLogin = _session.UserLoginView(data);
+                var userLogin = _session.UserLoginSessionBL(data);
                 if (userLogin.Status)
                 {
                     HttpCookie cookie = _session.GenCookie(login.credential);
