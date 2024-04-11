@@ -4,16 +4,14 @@
     Layout = "~/Views/Shared/_LayoutPageUser.cshtml";
 }
 @Styles.Render("~/Content/css/profile")
-@using (Html.BeginForm("SignUp", "Account", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
     <div class="profile">
 
         <img src="../../images/person-circle.svg"/>
 
         <div class="profileContent">
 
-            <h1>Name</h1>
+            @*<h1>Name</h1>*@
+            <h1>@ViewBag.userName</h1>
             <div class="valuedCourses">
                 <p>Cursuri apreciate</p>
                 <div class="profileLine">
@@ -66,4 +64,3 @@
         </div>
 
     </div>
-}

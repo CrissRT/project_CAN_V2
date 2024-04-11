@@ -9,12 +9,10 @@ namespace project_CAN.Domain.Entities.User
     public class URegistrationData
     {
         public string password { get; set; }
-
         public string repeatPassword { get; set; }
         public string email { get; set; }
 
         public string username { get; set; }
-        //public URole privilegies { get; set; }
         public DateTime lastLogin { get; set; }
     }
 }

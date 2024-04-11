@@ -6,7 +6,6 @@ using System.Web.Mvc;
 using AutoMapper;
 using project_CAN.BusinessLogic;
 using project_CAN.BusinessLogic.Interfaces;
-
 using project_CAN.Domain.Entities.User;
 using project_CAN.Web.Extension;
 
@@ -33,7 +32,12 @@ namespace project_CAN.Web.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
-            return View();
+
+            var apiCookie = Request.Cookies["X-KEY"];
+            var profile = _session.GetUserByCookie(apiCookie.Value);
+
+            ViewBag.userName = profile.userName;
+            return View(ViewBag);
         }
         public ActionResult SignUp()
         {
