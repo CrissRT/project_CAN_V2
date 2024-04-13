@@ -14,24 +14,37 @@
     @Scripts.Render("~/bundles/bootstrap")
 </head>
 <body class="loginPage">
+    <script>
+            var inputTags = document.querySelectorAll("input");
+
+            function updateOutput() {
+               @ViewBag.ErError= ""
+            }
+
+            // Loop through each input element and attach event listener
+            inputTags.forEach(function(input) {
+                input.addEventListener('input', updateOutput);
+            });
+    </script>
     @using (Html.BeginForm("Login", "Account", FormMethod.Post))
     {
-    @Html.AntiForgeryToken()
-    <div class="loginContent">
-        <h1>Logare</h1>
-        <div class="login">
-            <p>Login-ul:</p>
-            @Html.TextBoxFor(model => model.credential)
-            @Html.ValidationMessageFor(model => model.credential, "")
+        @Html.AntiForgeryToken()
+        <div class="loginContent">
+            <h1>Logare</h1>
+            <div class="login">
+                <p>Login-ul:</p>
+                @Html.TextBoxFor(model => model.credential)
+                @Html.ValidationMessageFor(model => model.credential)
+            </div>
+            <div class="parola">
+                <p>Parola:</p>
+                @Html.PasswordFor(model => model.password)
+                @Html.ValidationMessageFor(model => model.password)
+            </div>
+            <div id="error-div">@ViewBag.Error </div>
+            <button type="submit" class="btn btn-secondary btn-lg">Logare</button>
+            @Html.ActionLink("Sign Up", "SignUp", "Account")
         </div>
-        <div class="parola">
-            <p>Parola:</p>
-            @Html.PasswordFor(model => model.password)
-            @Html.ValidationMessageFor(model => model.password, "")
-        </div>
-        <button type="submit" class="btn btn-secondary btn-lg">Logare</button>
-        @Html.ActionLink("Sign Up", "SignUp", "Account")
-    </div>
     }
 </body>
 </html>

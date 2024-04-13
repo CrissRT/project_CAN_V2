@@ -23,20 +23,20 @@ namespace project_CAN.BusinessLogic.Core
             var validate = new System.ComponentModel.DataAnnotations.EmailAddressAttribute();
             if (!validate.IsValid(dataUserDomain.email))
             {
-                return new UResponseLogin { Status = false, StatusMsg = "Invalid email format" };
+                return new UResponseLogin { Status = false, StatusMsg = "Email format incorect" };
             }
             var pass = LoginHelper.HashGen(dataUserDomain.password);
 
             if (LoginHelper.HashGen(dataUserDomain.repeatPassword) != pass)
             {
-                return new UResponseLogin { Status = false, StatusMsg = "Repeat Password is incorrect" };
+                return new UResponseLogin { Status = false, StatusMsg = "Repeta Parola incorect" };
             }
             
             using (var db = new DBUserContext())
             {
-                if (db.Users.Any(u => u.email == dataUserDomain.email) || db.Users.Any(u => u.userName == dataUserDomain.username))
+                if (db.Users.Any(itemDB => itemDB.email == dataUserDomain.email) || db.Users.Any(itemDB => itemDB.userName == dataUserDomain.username))
                 {
-                    return new UResponseLogin {Status = false, StatusMsg = "User already exists"};
+                    return new UResponseLogin {Status = false, StatusMsg = "Utilizatorul deja exista"};
                 }
 
                 var newUser = new UDBTable
@@ -52,7 +52,7 @@ namespace project_CAN.BusinessLogic.Core
                 db.Users.Add(newUser);
                 db.SaveChanges();
             }
-            return new UResponseLogin { Status = true, StatusMsg = "Registration successful"};
+            return new UResponseLogin { Status = true, StatusMsg = "Registrare cu success"};
         }
         internal UResponseLogin UserLoginAction(ULoginData dataUserDomain)
         {
@@ -63,18 +63,17 @@ namespace project_CAN.BusinessLogic.Core
             {
                 using (var db = new DBUserContext())
                 {
-                    //result = db.Users.FirstOrDefault(itemDB => itemDB.email == dataUserDomain.email && itemDB.password == pass);
                     userTable = db.Users.FirstOrDefault(itemDB => itemDB.email == dataUserDomain.credential && itemDB.password == pass);
                 }
 
                 if (userTable == null)
                 {
-                    return new UResponseLogin { Status = false, StatusMsg = "The Username or Password is Incorrect" };
+                    return new UResponseLogin { Status = false, StatusMsg = "Login-ul sau Parola este incorecta" };
                 }
 
                 if (userTable.isBlocked)
                 {
-                    return new UResponseLogin { Status = false, StatusMsg = "You are blocked!" };
+                    return new UResponseLogin { Status = false, StatusMsg = "D-voastra sunteti blocat!" };
                 }
 
                 using (var todo = new DBUserContext())
@@ -84,7 +83,7 @@ namespace project_CAN.BusinessLogic.Core
                     todo.SaveChanges();
                 }
 
-                return new UResponseLogin { Status = true , StatusMsg = "Success Login"};
+                return new UResponseLogin { Status = true , StatusMsg = "Login cu success"};
             }
             // When user logins with username
             else
@@ -97,12 +96,12 @@ namespace project_CAN.BusinessLogic.Core
 
                 if (userTable == null)
                 {
-                    return new UResponseLogin { Status = false, StatusMsg = "The Username or Password is Incorrect" };
+                    return new UResponseLogin { Status = false, StatusMsg = "Login-ul sau Parola este incorecta" };
                 }
 
                 if (userTable.isBlocked)
                 {
-                    return new UResponseLogin { Status = false, StatusMsg = "You are blocked!" };
+                    return new UResponseLogin { Status = false, StatusMsg = "D-voastra sunteti blocat!" };
                 }
 
                 using (var todo = new DBUserContext())
@@ -112,7 +111,7 @@ namespace project_CAN.BusinessLogic.Core
                     todo.SaveChanges();
                 }
 
-                return new UResponseLogin { Status = true , StatusMsg = "Success Login"};
+                return new UResponseLogin { Status = true , StatusMsg = "Login cu success" };
             }
         }
 

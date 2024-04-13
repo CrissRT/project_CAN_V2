@@ -24,7 +24,20 @@ namespace project_CAN.Web.Controllers
             var bl = new BussinesLogic();
             _session = bl.GetSessionBL();
         }
-        // GET: Account
+
+        public ActionResult Logout()
+        {
+            // Invalidate the authentication cookie
+            var cookie = Request.Cookies["X-KEY"];
+            if (cookie != null)
+            {
+                cookie.Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies.Add(cookie);
+            }
+
+            // Redirect to the login page or any other page after logout
+            return RedirectToAction("Index", "Main");
+        }
         public ActionResult Profile()
         {
             SessionStatus();
@@ -94,13 +107,12 @@ namespace project_CAN.Web.Controllers
                 {
                     HttpCookie cookie = _session.GenCookie(login.credential);
                     ControllerContext.HttpContext.Response.Cookies.Add(cookie);
-
+                    
                     return RedirectToAction("Index", "Main");
                 }
                 else
                 {
-                    ModelState.AddModelError("", userLogin.StatusMsg);
-                    return View();
+                    ViewBag.Error = userLogin.StatusMsg;
                 }
             }
 
