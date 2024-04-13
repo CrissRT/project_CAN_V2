@@ -1,31 +1,12 @@
-﻿@{
-    Layout = null;
-    ViewBag.Title = "Csbabgbang";
-}
-
+﻿@using System.Web.Optimization
 @model project_CAN.Web.Models.UserLoginView
-@using System.Web.Optimization
-<!DOCTYPE html>
-<html>
-<head>
-    <title>@ViewBag.Title</title>
-    @Styles.Render("~/Content/css/bootstrap")
-    @Styles.Render("~/Content/css/login")
-    @Scripts.Render("~/bundles/bootstrap")
-</head>
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutBlankPage.cshtml";
+}
+@Styles.Render("~/Content/css/login")
+
 <body class="loginPage">
-    <script>
-            var inputTags = document.querySelectorAll("input");
-
-            function updateOutput() {
-               @ViewBag.ErError= ""
-            }
-
-            // Loop through each input element and attach event listener
-            inputTags.forEach(function(input) {
-                input.addEventListener('input', updateOutput);
-            });
-    </script>
     @using (Html.BeginForm("Login", "Account", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
@@ -47,4 +28,3 @@
         </div>
     }
 </body>
-</html>
