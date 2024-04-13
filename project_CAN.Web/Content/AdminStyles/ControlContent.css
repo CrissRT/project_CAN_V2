@@ -1,0 +1,145 @@
+.adminPage {
+    background-image: url(../../images/backGround.svg);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.barr {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 70px;
+    border: 1px solid black;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    padding: 25px;
+    position: relative;
+}
+
+.bi-person-lines-fill {
+    font-size: 50px;
+    margin-left: 30px;
+    position: absolute;
+}
+
+.bi-person-circle {
+    font-size: 50px;
+    position: absolute;
+    right: 20px;
+}
+
+.CourseBarr {
+    background-color: white;
+    width: 1000px;
+    height: 70px;
+    margin-top: 20px;
+    border: 1px solid black;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.courseSearch {
+    background-color: white;
+    width: 500px;
+    height: 50px;
+    border-radius: 20px;
+    border: 1.5px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding: 5px;
+    margin-right: 20px;
+}
+
+    .courseSearch > .bi-search {
+        font-size: 30px;
+        margin-right: 12px;
+    }
+
+.bi-file-earmark-plus {
+    font-size: 40px;
+}
+
+.courseList {
+    background-color: white;
+    width: 80%;
+/*    contain: paint;*/
+    border: 1px solid black;
+    border-radius: 20px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    display: relative;
+}
+
+.adminCourseView {
+    width: 100%;
+    height: 200px;
+    border: 1px solid black;
+    border-left: none;
+    border-right: none;
+    margin: -5px 0 10px 0;
+    display: flex;
+    flex-direction: row;
+}
+
+    .adminCourseView > img {
+        width: 400px;
+        height: 100%;
+        margin-right: 20px;
+    }
+
+    .adminCourseView > p {
+        width: 450px;
+        margin-right: 20px;
+        margin-bottom: 0;
+        display: flex;
+        align-items: center;
+    }
+
+.editRemoveCourse {
+    width: 108px;
+    height: 100%;
+    border: 1px solid black;
+    border-top: none;
+    border-bottom: none;
+    border-right: none;
+}
+
+.edit {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bi-pencil {
+    font-size: 40px;
+}
+
+.remove {
+    width: 100%;
+    height: 50%;
+    border: 1px solid black;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bi-file-earmark-minus {
+    font-size: 40px;
+}

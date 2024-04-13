@@ -39,6 +39,11 @@ namespace project_CAN
             bundles.Add(new StyleBundle("~/Content/css/login").Include(
                 "~/Content/UserStyles/Login.css"));
 
+            bundles.Add(new StyleBundle("~/Content/css/admin/users").Include(
+                "~/Content/AdminStyles/ControlUsers.css"));
+
+            bundles.Add(new StyleBundle("~/Content/css/admin/content").Include(
+                "~/Content/AdminStyles/ControlContent.css"));
         }
     }
 }

@@ -78,7 +78,7 @@ namespace project_CAN.BusinessLogic.Core
 
                 using (var todo = new DBUserContext())
                 {
-                    userTable.lastLogin = dataUserDomain.lastLogin;
+                    userTable.lastLogin = DateTime.Now;
                     todo.Entry(userTable).State = EntityState.Modified;
                     todo.SaveChanges();
                 }

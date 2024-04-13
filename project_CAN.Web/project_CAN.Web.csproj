@@ -132,6 +132,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\AdminStyles\ControlContent.css" />
+    <Content Include="Content\AdminStyles\ControlUsers.css" />
     <Content Include="Content\bootstrap-icons-1.11.3\0-circle-fill.svg" />
     <Content Include="Content\bootstrap-icons-1.11.3\0-circle.svg" />
     <Content Include="Content\bootstrap-icons-1.11.3\0-square-fill.svg" />
@@ -3312,6 +3314,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Extension\HttpContextExtensions.cs" />
     <Compile Include="Global.asax.cs">
@@ -3442,6 +3446,8 @@
     <Content Include="Views\Account\SignUp.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\_LayoutBlankPage.cshtml" />
+    <Content Include="Views\Admin\ControlUsers.cshtml" />
+    <Content Include="Views\Admin\ControlContent.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -3451,9 +3457,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\AdminStyles\" />
     <Folder Include="Content\ModeratorStyles\" />
-    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\project_CAN.BusinessLogic\project_CAN.BusinessLogic.csproj">

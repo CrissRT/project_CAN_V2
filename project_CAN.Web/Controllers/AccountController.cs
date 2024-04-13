@@ -15,16 +15,8 @@ using project_CAN.Web.Models;
 
 namespace project_CAN.Web.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
-        private readonly ISession _session;
-
-        public AccountController()
-        {
-            var bl = new BussinesLogic();
-            _session = bl.GetSessionBL();
-        }
-
         public ActionResult Logout()
         {
             // Invalidate the authentication cookie
@@ -67,7 +59,7 @@ namespace project_CAN.Web.Controllers
                 Mapper.Initialize(cfg => cfg.CreateMap<UserRegistrationView, URegistrationData>());
                 var data = Mapper.Map<URegistrationData>(registrationViewData);
 
-                data.lastLogin = DateTime.Now;
+                //data.lastLogin = DateTime.Now;
                 var userRegister = _session.UserRegistrationSessionBL(data);
                 if (userRegister.Status)
                 {
@@ -117,39 +109,6 @@ namespace project_CAN.Web.Controllers
             }
 
             return View();
-        }
-
-        public void SessionStatus()
-        {
-            var apiCookie = Request.Cookies["X-KEY"];
-            if (apiCookie != null)
-            {
-                var profile = _session.GetUserByCookie(apiCookie.Value);
-                if (profile != null)
-                {
-                    System.Web.HttpContext.Current.SetMySessionObject(profile);
-                    System.Web.HttpContext.Current.Session["LoginStatus"] = "login";
-                }
-                else
-                {
-                    System.Web.HttpContext.Current.Session.Clear();
-                    if (ControllerContext.HttpContext.Request.Cookies.AllKeys.Contains("X-KEY"))
-                    {
-                        var cookie = ControllerContext.HttpContext.Request.Cookies["X-KEY"];
-                        if (cookie != null)
-                        {
-                            cookie.Expires = DateTime.Now.AddDays(-1);
-                            ControllerContext.HttpContext.Response.Cookies.Add(cookie);
-                        }
-                    }
-
-                    System.Web.HttpContext.Current.Session["LoginStatus"] = "logout";
-                }
-            }
-            else
-            {
-                System.Web.HttpContext.Current.Session["LoginStatus"] = "logout";
-            }
         }
     }
 }

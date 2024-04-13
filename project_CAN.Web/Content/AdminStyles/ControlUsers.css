@@ -1,0 +1,146 @@
+.users{
+    background-image: url(../../images/backGround.svg);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.barr{
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 70px;
+    border: 1px solid black; 
+    border-top: none; 
+    border-right: none; 
+    border-left: none;
+    padding: 25px;
+    position: relative;
+}
+
+.bi-view-list{
+    font-size: 50px;
+    margin-left: 30px;
+    position: absolute;
+}
+.barr > .bi-person-circle{
+    font-size: 50px;
+    position: absolute;
+    right: 20px;
+}
+
+
+.searchUser{
+    background-color: white;
+    width: 700px;
+    height: 70px;
+    border: 1px solid black;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    margin-top: 20px;
+
+}
+.searchBarr{
+    background-color: white;
+    width: 500px;
+    height: 50px;
+    border-radius: 20px;
+    border: 1.5px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding: 5px;
+}
+.bi-search{
+    font-size: 30px;
+    margin-right: 12px;
+}
+
+
+
+.userList{
+    background-color: white;
+    width: 700px;
+    height: 800px;
+    overflow: scroll;
+    border: 1px solid black;
+    border-radius: 20px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.userData{
+    width: 100%;
+    height: 100px;
+    border: 1px solid black;
+    border-left: none;
+    border-right: none;
+    margin-top: -5px;
+    margin-bottom: 10px;
+    padding-left: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.userIMG{
+    width: 100px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.userIMG > .bi-person-circle{
+    font-size: 60px;
+}
+
+.userInfoBlock{
+    width: 400px;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+.infoFQ{
+    width: 100px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.infoFQ > p{
+    margin: 0;
+}
+.userInfo{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+}
+.userInfo >p{
+    margin: 0;
+}
+
+
+.userRemove{
+    width: 100px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-left: 1px solid black;
+}
+.userRemove > .bi-person-x{
+    font-size: 40px;
+}
