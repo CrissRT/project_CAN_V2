@@ -1,5 +1,8 @@
-﻿using System.Web;
+﻿using System.Data.Entity.Infrastructure;
+using System;
+using System.Web;
 using System.Web.Optimization;
+using System.Web.UI.WebControls;
 
 namespace project_CAN
 {
@@ -17,6 +20,9 @@ namespace project_CAN
             // bundles.Add(new StyleBundle("~/Content/css").Include(
             //          "~/Content/bootstrap.css",
             //          "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+                "~/Scripts/jQuery.3.7.1/Content/Scripts/jquery-{version}.js"));
 
 
             // Bootstrap Bundles
