@@ -90,6 +90,7 @@
     flex-direction: column;
     justify-content: center;
     display: relative;
+    margin-bottom: 20px;
 }
 
 .adminCourseView {
@@ -103,19 +104,19 @@
     flex-direction: row;
 }
 
-    .adminCourseView > img {
-        width: 400px;
-        height: 100%;
-        margin-right: 20px;
-    }
+.adminCourseView > img {
+    width: 400px;
+    height: 100%;
+    margin-right: 20px;
+}
 
-    .adminCourseView > p {
-        width: 450px;
-        margin-right: 20px;
-        margin-bottom: 0;
-        display: flex;
-        align-items: center;
-    }
+.adminCourseView > p {
+    width: 450px;
+    margin-right: 20px;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+}
 
 .editRemoveCourse {
     width: 108px;
