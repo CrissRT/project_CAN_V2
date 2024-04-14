@@ -35,7 +35,7 @@
                 @Html.PasswordFor(model => model.repeatPassword)
                 @Html.ValidationMessageFor(model => model.repeatPassword, "")
             </div>
-
+            <div>@ViewBag.Error</div>
             <button type="submit" class="btn btn-secondary btn-lg">Inregestrare</button>
         </div>
     }

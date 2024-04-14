@@ -14,16 +14,9 @@ namespace project_CAN.Web.Controllers
         // GET: Main
         public ActionResult Index()
         {
-            var apiCookie = Request.Cookies["X-KEY"];
-
-            if (apiCookie != null)
+            if (isUserAdmin())
             {
-                var profile = _session.GetUserByCookie(apiCookie.Value);
-
-                if (profile != null && profile.privilegies == URole.admin)
-                {
-                    return RedirectToAction("ControlUsers", "Admin");
-                }
+                return RedirectToAction("ControlUsers", "Admin");
             }
 
             return View();

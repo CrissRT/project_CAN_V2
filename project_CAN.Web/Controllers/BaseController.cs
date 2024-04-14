@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using project_CAN.Domain.Enums;
 
 namespace project_CAN.Web.Controllers
 {
@@ -18,7 +19,50 @@ namespace project_CAN.Web.Controllers
             var bl = new BussinesLogic();
             _session = bl.GetSessionBL();
         }
-        public void SessionStatus()
+
+        public bool isUserLogged()
+        {
+            SessionStatus();
+            if ((string)System.Web.HttpContext.Current.Session["LoginStatus"] != "login")
+            {
+                return false;
+            }
+            var apiCookie = Request.Cookies["X-KEY"];
+
+            if (apiCookie != null)
+            {
+                var profile = _session.GetUserByCookie(apiCookie.Value);
+
+                if (profile != null)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool isUserAdmin()
+        {
+            SessionStatus();
+            if ((string)System.Web.HttpContext.Current.Session["LoginStatus"] != "login")
+            {
+                return false;
+            }
+            var apiCookie = Request.Cookies["X-KEY"];
+
+            if (apiCookie != null)
+            {
+                var profile = _session.GetUserByCookie(apiCookie.Value);
+
+                if (profile != null && profile.privilegies == URole.admin)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private void SessionStatus()
         {
             var apiCookie = Request.Cookies["X-KEY"];
             if (apiCookie != null)

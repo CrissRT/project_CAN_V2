@@ -32,11 +32,11 @@ namespace project_CAN.Web.Controllers
         }
         public ActionResult Profile()
         {
-            SessionStatus();
-            if ((string)System.Web.HttpContext.Current.Session["LoginStatus"] != "login")
+            if (!isUserLogged())
             {
                 return RedirectToAction("Login", "Account");
             }
+
 
             var apiCookie = Request.Cookies["X-KEY"];
             var profile = _session.GetUserByCookie(apiCookie.Value);
@@ -70,7 +70,7 @@ namespace project_CAN.Web.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", userRegister.StatusMsg);
+                    ViewBag.Error = userRegister.StatusMsg;
                 }
             }
 

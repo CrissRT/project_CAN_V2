@@ -14,7 +14,7 @@ namespace project_CAN.Domain.Entities.User
 
         [Required]
         [Display(Name = "Username")]
-        [StringLength(50, MinimumLength = 5, ErrorMessage = "Username cannot be longer than 50 characters.")]
+        [StringLength(50, MinimumLength = 3, ErrorMessage = "Username cannot be longer than 50 characters.")]
         public string userName { get; set; }
 
         [Required]
@@ -31,14 +31,11 @@ namespace project_CAN.Domain.Entities.User
         [Column(TypeName = "int")]
         public URole privilegies { get; set; }
 
-        public int? tutorialId { get; set; }
-
         [Required]
         public bool isBlocked { get; set; }
 
         [Required]
+        [Column(TypeName = "datetime")]
         public DateTime lastLogin { get; set; }
-
-        //public SessionDBTable Sessions { get; set; }
     }
 }

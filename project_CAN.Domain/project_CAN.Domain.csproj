@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Admin\UsersAllData.cs" />
     <Compile Include="Entities\Enums\URole.cs" />
     <Compile Include="Entities\User\SessionDBTable.cs" />
     <Compile Include="Entities\User\UDBTable.cs" />

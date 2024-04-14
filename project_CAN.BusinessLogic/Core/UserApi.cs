@@ -25,6 +25,32 @@ namespace project_CAN.BusinessLogic.Core
             {
                 return new UResponseLogin { Status = false, StatusMsg = "Email format incorect" };
             }
+
+            if (dataUserDomain.username.Length < 3)
+            {
+                return new UResponseLogin { Status = false, StatusMsg = "Username trebuie sa contina minim 3 caractere" };
+            }
+
+            if (dataUserDomain.username.Length > 50)
+            {
+                return new UResponseLogin { Status = false, StatusMsg = "Username trebuie sa contina maxim 50 caractere" };
+            }
+
+            if (dataUserDomain.password.Length > 50)
+            {
+                return new UResponseLogin { Status = false, StatusMsg = "Parola trebuie sa contina maxim 50 caractere" };
+            }
+
+            if (dataUserDomain.password.Length < 8)
+            {
+                return new UResponseLogin { Status = false, StatusMsg = "Parola trebuie sa contina minim 8 caractere" };
+            }
+
+            if (dataUserDomain.email.Length > 256)
+            {
+                return new UResponseLogin { Status = false, StatusMsg = "Email trebuie sa contina maxim 256 caractere" };
+            }
+
             var pass = LoginHelper.HashGen(dataUserDomain.password);
 
             if (LoginHelper.HashGen(dataUserDomain.repeatPassword) != pass)
@@ -45,7 +71,7 @@ namespace project_CAN.BusinessLogic.Core
                     email = dataUserDomain.email,
                     password = pass,
                     privilegies = URole.user,
-                    lastLogin = dataUserDomain.lastLogin,
+                    lastLogin = DateTime.Now,
                     isBlocked = false
                 };
 

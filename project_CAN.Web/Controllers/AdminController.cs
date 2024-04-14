@@ -13,44 +13,19 @@ namespace project_CAN.Web.Controllers
     { 
         public ActionResult ControlUsers()
         {
-            SessionStatus();
-            if ((string)System.Web.HttpContext.Current.Session["LoginStatus"] != "login")
+            if (!isUserAdmin() )
             {
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("Index", "Main");
             }
-            var apiCookie = Request.Cookies["X-KEY"];
-
-            if (apiCookie != null)
-            {
-                var profile = _session.GetUserByCookie(apiCookie.Value);
-
-                if (profile != null && profile.privilegies != URole.admin)
-                {
-                    return RedirectToAction("Index", "Main");
-                }
-            }
-
+            
             return View();
         }
 
         public ActionResult ControlContent()
         {
-            SessionStatus();
-            if ((string)System.Web.HttpContext.Current.Session["LoginStatus"] != "login")
+            if (!isUserAdmin())
             {
-                return RedirectToAction("Login", "Account");
-            }
-
-            var apiCookie = Request.Cookies["X-KEY"];
-
-            if (apiCookie != null)
-            {
-                var profile = _session.GetUserByCookie(apiCookie.Value);
-
-                if (profile != null && profile.privilegies != URole.admin)
-                {
-                    return RedirectToAction("Index", "Main");
-                }
+                return RedirectToAction("Index", "Main");
             }
 
             return View();
