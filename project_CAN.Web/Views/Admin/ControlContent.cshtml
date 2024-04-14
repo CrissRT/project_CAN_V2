@@ -9,8 +9,10 @@
 <body class="adminPage">
 
     <div class="barr">
-        <i class="bi bi-person-lines-fill"></i>
-        <i class="bi bi-person-circle"></i>
+        <div class="inside-bar">
+            <a href="@Url.Action("ControlUsers", "Admin")"><i class="bi bi-person-lines-fill"></i></a>
+            <a href="@Url.Action("Profile", "Account")"><i class="bi bi-person-circle"></i></a>
+        </div>
     </div>
 
     <div class="CourseBarr">

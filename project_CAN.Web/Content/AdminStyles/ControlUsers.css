@@ -11,7 +11,7 @@
     background-color: white;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     width: 100%;
     height: 70px;
     border: 1px solid black;
@@ -22,17 +22,30 @@
     position: relative;
 }
 
-.bi-view-list {
+.inside-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 50%;
+    height: 100%;
+}
+
+.inside-bar i {
+    font-size: 50px;
+    color: black;
+}
+
+/*.bi-view-list {
     font-size: 50px;
     margin-left: 30px;
     position: absolute;
-}
+}*/
 
-.barr > .bi-person-circle {
+/*.barr > .bi-person-circle {
     font-size: 50px;
     position: absolute;
     right: 20px;
-}
+}*/
 
 
 .searchUser {
@@ -65,13 +78,9 @@
     margin-right: 12px;
 }
 
-
-
 .userList {
     background-color: white;
     width: 700px;
-    /* height: 800px; */
-    /* overflow: scroll; */
     overflow: hidden;
     border: 1px solid black;
     border-radius: 20px;

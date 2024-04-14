@@ -13,6 +13,11 @@ namespace project_CAN.Web.Controllers
     { 
         public ActionResult ControlUsers()
         {
+            SessionStatus();
+            if ((string)System.Web.HttpContext.Current.Session["LoginStatus"] != "login")
+            {
+                return RedirectToAction("Login", "Account");
+            }
             var apiCookie = Request.Cookies["X-KEY"];
 
             if (apiCookie != null)
@@ -30,6 +35,12 @@ namespace project_CAN.Web.Controllers
 
         public ActionResult ControlContent()
         {
+            SessionStatus();
+            if ((string)System.Web.HttpContext.Current.Session["LoginStatus"] != "login")
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
             var apiCookie = Request.Cookies["X-KEY"];
 
             if (apiCookie != null)
