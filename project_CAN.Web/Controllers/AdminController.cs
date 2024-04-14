@@ -11,12 +11,21 @@ namespace project_CAN.Web.Controllers
 {
     public class AdminController : BaseController
     { 
+        private readonly IAdmin _adminBL;
+
+        public AdminController()
+        {
+            var bl = new BussinesLogic();
+            _adminBL = bl.GetAdminBL();
+        }
         public ActionResult ControlUsers()
         {
             if (!isUserAdmin() )
             {
                 return RedirectToAction("Index", "Main");
             }
+
+            ViewBag.users = _adminBL.GetAllUsersFromDB();
             
             return View();
         }

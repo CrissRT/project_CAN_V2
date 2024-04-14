@@ -8,5 +8,10 @@ namespace project_CAN.BusinessLogic
         {
             return new SessionBL();
         }
+
+        public IAdmin GetAdminBL()
+        {
+            return new AdminBL();
+        }
     }
 }
