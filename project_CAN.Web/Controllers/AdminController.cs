@@ -25,7 +25,7 @@ namespace project_CAN.Web.Controllers
                 return RedirectToAction("Index", "Main");
             }
 
-            ViewBag.users = _adminBL.GetAllUsersFromDB();
+            ViewBag.users = _adminBL.GetAllUsersExceptAdminFromDB(RetrieveUserID());
             
             return View();
         }

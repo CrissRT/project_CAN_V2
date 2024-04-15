@@ -11,9 +11,9 @@ namespace project_CAN.BusinessLogic
 {
     public class AdminBL : AdminApi, IAdmin
     {
-        public UsersAllData GetAllUsersFromDB()
+        public UsersAllData GetAllUsersExceptAdminFromDB(int excludeId)
         {
-            return GetAllUsers();
+            return GetAllUsers(excludeId);
         }
 
         public void DeleteUserFromDB(int id)

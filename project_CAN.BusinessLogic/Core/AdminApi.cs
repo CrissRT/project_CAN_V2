@@ -19,14 +19,16 @@ namespace project_CAN.BusinessLogic.Core
         {
             using (var db = new DBSessionContext())
             {
+                // Delete all sessions associated with the user
                 var sessions = db.Sessions.Where(s => s.userId == id).ToList();
-                // Remove each session from the DbSet
                 foreach (var session in sessions)
                 {
                     db.Sessions.Remove(session);
                 }
+                db.SaveChanges();
             }
 
+            // Now, delete the user
             using (var db = new DBUserContext())
             {
                 var user = db.Users.FirstOrDefault(u => u.userId == id);
@@ -47,11 +49,12 @@ namespace project_CAN.BusinessLogic.Core
             // Get user logic here
         }
 
-        public UsersAllData GetAllUsers()
+        public UsersAllData GetAllUsers(int excludeId)
         {
             using (var db = new DBUserContext())
             {
-                return new UsersAllData { UsersData = db.Users.ToList() };
+                var allUsersExceptAdmin = db.Users.Where(u => u.userId != excludeId).ToList();
+                return new UsersAllData { UsersData = allUsersExceptAdmin };
             }
         }
     }

@@ -62,6 +62,20 @@ namespace project_CAN.Web.Controllers
             return false;
         }
 
+        public int RetrieveUserID()
+        {
+            var apiCookie = Request.Cookies["X-KEY"];
+            if (apiCookie != null)
+            {
+                var profile = _session.GetUserByCookie(apiCookie.Value);
+                if (profile != null)
+                {
+                    return profile.userId;
+                }
+            }
+            return -1;
+        }
+
         private void SessionStatus()
         {
             var apiCookie = Request.Cookies["X-KEY"];
