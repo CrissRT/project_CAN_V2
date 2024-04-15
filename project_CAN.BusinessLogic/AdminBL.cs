@@ -15,5 +15,10 @@ namespace project_CAN.BusinessLogic
         {
             return GetAllUsers();
         }
+
+        public void DeleteUserFromDB(int id)
+        {
+            DeleteUser(id);
+        }
     }
 }

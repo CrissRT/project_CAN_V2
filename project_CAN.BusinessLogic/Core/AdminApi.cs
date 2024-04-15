@@ -15,9 +15,26 @@ namespace project_CAN.BusinessLogic.Core
             // Add user logic here
         }
 
-        public void DeleteUser()
+        public void DeleteUser(int id)
         {
-            // Delete user logic here
+            using (var db = new DBSessionContext())
+            {
+                var sessions = db.Sessions.Where(s => s.userId == id).ToList();
+                // Remove each session from the DbSet
+                foreach (var session in sessions)
+                {
+                    db.Sessions.Remove(session);
+                }
+            }
+
+            using (var db = new DBUserContext())
+            {
+                var user = db.Users.FirstOrDefault(u => u.userId == id);
+                if (user == null) return;
+
+                db.Users.Remove(user);
+                db.SaveChanges();
+            }
         }
 
         public void UpdateUser()
