@@ -39,5 +39,26 @@ namespace project_CAN.Web.Controllers
 
             return View();
         }
+
+        //public ActionResult AddUser()
+        //{
+        //    if (!isUserAdmin())
+        //    {
+        //        return RedirectToAction("Index", "Main");
+        //    }
+
+        //    return View();
+        //}
+
+        public ActionResult DeleteUser(int id)
+        {
+            if (!isUserAdmin())
+            {
+                return RedirectToAction("Index", "Main");
+            }
+
+            _adminBL.DeleteUserFromDB(id);
+            return RedirectToAction("ControlUsers", "Admin");
+        }
     }
 }

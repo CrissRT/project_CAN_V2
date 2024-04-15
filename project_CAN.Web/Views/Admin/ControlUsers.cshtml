@@ -40,7 +40,9 @@
                     </div>
                 </div>
                 <div class="userRemove">
-                    <i class="bi bi-person-x"></i>
+                    <a href="@Url.Action("DeleteUser", "Admin", new { id = user.userId })">
+                        <i class="bi bi-person-x"></i>
+                    </a>
                 </div>
             </div>
         }

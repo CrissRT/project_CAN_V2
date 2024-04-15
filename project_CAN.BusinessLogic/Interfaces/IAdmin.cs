@@ -13,6 +13,6 @@ namespace project_CAN.BusinessLogic.Interfaces
         //public void DeleteUser();
         //public void UpdateUser();
        UsersAllData GetAllUsersFromDB();
-        void DeleteUser(int id);
+        void DeleteUserFromDB(int id);
     }
 }
