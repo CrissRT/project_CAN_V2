@@ -1,0 +1,69 @@
+﻿@using System.Web.Optimization
+@using System.Web.UI.WebControls
+
+@{
+    ViewBag.Title = "Edit User";
+    Layout = "~/Views/Shared/_LayoutBlankPage.cshtml";
+    var user = @ViewBag.user;
+}
+
+@Styles.Render("~/Content/css/admin/editUser")
+
+
+<body class="userEdit">
+
+    <div class="userEditContent">
+
+        <a href="@Url.Action("ControlUsers", "Admin")" style="color: black;"><i class="bi bi-arrow-left-square"></i></a>
+
+            <i class="bi bi-person-circle"></i>
+
+            <div class="userName">
+                <label for="fname">Numele:</label>
+                <input type="text" id="fname" name="fname" placeholder="@user.userName">
+            </div>
+
+            <div class="gmail">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="@user.email">
+            </div>
+
+            <div class="pasword">
+                <label for="pass">Parola:</label>
+                <input type="password" id="pass" name="pass" placeholder="***" maxlength="50">
+            </div>
+
+            <div class="banedStatus">
+
+                <label for="ban">banedStatus</label>
+
+                <label for="unban">unBan</label>
+                <input type="radio" name="ban" id="unBan" value="unBan">
+
+                <label for="baned">Ban</label>
+                <input type="radio" name="ban" id="baned" value="baned">
+
+            </div>
+            <button type="button" class="btn btn-secondary btn-lg">Salvare</button>
+
+</div>
+
+    <script>
+            @{
+                var userPrivileges = Json.Encode(ViewBag.UserPrivileges);
+            }
+             var banStatus = @Html.Raw(userPrivileges).ToString().ToLower();
+            // Function to set the checked state based on banStatus
+            function setBanStatus() {
+                if (banStatus) {
+                    document.getElementById("baned").checked = true;
+                } else {
+                    document.getElementById("unBan").checked = true;
+                }
+            }
+
+            // Call the function to initially set the ban status
+            setBanStatus();
+    </script>
+       
+</body>

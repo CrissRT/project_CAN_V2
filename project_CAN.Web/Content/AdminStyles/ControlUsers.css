@@ -28,7 +28,7 @@ html {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 50%;
+    width: 54%;
     height: 100%;
 }
 
@@ -161,6 +161,11 @@ html {
     border-left: 1px solid black;
 }
 
-.userRemove > .bi-person-x {
+.bi-person-x {
     font-size: 40px;
+}
+
+.bi-pencil-square {
+    font-size: 35px;
+    margin-left: 10px;
 }

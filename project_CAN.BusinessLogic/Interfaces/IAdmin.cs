@@ -4,15 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using project_CAN.Domain.Entities.Admin;
+using project_CAN.Domain.Entities.User;
 
 namespace project_CAN.BusinessLogic.Interfaces
 {
     public interface IAdmin
     {
-        //public void AddUser();
-        //public void DeleteUser();
-        //public void UpdateUser();
-       UsersAllData GetAllUsersExceptAdminFromDB(int excludeId);
+        UsersAllData GetAllUsersExceptAdminFromDB(int excludeId);
         void DeleteUserFromDB(int id);
+        UDBTable GetUserByIdFromDB(int id);
     }
 }

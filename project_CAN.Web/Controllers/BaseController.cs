@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using project_CAN.Domain.Entities.User;
 using project_CAN.Domain.Enums;
 
 namespace project_CAN.Web.Controllers
@@ -41,7 +42,7 @@ namespace project_CAN.Web.Controllers
             return false;
         }
 
-        public bool isUserAdmin()
+        protected bool isUserAdmin()
         {
             SessionStatus();
             if ((string)System.Web.HttpContext.Current.Session["LoginStatus"] != "login")
@@ -62,7 +63,7 @@ namespace project_CAN.Web.Controllers
             return false;
         }
 
-        public int RetrieveUserID()
+        protected int RetrieveUserID()
         {
             var apiCookie = Request.Cookies["X-KEY"];
             if (apiCookie != null)
@@ -76,7 +77,7 @@ namespace project_CAN.Web.Controllers
             return -1;
         }
 
-        private void SessionStatus()
+        internal void SessionStatus()
         {
             var apiCookie = Request.Cookies["X-KEY"];
             if (apiCookie != null)

@@ -50,6 +50,9 @@ namespace project_CAN
 
             bundles.Add(new StyleBundle("~/Content/css/admin/content").Include(
                 "~/Content/AdminStyles/ControlContent.css"));
+
+            bundles.Add(new StyleBundle("~/Content/css/admin/editUser").Include(
+                "~/Content/AdminStyles/EditUser.css"));
         }
     }
 }

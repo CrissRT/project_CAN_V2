@@ -29,6 +29,15 @@ namespace project_CAN.Web.Controllers
             
             return View();
         }
+        public ActionResult EditUser(int id)
+        {
+            if (!isUserAdmin())
+            {
+                return RedirectToAction("Index", "Main");
+            }
+            ViewBag.user = _adminBL.GetUserByIdFromDB(id);
+            return View();
+        }
 
         public ActionResult ControlContent()
         {
@@ -40,13 +49,22 @@ namespace project_CAN.Web.Controllers
             return View();
         }
 
+        //public ActionResult EditUser()
+        //{
+        //    if (!isUserAdmin())
+        //    {
+        //        return RedirectToAction("Index", "Main");
+        //    }
+        //    return View();
+        //}
+
         //public ActionResult AddUser()
         //{
         //    if (!isUserAdmin())
         //    {
         //        return RedirectToAction("Index", "Main");
         //    }
-
+        //    _adminBL.AddUser(id);
         //    return View();
         //}
 

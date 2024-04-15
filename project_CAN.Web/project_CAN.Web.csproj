@@ -134,6 +134,7 @@
   <ItemGroup>
     <Content Include="Content\AdminStyles\ControlContent.css" />
     <Content Include="Content\AdminStyles\ControlUsers.css" />
+    <Content Include="Content\AdminStyles\EditUser.css" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -2323,6 +2324,8 @@
     <Content Include="Scripts\jQuery.3.7.1\Tools\common.ps1" />
     <Content Include="Scripts\jQuery.3.7.1\Tools\install.ps1" />
     <Content Include="Scripts\jQuery.3.7.1\Tools\uninstall.ps1" />
+    <Content Include="Views\Admin\EditUser.cshtml" />
+    <Content Include="Views\Admin\EditContent.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

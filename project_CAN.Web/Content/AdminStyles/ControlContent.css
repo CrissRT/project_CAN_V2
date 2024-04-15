@@ -1,3 +1,5 @@
+
+
 .adminPage {
     background-image: url(../../images/backGround.svg);
     width: 100%;
@@ -11,7 +13,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 50%;
+    width: 54%;
     height: 100%;
 }
 
@@ -81,7 +83,7 @@
 
 .courseList {
     background-color: white;
-    width: 80%;
+    width: 1000px;
     contain: paint;
     border: 1px solid black;
     border-radius: 20px;
@@ -104,13 +106,18 @@
     flex-direction: row;
 }
 
+.adminCourseView:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+}
+
 .adminCourseView > img {
     width: 400px;
     height: 100%;
     margin-right: 20px;
 }
 
-.adminCourseView > p {
+.adminCourseView > h2 {
     width: 450px;
     margin-right: 20px;
     margin-bottom: 0;

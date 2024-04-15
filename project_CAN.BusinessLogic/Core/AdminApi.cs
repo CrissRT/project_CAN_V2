@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using project_CAN.BusinessLogic.DBModel;
 using project_CAN.Domain.Entities.Admin;
+using project_CAN.Domain.Entities.User;
 
 namespace project_CAN.BusinessLogic.Core
 {
@@ -44,9 +46,15 @@ namespace project_CAN.BusinessLogic.Core
             // Update user logic here
         }
 
-        public void GetUser()
+        public UDBTable GetUserById(int id)
         {
-            // Get user logic here
+            UDBTable user = null;
+            using (var db = new DBUserContext())
+            {
+                user = db.Users.FirstOrDefault(itemDB => itemDB.userId == id);
+            }
+
+            return user;
         }
 
         public UsersAllData GetAllUsers(int excludeId)
