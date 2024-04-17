@@ -56,6 +56,9 @@ namespace project_CAN
 
             bundles.Add(new StyleBundle("~/Content/css/admin/editContent").Include(
                 "~/Content/AdminStyles/EditContent.css"));
+
+            bundles.Add(new StyleBundle("~/Content/css/admin/addContent").Include(
+                "~/Content/AdminStyles/AddContent.css"));
         }
     }
 }

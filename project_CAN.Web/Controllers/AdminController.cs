@@ -45,6 +45,36 @@ namespace project_CAN.Web.Controllers
             return View();
         }
 
+        public ActionResult AddContent()
+        {
+            if (!isUserAdmin())
+            {
+                return RedirectToAction("Index", "Main");
+            }
+            //ViewBag.user = _adminBL.GetUserByIdFromDB(id);
+            return View();
+        }
+
+        public ActionResult EditContent()
+        {
+            if (!isUserAdmin())
+            {
+                return RedirectToAction("Index", "Main");
+            }
+            //ViewBag.user = _adminBL.GetUserByIdFromDB(id);
+            return View();
+        }
+
+        public ActionResult RemoveContent()
+        {
+            if (!isUserAdmin())
+            {
+                return RedirectToAction("Index", "Main");
+            }
+            //ViewBag.user = _adminBL.GetUserByIdFromDB(id);
+            return View();
+        }
+
         public ActionResult EditUser(int id)
         {
             if (!isUserAdmin())
@@ -76,15 +106,6 @@ namespace project_CAN.Web.Controllers
             return RedirectToAction("EditUser", "Admin");
         }
 
-        public ActionResult EditContent()
-        {
-            if (!isUserAdmin())
-            {
-                return RedirectToAction("Index", "Main");
-            }
-            //ViewBag.user = _adminBL.GetUserByIdFromDB(id);
-            return View();
-        }
 
         public ActionResult DeleteUser(int id)
         {

@@ -1,0 +1,98 @@
+﻿.addCourses {
+    background-image: url("../../images/backGround.svg");
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.addCoursesContent {
+    background-color: white;
+    width: 1000px;
+    height: 800px;
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.bi-arrow-left-square {
+    font-size: 40px;
+    position: absolute;
+    left: 20px;
+}
+
+.coursesTitle {
+    margin-top: 50px;
+}
+
+.coursesTitle > input {
+    height: 40px;
+    width: 500px;
+    border: 1.5px solid black;
+    border-radius: 15px;
+    padding: 5px;
+    font-size: 20px;
+}
+
+.coursesText {
+    margin-top: 20px;
+}
+
+.coursesText > textarea {
+    height: 150px;
+    width: 500px;
+    border: 1.5px solid black;
+    border-radius: 15px;
+    padding: 5px;
+    font-size: 20px;
+    max-height: 300px;
+    min-height: 40px;
+}
+
+.coursesVideo {
+    margin-top: 20px;
+}
+
+.coursesVideo > input {
+    height: 40px;
+    width: 500px;
+    border: 1.5px solid black;
+    border-radius: 15px;
+    padding: 5px;
+    font-size: 20px;
+}
+
+.coursesImg {
+    width: 500px;
+    padding: 0 5px;
+    margin-top: 20px;
+}
+
+.coursesImg > label {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.coursesImg > input {
+    width: 300px;
+    font-size: 18px;
+}
+
+.previewImage {
+    width: fit-content;
+    height: fit-content;
+    border: 1px solid black;
+    border-radius: 20px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.btn-secondary {
+    margin-top: 10px;
+}

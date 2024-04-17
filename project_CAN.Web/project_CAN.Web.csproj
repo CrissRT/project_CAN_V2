@@ -132,6 +132,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\AdminStyles\AddContent.css" />
     <Content Include="Content\AdminStyles\ControlContent.css" />
     <Content Include="Content\AdminStyles\ControlUsers.css" />
     <Content Include="Content\AdminStyles\EditContent.css" />
@@ -2328,6 +2329,7 @@
     <Content Include="Scripts\jQuery.3.7.1\Tools\uninstall.ps1" />
     <Content Include="Views\Admin\EditUser.cshtml" />
     <Content Include="Views\Admin\EditContent.cshtml" />
+    <Content Include="Views\Admin\AddContent.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

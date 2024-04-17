@@ -19,7 +19,8 @@
         <div class="courseSearch">
             <i class="bi bi-search"></i>
         </div>
-        <i class="bi bi-file-earmark-plus"></i>
+        @*<i class="bi bi-file-earmark-plus"></i>*@
+        <a href="@Url.Action("AddContent", "Admin")" style="color: black;"><i class="bi bi-file-earmark-plus"></i></a>
     </div>
 
     <div class="courseList">
@@ -27,8 +28,8 @@
             <img src="../images/movement.png" />
             <h2>Mișcările de bază în CS:GO 2</h2>
             <div class="editRemoveCourse">
-                <div class="edit"><a href="@Url.Action("ControlUsers", "Admin")" style="color: black;"><i class="bi bi-pencil"></i></a></div>
-                <div class="remove"><a href="@Url.Action("ControlUsers", "Admin")" style="color: black;"><i class="bi bi-file-earmark-minus"></i></a></div>
+                <div class="edit"><a href="@Url.Action("EditContent", "Admin")" style="color: black;"><i class="bi bi-pencil"></i></a></div>
+                <div class="remove"><a href="@Url.Action("RemoveContent", "Admin")" style="color: black;"><i class="bi bi-file-earmark-minus"></i></a></div>
             </div>
         </div>
     </div>

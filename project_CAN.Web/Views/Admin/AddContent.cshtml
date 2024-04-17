@@ -1,0 +1,52 @@
+﻿@using System.Web.Optimization
+
+@{
+    ViewBag.Title = "AddContent";
+    Layout = "~/Views/Shared/_LayoutBlankPage.cshtml";
+}
+@Styles.Render("~/Content/css/admin/addContent")
+<body class="addCourses">
+    <div class="addCoursesContent">
+
+        <a href="@Url.Action("ControlUsers", "Admin")" style="color: black;"><i class="bi bi-arrow-left-square"></i></a>
+
+        <div class="coursesTitle">
+            <input type="text"  placeholder="Titlu">
+        </div>
+        <div class="coursesText">
+            <textarea name="text" placeholder="Continutul"></textarea>
+        </div>
+        <div class="coursesVideo">
+            <input type="text"  placeholder="Linkul Videului">
+        </div>
+                
+        <div class="coursesImg">
+            <label for="uploadFile">Adauga o imagine:</label>
+            <input type="file" name="uploadFile" onchange="previewImage(event)">
+        </div>
+        <div class="previewImage"></div>
+        <button type="button" class="btn btn-secondary btn-lg">Adauga</button>
+
+    </div>
+
+    <script>
+        function previewImage(event) {
+            var preview = document.querySelector('.previewImage');
+            preview.innerHTML = ''; // Clear previous preview
+                    
+            var file = event.target.files[0];
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.style.maxWidth = '100%';
+                    img.style.maxHeight = '100%';
+                    preview.appendChild(img);
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+        
+</body>
