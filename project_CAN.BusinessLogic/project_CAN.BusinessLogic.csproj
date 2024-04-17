@@ -59,8 +59,11 @@
     <Compile Include="BusinessLogic.cs" />
     <Compile Include="Core\AdminApi.cs" />
     <Compile Include="Core\UserApi.cs" />
+    <Compile Include="DBModel\DBImageContext.cs" />
     <Compile Include="DBModel\DBSessionContext.cs" />
+    <Compile Include="DBModel\DBTutorialContext.cs" />
     <Compile Include="DBModel\DBUserContext.cs" />
+    <Compile Include="DBModel\DBVideoContext.cs" />
     <Compile Include="Interfaces\IAdmin.cs" />
     <Compile Include="Interfaces\ISession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

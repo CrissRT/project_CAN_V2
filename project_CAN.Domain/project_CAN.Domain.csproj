@@ -34,6 +34,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,6 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Admin\ContentDomainData.cs" />
+    <Compile Include="Entities\Admin\ContentResponse.cs" />
+    <Compile Include="Entities\Admin\ImageDBTable.cs" />
     <Compile Include="Entities\Admin\OperationOnUserResponse.cs" />
     <Compile Include="Entities\Admin\UserEdit.cs" />
     <Compile Include="Entities\Admin\UsersAllData.cs" />

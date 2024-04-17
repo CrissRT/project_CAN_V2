@@ -18,7 +18,7 @@
             </div>
             <div class="coursesText">
                 @*<textarea name="text" placeholder="Continutul"></textarea>*@
-                @Html.TextArea("text", new { placeholder = "Continutul" })
+                @Html.TextAreaFor(model => model.title, new { name = "text", placeholder = "Continutul" })
             </div>
             <div class="coursesVideo">
                 @Html.TextBoxFor(model => model.videoLink, new { placeholder = "Linkul Video-ului" })

@@ -55,28 +55,38 @@ namespace project_CAN.Web.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult AddContent()
-        //{
-        //    Mapper.Reset();
-        //    Mapper.Initialize(cfg => cfg.CreateMap<UserEditView, UserEdit>());
-        //    var data = Mapper.Map<UserEdit>(editData);
-        //    if (!isUserAdmin())
-        //    {
-        //        return RedirectToAction("Index", "Main");
-        //    }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddContent(ContentView viewModel)
+        {
+            if (ModelState.IsValid)
+            {
 
-        //    var response = _adminBL.EditUserInDB(data);
-        //    if (response.Status)
-        //    {
-        //        return RedirectToAction("ControlUsers", "Admin");
-        //    }
+                return RedirectToAction("Index", "Home");
+            }
 
-        //    return RedirectToAction("EditUser", "Admin");
-        //}
+            //[HttpPost]
+            //[ValidateAntiForgeryToken]
+            //public ActionResult AddContent()
+            //{
+            //    Mapper.Reset();
+            //    Mapper.Initialize(cfg => cfg.CreateMap<UserEditView, UserEdit>());
+            //    var data = Mapper.Map<UserEdit>(editData);
+            //    if (!isUserAdmin())
+            //    {
+            //        return RedirectToAction("Index", "Main");
+            //    }
 
-        public ActionResult EditContent()
+            //    var response = _adminBL.EditUserInDB(data);
+            //    if (response.Status)
+            //    {
+            //        return RedirectToAction("ControlUsers", "Admin");
+            //    }
+
+            //    return RedirectToAction("EditUser", "Admin");
+            //}
+
+            public ActionResult EditContent()
         {
             if (!isUserAdmin())
             {
