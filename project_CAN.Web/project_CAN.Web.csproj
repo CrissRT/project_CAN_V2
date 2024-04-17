@@ -2258,6 +2258,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Admin\ContentView.cs" />
     <Compile Include="Models\Admin\UserEditView.cs" />
     <Compile Include="Models\UserLoginView.cs" />
     <Compile Include="Models\UserRegistrationView.cs" />

@@ -17,6 +17,7 @@ namespace project_CAN.Web.Controllers
     public class AdminController : BaseController
     { 
         private readonly IAdmin _adminBL;
+        private readonly string fileRootPath = @"C:\Images\";
 
         public AdminController()
         {
@@ -51,9 +52,29 @@ namespace project_CAN.Web.Controllers
             {
                 return RedirectToAction("Index", "Main");
             }
-            //ViewBag.user = _adminBL.GetUserByIdFromDB(id);
             return View();
         }
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult AddContent()
+        //{
+        //    Mapper.Reset();
+        //    Mapper.Initialize(cfg => cfg.CreateMap<UserEditView, UserEdit>());
+        //    var data = Mapper.Map<UserEdit>(editData);
+        //    if (!isUserAdmin())
+        //    {
+        //        return RedirectToAction("Index", "Main");
+        //    }
+
+        //    var response = _adminBL.EditUserInDB(data);
+        //    if (response.Status)
+        //    {
+        //        return RedirectToAction("ControlUsers", "Admin");
+        //    }
+
+        //    return RedirectToAction("EditUser", "Admin");
+        //}
 
         public ActionResult EditContent()
         {
@@ -61,7 +82,6 @@ namespace project_CAN.Web.Controllers
             {
                 return RedirectToAction("Index", "Main");
             }
-            //ViewBag.user = _adminBL.GetUserByIdFromDB(id);
             return View();
         }
 
@@ -71,7 +91,6 @@ namespace project_CAN.Web.Controllers
             {
                 return RedirectToAction("Index", "Main");
             }
-            //ViewBag.user = _adminBL.GetUserByIdFromDB(id);
             return View();
         }
 

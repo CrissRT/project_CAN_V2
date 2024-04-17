@@ -6,38 +6,45 @@
 }
 @Styles.Render("~/Content/css/admin/addContent")
 <body class="addCourses">
-    <div class="addCoursesContent">
+    @using (Html.BeginForm("AddContent", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="addCoursesContent">
 
-        <a href="@Url.Action("ControlUsers", "Admin")" style="color: black;"><i class="bi bi-arrow-left-square"></i></a>
+            <a href="@Url.Action("ControlUsers", "Admin")" style="color: black;"><i class="bi bi-arrow-left-square"></i></a>
 
-        <div class="coursesTitle">
-            <input type="text"  placeholder="Titlu">
-        </div>
-        <div class="coursesText">
-            <textarea name="text" placeholder="Continutul"></textarea>
-        </div>
-        <div class="coursesVideo">
-            <input type="text"  placeholder="Linkul Videului">
-        </div>
-                
-        <div class="coursesImg">
-            <label for="uploadFile">Adauga o imagine:</label>
-            <input type="file" name="uploadFile" onchange="previewImage(event)">
-        </div>
-        <div class="previewImage"></div>
-        <button type="button" class="btn btn-secondary btn-lg">Adauga</button>
+            <div class="coursesTitle">
+                @*<input type="text" placeholder="Titlu">*@
+                @Html.TextBoxFor(model => model.title, new { placeholder = "Titlu" })
+            </div>
+            <div class="coursesText">
+                @*<textarea name="text" placeholder="Continutul"></textarea>*@
+                @Html.TextArea("text", new { placeholder = "Continutul" })
+            </div>
+            <div class="coursesVideo">
+                @Html.TextBoxFor(model => model.videoLink, new { placeholder = "Linkul Video-ului" })
+                @Html.ValidationMessageFor(model => model.videoLink)
+            </div>
 
-    </div>
+            <div class="coursesImg">
+                <label for="uploadFile">Adauga o imagine:</label>
+                <input type="file" name="uploadFile" id="uploadFile"> <!-- Added ID for JavaScript access -->
+                <div class="previewImage"></div> <!-- Added a container for preview -->
+            </div>
 
+            <button type="submit" class="btn btn-secondary btn-lg">Adauga</button>
+
+        </div>
+    }
     <script>
-        function previewImage(event) {
+        // Function to preview the uploaded image
+        document.getElementById('uploadFile').addEventListener('change', function (event) {
             var preview = document.querySelector('.previewImage');
             preview.innerHTML = ''; // Clear previous preview
-                    
+
             var file = event.target.files[0];
             if (file) {
                 var reader = new FileReader();
-                reader.onload = function(e) {
+                reader.onload = function (e) {
                     var img = document.createElement('img');
                     img.src = e.target.result;
                     img.style.maxWidth = '100%';
@@ -46,7 +53,7 @@
                 }
                 reader.readAsDataURL(file);
             }
-        }
+        });
     </script>
-        
+
 </body>
