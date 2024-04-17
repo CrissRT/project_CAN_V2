@@ -1,6 +1,6 @@
 ﻿@using System.Web.Optimization
 @using System.Web.UI.WebControls
-
+@model project_CAN.Web.Models.Admin.UserEditView
 @{
     ViewBag.Title = "Edit User";
     Layout = "~/Views/Shared/_LayoutBlankPage.cshtml";
@@ -11,51 +11,77 @@
 
 
 <body class="userEdit">
+    @using (Html.BeginForm("EditUser", "Admin", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @*@Html.HiddenFor(model => model.userId, new { value = user.userId })*@
+        @Html.HiddenFor(model => model.userId, new { @Value = user.userId })
+        <div class="userEditContent">
 
-    <div class="userEditContent">
-
-        <a href="@Url.Action("ControlUsers", "Admin")" style="color: black;"><i class="bi bi-arrow-left-square"></i></a>
+            <a href="@Url.Action("ControlUsers", "Admin")" style="color: black;"><i class="bi bi-arrow-left-square"></i></a>
 
             <i class="bi bi-person-circle"></i>
 
+            <div>ID: @user.userId</div>
+
+
             <div class="userName">
                 <label for="fname">Numele:</label>
-                <input type="text" id="fname" name="fname" placeholder="@user.userName">
+                @Html.TextBoxFor(model => model.userName, new { placeholder = user.userName, id = "fname", name = "fname" })
+                @Html.ValidationMessageFor(model => model.userName)
             </div>
 
             <div class="gmail">
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email" placeholder="@user.email">
+                @Html.TextBoxFor(model => model.email, new { placeholder = user.email, type = "email", id = "email", name = "email" })
+                @Html.ValidationMessageFor(model => model.email)
             </div>
 
             <div class="pasword">
                 <label for="pass">Parola:</label>
-                <input type="password" id="pass" name="pass" placeholder="***" maxlength="50">
+                @Html.PasswordFor(model => model.password, new { placeholder = "*****", type = "password", maxlength = "50", id = "pass", name = "pass" })
+                @Html.ValidationMessageFor(model => model.password)
             </div>
 
             <div class="banedStatus">
+                <label>Ban status:</label><br />
 
-                <label for="ban">banedStatus</label>
+                @Html.RadioButtonFor(model => model.isBlocked, true, new { id = "baned" })
+                <label for="baned">Blocked</label><br />
 
-                <label for="unban">unBan</label>
-                <input type="radio" name="ban" id="unBan" value="unBan">
+                @Html.RadioButtonFor(model => model.isBlocked, false, new { id = "unBan" })
+                <label for="unBan">No blocked</label>
+            </div>
 
-                <label for="baned">Ban</label>
-                <input type="radio" name="ban" id="baned" value="baned">
+            <div class="roleStatus">
+
+                <label for="role">Rolul:</label>
+
+                <label for="User">User</label>
+                @Html.RadioButtonFor(model => model.privilegies, 0, new { id = "User", name = "role" })
+
+                <label for="Mod">Moderator</label>
+                @Html.RadioButtonFor(model => model.privilegies, 1, new { id = "Mod", name = "role" })
+
+                <label for="Admin">Admin</label>
+                @Html.RadioButtonFor(model => model.privilegies, 2, new { id = "Admin", name = "role" })
 
             </div>
-            <button type="button" class="btn btn-secondary btn-lg">Salvare</button>
 
-</div>
+
+            <button type="submit" class="btn btn-secondary btn-lg">Salvare</button>
+
+        </div>
+    }
 
     <script>
             @{
-                var userPrivileges = Json.Encode(ViewBag.UserPrivileges);
+                var status = Json.Encode(ViewBag.user.isBlocked);
             }
-             var banStatus = @Html.Raw(userPrivileges).ToString().ToLower();
+             var banStatus = @Html.Raw(status).ToString().ToLower();
             // Function to set the checked state based on banStatus
             function setBanStatus() {
-                if (banStatus) {
+                if (banStatus == 1) {
                     document.getElementById("baned").checked = true;
                 } else {
                     document.getElementById("unBan").checked = true;
@@ -63,7 +89,28 @@
             }
 
             // Call the function to initially set the ban status
-            setBanStatus();
+        setBanStatus();
+
+
+        @{
+            var userPrivileges = Json.Encode(ViewBag.user.privilegies);
+        }
+        var privilegies = @Html.Raw(userPrivileges).ToString().ToLower();
+
+        // Function to set the checked state based on privilegies
+        function setPrivilegies() {
+            if (privilegies === 0) {
+                document.getElementById("User").checked = true;
+            } else if (privilegies === 1) {
+                document.getElementById("Mod").checked = true;
+            } else if (privilegies === 2) {
+                document.getElementById("Admin").checked = true;
+            }
+        }
+
+        // Call the function to initially set the privilegies status
+        setPrivilegies();
+
     </script>
-       
+
 </body>

@@ -70,7 +70,7 @@ namespace project_CAN.Web.Controllers
                 }
                 else
                 {
-                    ViewBag.Error = userRegister.StatusMsg;
+                    ViewBag.Error = "S-a petrecut o eroare!";
                 }
             }
 
@@ -104,7 +104,7 @@ namespace project_CAN.Web.Controllers
                 }
                 else
                 {
-                    ViewBag.Error = userLogin.StatusMsg;
+                    ViewBag.Error = "S-a petrecut o eroare!";
                 }
             }
 

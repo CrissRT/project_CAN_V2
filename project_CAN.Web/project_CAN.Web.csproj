@@ -134,6 +134,7 @@
   <ItemGroup>
     <Content Include="Content\AdminStyles\ControlContent.css" />
     <Content Include="Content\AdminStyles\ControlUsers.css" />
+    <Content Include="Content\AdminStyles\EditContent.css" />
     <Content Include="Content\AdminStyles\EditUser.css" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -2256,6 +2257,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Admin\UserEditView.cs" />
     <Compile Include="Models\UserLoginView.cs" />
     <Compile Include="Models\UserRegistrationView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

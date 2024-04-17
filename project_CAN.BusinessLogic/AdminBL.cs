@@ -12,6 +12,10 @@ namespace project_CAN.BusinessLogic
 {
     public class AdminBL : AdminApi, IAdmin
     {
+        public OperationOnUserResponse EditUserInDB(UserEdit data)
+        {
+            return EditUser(data);
+        }
         public UsersAllData GetAllUsersExceptAdminFromDB(int excludeId)
         {
             return GetAllUsers(excludeId);

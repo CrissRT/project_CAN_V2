@@ -12,11 +12,6 @@ namespace project_CAN.BusinessLogic.Core
 {
     public class AdminApi
     {
-        public void AddUser()
-        {
-            // Add user logic here
-        }
-
         public void DeleteUser(int id)
         {
             using (var db = new DBSessionContext())
@@ -41,9 +36,35 @@ namespace project_CAN.BusinessLogic.Core
             }
         }
 
-        public void UpdateUser()
+        public OperationOnUserResponse EditUser(UserEdit data)
         {
-            // Update user logic here
+            using (var db = new DBUserContext())
+            {
+                var user = db.Users.FirstOrDefault(u => u.userId == data.userId);
+
+                // Update user properties only if they are not null
+                if (data.userName != null)
+                {
+                    user.userName = data.userName;
+                }
+
+                if (data.email != null)
+                {
+                    user.email = data.email;
+                }
+
+                if (data.password != null)
+                {
+                    user.password = data.password;
+                }
+
+                user.privilegies = data.privilegies;
+                user.isBlocked = data.isBlocked;
+
+                db.SaveChanges();
+            }
+
+            return new OperationOnUserResponse { Status = true, StatusMsg = "Datele au fost editate cu succes" };
         }
 
         public UDBTable GetUserById(int id)
