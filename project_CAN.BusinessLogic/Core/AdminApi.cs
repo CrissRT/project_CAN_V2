@@ -1,17 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Web.UI.WebControls;
 using AutoMapper;
 using project_CAN.BusinessLogic.DBModel;
 using project_CAN.Domain.Entities.Admin;
 using project_CAN.Domain.Entities.User;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace project_CAN.BusinessLogic.Core
 {
     public class AdminApi
     {
+        private readonly string fileRootPath = @"C:\Images\";
+
+        public TutorialsAllData GetAllContent()
+        {
+            using (var db = new DBTutorialContext())
+            {
+                var allTutorials = db.Content.ToList();
+                return new TutorialsAllData { TutorialTable = allTutorials };
+            }
+        }
+
         public void DeleteUser(int id)
         {
             using (var db = new DBSessionContext())
@@ -85,6 +100,108 @@ namespace project_CAN.BusinessLogic.Core
                 var allUsersExceptAdmin = db.Users.Where(u => u.userId != excludeId).ToList();
                 return new UsersAllData { UsersData = allUsersExceptAdmin };
             }
+        }
+
+        public ContentResponse AddContent(ContentDomainData data)
+        {
+            if (data == null) return new ContentResponse { Status = false, StatusMsg = "Datele nu au fost gasite!" };
+
+            if (data.videoLink  == null || !IsYouTubeLink(data.videoLink)) return new ContentResponse { Status = false, StatusMsg = "Video linkul nu a fost gasit!" };
+
+            if (data.title == null) return new ContentResponse { Status = false, StatusMsg = "Titlul nu a fost gasit!" };
+
+            if (data.description == null) return new ContentResponse { Status = false, StatusMsg = "Descrierea tutorialului nu a fost gasita!" };
+
+            if (data.image == null || data.image.ContentLength == 0 || !data.image.ContentType.StartsWith("image")) return new ContentResponse { Status = false, StatusMsg = "Imaginea nu a fost gasita!" };
+
+            int insertedImageId, insertedVideoLinkId;
+            using (var db = new DBImageContext())
+            {
+                var existingImage = db.Images.FirstOrDefault(itemDB => itemDB.imageName == data.image.FileName);
+                if (existingImage == null)
+                {
+                    var image = new DBImageTable
+                    {
+                        imagePath = fileRootPath,
+                        imageName = Path.GetFileName(data.image.FileName),
+                    };
+
+                    // Saving image on server
+                    try
+                    {
+                        if (!Directory.Exists(fileRootPath))
+                        {
+                            Directory.CreateDirectory(fileRootPath);
+                        }
+
+                        var filePath = Path.Combine(fileRootPath, image.imageName);
+                        data.image.SaveAs(filePath);
+                    }
+                    catch (Exception ex)
+                    {
+                        // Log the exception
+                        return new ContentResponse
+                            { Status = false, StatusMsg = "Exception occurred while saving image: " + ex.Message };
+                    }
+
+                    //Saving image path and name on DB
+                    db.Images.Add(image);
+                    db.SaveChanges();
+                    // Retrieve the ID of the inserted image
+                    insertedImageId = image.imageId;
+                }
+                else 
+                    insertedImageId = existingImage.imageId;
+            }
+
+            using (var db = new DBVideoContext())
+            {
+                var existingVideo = db.Videos.FirstOrDefault(itemDB => itemDB.videoLink == data.videoLink);
+                if (existingVideo == null)
+                {
+                    var video = new DBVideoTable { videoLink = data.videoLink };
+                    db.Videos.Add(video);
+                    db.SaveChanges();
+                    insertedVideoLinkId = video.videoLinkId;
+                }
+                else
+                    insertedVideoLinkId = existingVideo.videoLinkId;
+            }
+
+            using (var db = new DBTutorialContext())
+            {
+                var contentTutorialTable = db.Content.FirstOrDefault(itemDB => itemDB.title == data.title);
+
+                if (contentTutorialTable != null) return new ContentResponse { Status = false, StatusMsg = "Content Found with this title" };
+
+                contentTutorialTable = new DBTutorialTable
+                {
+                    title = data.title,
+                    description = data.description,
+                    imageId = insertedImageId,
+                    videoLinkId = insertedVideoLinkId
+                };
+
+                db.Content.Add(contentTutorialTable);
+                db.SaveChanges();
+            }
+
+            return new ContentResponse {Status = true, StatusMsg = "Content adaugat!"};
+        }
+
+        private bool IsYouTubeLink(string link)
+        {
+            // Regular expression pattern to match YouTube video links
+            string pattern = @"(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})";
+
+            // Create a regular expression object
+            Regex regex = new Regex(pattern);
+
+            // Match the link against the regular expression pattern
+            Match match = regex.Match(link);
+
+            // Return true if the link matches the pattern, false otherwise
+            return match.Success;
         }
     }
 }

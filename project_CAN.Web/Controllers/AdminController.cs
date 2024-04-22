@@ -11,13 +11,13 @@ using AutoMapper;
 using project_CAN.Domain.Entities.User;
 using System.Web.UI.WebControls;
 using project_CAN.Domain.Entities.Admin;
+using project_CAN.Web.Models;
 
 namespace project_CAN.Web.Controllers
 {
     public class AdminController : BaseController
     { 
         private readonly IAdmin _adminBL;
-        private readonly string fileRootPath = @"C:\Images\";
 
         public AdminController()
         {
@@ -43,6 +43,8 @@ namespace project_CAN.Web.Controllers
                 return RedirectToAction("Index", "Main");
             }
 
+            ViewBag.content = _adminBL.GetAllContentFromDB();
+
             return View();
         }
 
@@ -59,34 +61,19 @@ namespace project_CAN.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddContent(ContentView viewModel)
         {
-            if (ModelState.IsValid)
+            if (!isUserAdmin()) return RedirectToAction("Index", "Main");
+            Mapper.Reset();
+            Mapper.Initialize(cfg => cfg.CreateMap<ContentView, ContentDomainData>());
+            var data = Mapper.Map<ContentDomainData>(viewModel);
+            var addedContent = _adminBL.AddContentInDB(data);
+            if (addedContent.Status)
             {
-
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("ControlContent", "Admin");
             }
+            return View();
+        }
 
-            //[HttpPost]
-            //[ValidateAntiForgeryToken]
-            //public ActionResult AddContent()
-            //{
-            //    Mapper.Reset();
-            //    Mapper.Initialize(cfg => cfg.CreateMap<UserEditView, UserEdit>());
-            //    var data = Mapper.Map<UserEdit>(editData);
-            //    if (!isUserAdmin())
-            //    {
-            //        return RedirectToAction("Index", "Main");
-            //    }
-
-            //    var response = _adminBL.EditUserInDB(data);
-            //    if (response.Status)
-            //    {
-            //        return RedirectToAction("ControlUsers", "Admin");
-            //    }
-
-            //    return RedirectToAction("EditUser", "Admin");
-            //}
-
-            public ActionResult EditContent()
+        public ActionResult EditContent()
         {
             if (!isUserAdmin())
             {

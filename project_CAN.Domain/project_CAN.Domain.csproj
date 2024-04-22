@@ -43,10 +43,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Admin\DBTutorialTable.cs" />
     <Compile Include="Entities\Admin\ContentDomainData.cs" />
     <Compile Include="Entities\Admin\ContentResponse.cs" />
-    <Compile Include="Entities\Admin\ImageDBTable.cs" />
+    <Compile Include="Entities\Admin\DBImageTable.cs" />
+    <Compile Include="Entities\Admin\DBVideoTable.cs" />
     <Compile Include="Entities\Admin\OperationOnUserResponse.cs" />
+    <Compile Include="Entities\Admin\TutorialsAllData.cs" />
     <Compile Include="Entities\Admin\UserEdit.cs" />
     <Compile Include="Entities\Admin\UsersAllData.cs" />
     <Compile Include="Entities\Enums\URole.cs" />

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using project_CAN.Domain.Entities.Admin;
 
 namespace project_CAN.BusinessLogic.DBModel
 {
@@ -10,6 +11,6 @@ namespace project_CAN.BusinessLogic.DBModel
         {
         }
 
-        //public virtual DbSet<UDBTable> Users { get; set; }
+        public virtual DbSet<DBVideoTable> Videos { get; set; }
     }
 }

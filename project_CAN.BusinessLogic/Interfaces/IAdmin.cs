@@ -13,7 +13,8 @@ namespace project_CAN.BusinessLogic.Interfaces
         UsersAllData GetAllUsersExceptAdminFromDB(int excludeId);
         void DeleteUserFromDB(int id);
         UDBTable GetUserByIdFromDB(int id);
-
+        TutorialsAllData GetAllContentFromDB();
         OperationOnUserResponse EditUserInDB(UserEdit data);
+        ContentResponse AddContentInDB(ContentDomainData data);
     }
 }

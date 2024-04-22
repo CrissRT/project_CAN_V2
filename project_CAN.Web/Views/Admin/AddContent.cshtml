@@ -5,9 +5,11 @@
     Layout = "~/Views/Shared/_LayoutBlankPage.cshtml";
 }
 @Styles.Render("~/Content/css/admin/addContent")
+@model project_CAN.Web.Models.Admin.ContentView
 <body class="addCourses">
     @using (Html.BeginForm("AddContent", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
+        @Html.AntiForgeryToken()
         <div class="addCoursesContent">
 
             <a href="@Url.Action("ControlUsers", "Admin")" style="color: black;"><i class="bi bi-arrow-left-square"></i></a>
@@ -18,7 +20,7 @@
             </div>
             <div class="coursesText">
                 @*<textarea name="text" placeholder="Continutul"></textarea>*@
-                @Html.TextAreaFor(model => model.title, new { name = "text", placeholder = "Continutul" })
+                @Html.TextAreaFor(model => model.description, new { name = "text", placeholder = "Continutul" })
             </div>
             <div class="coursesVideo">
                 @Html.TextBoxFor(model => model.videoLink, new { placeholder = "Linkul Video-ului" })
@@ -27,7 +29,7 @@
 
             <div class="coursesImg">
                 <label for="uploadFile">Adauga o imagine:</label>
-                <input type="file" name="uploadFile" id="uploadFile"> <!-- Added ID for JavaScript access -->
+                @Html.TextBoxFor(model => model.image, new { type = "file", id = "UploadFile" })
                 <div class="previewImage"></div> <!-- Added a container for preview -->
             </div>
 
@@ -38,7 +40,7 @@
     <script>
         // Function to preview the uploaded image
         document.getElementById('uploadFile').addEventListener('change', function (event) {
-            var preview = document.querySelector('.previewImage');
+            var preview = document.querySelector('.previewDbImage');
             preview.innerHTML = ''; // Clear previous preview
 
             var file = event.target.files[0];

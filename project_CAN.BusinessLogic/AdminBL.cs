@@ -30,5 +30,15 @@ namespace project_CAN.BusinessLogic
         {
             return GetUserById(id);
         }
+
+        public ContentResponse AddContentInDB(ContentDomainData data)
+        {
+            return AddContent(data);
+        }
+
+        public TutorialsAllData GetAllContentFromDB()
+        {
+            return GetAllContent();
+        }
     }
 }
