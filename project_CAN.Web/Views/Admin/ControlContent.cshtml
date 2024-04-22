@@ -39,7 +39,7 @@
             <div class="adminCourseView">
                 @*<img src="../images/movement.png" />*@
                 @{
-                    var relativePath = Path.Combine("~/Content/ImagesContent", content.Image.imageName);
+                    var relativePath = Path.Combine(ViewBag.path, content.Image.imageName);
                 }
                 <img src="@Url.Content(relativePath)" />
                 <h2>@content.title</h2>

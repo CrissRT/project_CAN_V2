@@ -17,8 +17,5 @@ namespace project_CAN.Domain.Entities.Admin
 
         [Required]
         public string imageName { get; set; }
-
-        [Required]
-        public string imagePath { get; set; }
     }
 }

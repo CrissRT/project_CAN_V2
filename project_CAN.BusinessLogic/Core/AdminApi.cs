@@ -16,9 +16,9 @@ namespace project_CAN.BusinessLogic.Core
 {
     public class AdminApi
     {
-        //private readonly string fileRootPath = @"C:\Images\";
-        //private readonly string fileRootPath = AppDomain.CurrentDomain.BaseDirectory;
-        private readonly string fileRootPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Content", "ImagesContent");
+        //private readonly string pathImagesContent = @"C:\Images\";
+        //private readonly string pathImagesContent = AppDomain.CurrentDomain.BaseDirectory;
+        //private readonly string pathImagesContent = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Content", "ImagesContent");
 
         public TutorialsAllData GetAllContent()
         {
@@ -107,7 +107,7 @@ namespace project_CAN.BusinessLogic.Core
             }
         }
 
-        public ContentResponse AddContent(ContentDomainData data)
+        public ContentResponse AddContent(ContentDomainData data, string pathImagesContent)
         {
             if (data == null) return new ContentResponse { Status = false, StatusMsg = "Datele nu au fost gasite!" };
 
@@ -125,22 +125,20 @@ namespace project_CAN.BusinessLogic.Core
                 var existingImage = db.Images.FirstOrDefault(itemDB => itemDB.imageName == data.image.FileName);
                 if (existingImage == null)
                 {
-                    var filePath = Path.Combine(fileRootPath, data.image.FileName);
                     var image = new DBImageTable
                     {
-                        imagePath = filePath,
                         imageName = Path.GetFileName(data.image.FileName),
                     };
 
                     // Saving image on server
                     try
                     {
-                        if (!Directory.Exists(fileRootPath))
+                        if (!Directory.Exists(pathImagesContent))
                         {
-                            Directory.CreateDirectory(fileRootPath);
+                            Directory.CreateDirectory(pathImagesContent);
                         }
                         
-                        data.image.SaveAs(filePath);
+                        data.image.SaveAs(Path.Combine(pathImagesContent, data.image.FileName));
                     }
                     catch (Exception ex)
                     {

@@ -15,6 +15,6 @@ namespace project_CAN.BusinessLogic.Interfaces
         UDBTable GetUserByIdFromDB(int id);
         TutorialsAllData GetAllContentFromDB();
         OperationOnUserResponse EditUserInDB(UserEdit data);
-        ContentResponse AddContentInDB(ContentDomainData data);
+        ContentResponse AddContentInDB(ContentDomainData data,string pathImagesContent);
     }
 }

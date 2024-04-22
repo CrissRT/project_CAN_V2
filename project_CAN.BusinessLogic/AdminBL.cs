@@ -31,9 +31,9 @@ namespace project_CAN.BusinessLogic
             return GetUserById(id);
         }
 
-        public ContentResponse AddContentInDB(ContentDomainData data)
+        public ContentResponse AddContentInDB(ContentDomainData data, string pathImagesContent)
         {
-            return AddContent(data);
+            return AddContent(data, pathImagesContent);
         }
 
         public TutorialsAllData GetAllContentFromDB()
