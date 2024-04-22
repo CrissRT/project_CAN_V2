@@ -25,15 +25,6 @@
     </div>
 
     <div class="courseList">
-        @*<div class="adminCourseView">
-            <img src="../images/movement.png" />
-            <h2>Mișcările de bază în CS:GO 2</h2>
-            <div class="editRemoveCourse">
-                <div class="edit"><a href="@Url.Action("EditContent", "Admin")" style="color: black;"><i class="bi bi-pencil"></i></a></div>
-                <div class="remove"><a href="@Url.Action("RemoveContent", "Admin")" style="color: black;"><i class="bi bi-file-earmark-minus"></i></a></div>
-            </div>
-        </div>*@
-
         @foreach (var content in ViewBag.content.TutorialTable)
         {
             <div class="adminCourseView">
@@ -45,7 +36,7 @@
                 <h2>@content.title</h2>
                 <div class="editRemoveCourse">
                     <div class="edit"><a href="@Url.Action("EditContent", "Admin")" style="color: black;"><i class="bi bi-pencil"></i></a></div>
-                    <div class="remove"><a href="@Url.Action("RemoveContent", "Admin")" style="color: black;"><i class="bi bi-file-earmark-minus"></i></a></div>
+                    <div class="remove"><a href="@Url.Action("RemoveContent", "Admin", new { id = content.tutorialId })" style="color: black;"><i class="bi bi-file-earmark-minus"></i></a></div>
                 </div>
             </div>
         }

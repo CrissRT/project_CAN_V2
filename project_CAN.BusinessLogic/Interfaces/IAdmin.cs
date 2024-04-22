@@ -16,5 +16,7 @@ namespace project_CAN.BusinessLogic.Interfaces
         TutorialsAllData GetAllContentFromDB();
         OperationOnUserResponse EditUserInDB(UserEdit data);
         ContentResponse AddContentInDB(ContentDomainData data,string pathImagesContent);
+
+        void RemoveContentFromDB(int id, string pathImagesContent);
     }
 }

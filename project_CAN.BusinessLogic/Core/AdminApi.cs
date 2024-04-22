@@ -192,6 +192,57 @@ namespace project_CAN.BusinessLogic.Core
             return new ContentResponse {Status = true, StatusMsg = "Content adaugat!"};
         }
 
+        public void RemoveContent(int id, string pathImagesContent)
+        {
+            int imageId, videoId;
+            using (var db = new DBTutorialContext())
+            {
+                var tutorial = db.Content.FirstOrDefault(t => t.tutorialId == id);
+                imageId = tutorial.imageId;
+                videoId = tutorial.videoLinkId;
+
+                var countImages = db.Content.Count(o => o.imageId == imageId);
+                var countVideosLink = db.Content.Count(s => s.videoLinkId == videoId);
+
+                db.Content.Remove(tutorial);
+                db.SaveChanges();
+
+                
+                if (countImages == 1)
+                {
+                    using (var imagesDB = new DBImageContext())
+                    {
+                        var imageEntity = imagesDB.Images.FirstOrDefault(i => i.imageId == imageId);
+                        try
+                        {
+                            string imagePath = Path.Combine(pathImagesContent, imageEntity.imageName);
+                            // Check if the file exists
+                            if (File.Exists(imagePath))
+                            {
+                                // Delete the file
+                                File.Delete(imagePath);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("An error occurred while deleting the image: " + ex.Message);
+                        }
+
+                        imagesDB.Images.Remove(imageEntity);
+                        imagesDB.SaveChanges();
+                    }
+                }
+                if (countVideosLink == 1)
+                {
+                    using (var videoDB = new DBVideoContext())
+                    {
+                        videoDB.Videos.Remove(videoDB.Videos.FirstOrDefault(v => v.videoLinkId == videoId));
+                        videoDB.SaveChanges();
+                    }
+                }
+            }
+        }
+
         private bool IsYouTubeLink(string link)
         {
             // Regular expression pattern to match YouTube video links

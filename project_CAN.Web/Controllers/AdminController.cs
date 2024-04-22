@@ -87,12 +87,14 @@ namespace project_CAN.Web.Controllers
             return View();
         }
 
-        public ActionResult RemoveContent()
+        public ActionResult RemoveContent(int id)
         {
             if (!isUserAdmin())
             {
                 return RedirectToAction("Index", "Main");
             }
+            _adminBL.RemoveContentFromDB(id, pathImagesContent);
+
             return View();
         }
 

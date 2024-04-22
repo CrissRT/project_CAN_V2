@@ -40,5 +40,10 @@ namespace project_CAN.BusinessLogic
         {
             return GetAllContent();
         }
+
+        public void RemoveContentFromDB(int id, string pathImagesContent)
+        {
+            RemoveContent(id, pathImagesContent);
+        }
     }
 }
