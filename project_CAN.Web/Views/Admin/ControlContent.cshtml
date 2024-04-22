@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Control Content";
     Layout = "~/Views/Shared/_LayoutBlankPage.cshtml";
+    
 }
 @Styles.Render("~/Content/css/admin/content")
 
@@ -36,7 +37,11 @@
         @foreach (var content in ViewBag.content.TutorialTable)
         {
             <div class="adminCourseView">
-                <img src="../images/movement.png" />
+                @*<img src="../images/movement.png" />*@
+                @{
+                    var relativePath = Path.Combine("~/Content/ImagesContent", content.Image.imageName);
+                }
+                <img src="@Url.Content(relativePath)" />
                 <h2>@content.title</h2>
                 <div class="editRemoveCourse">
                     <div class="edit"><a href="@Url.Action("EditContent", "Admin")" style="color: black;"><i class="bi bi-pencil"></i></a></div>

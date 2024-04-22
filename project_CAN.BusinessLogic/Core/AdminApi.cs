@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -10,19 +11,23 @@ using AutoMapper;
 using project_CAN.BusinessLogic.DBModel;
 using project_CAN.Domain.Entities.Admin;
 using project_CAN.Domain.Entities.User;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace project_CAN.BusinessLogic.Core
 {
     public class AdminApi
     {
-        private readonly string fileRootPath = @"C:\Images\";
+        //private readonly string fileRootPath = @"C:\Images\";
+        //private readonly string fileRootPath = AppDomain.CurrentDomain.BaseDirectory;
+        private readonly string fileRootPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Content", "ImagesContent");
 
         public TutorialsAllData GetAllContent()
         {
             using (var db = new DBTutorialContext())
             {
-                var allTutorials = db.Content.ToList();
+                var allTutorials = db.Content
+                                                            .Include(itemDB => itemDB.Image)
+                                                            .Include(itemDB => itemDB.Video)
+                                                            .ToList();
                 return new TutorialsAllData { TutorialTable = allTutorials };
             }
         }
@@ -120,9 +125,10 @@ namespace project_CAN.BusinessLogic.Core
                 var existingImage = db.Images.FirstOrDefault(itemDB => itemDB.imageName == data.image.FileName);
                 if (existingImage == null)
                 {
+                    var filePath = Path.Combine(fileRootPath, data.image.FileName);
                     var image = new DBImageTable
                     {
-                        imagePath = fileRootPath,
+                        imagePath = filePath,
                         imageName = Path.GetFileName(data.image.FileName),
                     };
 
@@ -133,8 +139,7 @@ namespace project_CAN.BusinessLogic.Core
                         {
                             Directory.CreateDirectory(fileRootPath);
                         }
-
-                        var filePath = Path.Combine(fileRootPath, image.imageName);
+                        
                         data.image.SaveAs(filePath);
                     }
                     catch (Exception ex)
