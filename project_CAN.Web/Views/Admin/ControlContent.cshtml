@@ -2,25 +2,16 @@
 
 @{
     ViewBag.Title = "Control Content";
-    Layout = "~/Views/Shared/_LayoutBlankPage.cshtml";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
     
 }
 @Styles.Render("~/Content/css/admin/content")
 
-<body class="adminPage">
-
-    <div class="barr">
-        <div class="inside-bar">
-            <a href="@Url.Action("ControlUsers", "Admin")"><i class="bi bi-person-lines-fill"></i></a>
-            <a href="@Url.Action("Profile", "Account")"><i class="bi bi-person-circle"></i></a>
-        </div>
-    </div>
-
+<div class="adminPage">
     <div class="CourseBarr">
         <div class="courseSearch">
             <i class="bi bi-search"></i>
         </div>
-        @*<i class="bi bi-file-earmark-plus"></i>*@
         <a href="@Url.Action("AddContent", "Admin")" style="color: black;"><i class="bi bi-file-earmark-plus"></i></a>
     </div>
 
@@ -43,5 +34,5 @@
     </div>
 
 
-</body>
+</div>
 

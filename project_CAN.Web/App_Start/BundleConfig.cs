@@ -36,7 +36,7 @@ namespace project_CAN
             bundles.Add(new StyleBundle("~/Content/css/mainPage").Include(
                      "~/Content/UserStyles/Index.css", "~/Content/UserStyles/Header.css"));
 
-            bundles.Add(new StyleBundle("~/Content/css/profile").Include(
+            bundles.Add(new StyleBundle("~/Content/css/user/profile").Include(
                 "~/Content/UserStyles/Profile.css"));
 
             bundles.Add(new StyleBundle("~/Content/css/signup").Include(
@@ -60,8 +60,17 @@ namespace project_CAN
             bundles.Add(new StyleBundle("~/Content/css/admin/addContent").Include(
                 "~/Content/AdminStyles/AddContent.css"));
 
-            bundles.Add(new StyleBundle("~/Content/css/editProfile").Include(
+            bundles.Add(new StyleBundle("~/Content/css/user/editProfile").Include(
                 "~/Content/UserStyles/EditProfile.css"));
+
+            bundles.Add(new StyleBundle("~/Content/css/admin/editProfile").Include(
+                "~/Content/AdminStyles/EditProfile.css"));
+
+            bundles.Add(new StyleBundle("~/Content/css/admin/header").Include(
+                "~/Content/AdminStyles/HeaderAdmin.css"));
+
+            bundles.Add(new StyleBundle("~/Content/css/admin/profile").Include(
+                "~/Content/AdminStyles/Profile.css"));
         }
     }
 }

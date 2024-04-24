@@ -5,37 +5,6 @@
     flex-direction: column;
     align-items: center;
 }
-html {
-    height: 100%;
-}
-
-.barr {
-    background-color: white;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    width: 100%;
-    height: 70px;
-    border: 1px solid black;
-    border-top: none;
-    border-right: none;
-    border-left: none;
-    padding: 25px;
-    position: relative;
-}
-
-.inside-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 54%;
-    height: 100%;
-}
-
-.inside-bar i {
-    font-size: 50px;
-    color: black;
-}
 
 .searchUser {
     background-color: white;

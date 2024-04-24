@@ -14,5 +14,7 @@ namespace project_CAN.BusinessLogic.Interfaces
         void DeleteUserFromDB(int id);
         UDBTable GetUserByIdFromDB(int id);
         OperationOnUserResponse EditUserInDB(UserEdit data);
+
+
     }
 }

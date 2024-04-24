@@ -14,7 +14,7 @@ namespace project_CAN.Web.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            if (isUserAdmin())
+            if (isUserLogged() == 2)
             {
                 return RedirectToAction("ControlUsers", "Admin");
             }

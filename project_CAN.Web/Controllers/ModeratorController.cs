@@ -15,9 +15,9 @@ namespace project_CAN.Web.Controllers
         protected readonly string pathImagesContent =
             Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Content", "ImagesContent");
         // GET: Moderator
-        public ActionResult Profile()
-        {
-            return View();
-        }
+        //public ActionResult Profile()
+        //{
+        //    return View();
+        //}
     }
 }

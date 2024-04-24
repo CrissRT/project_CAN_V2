@@ -136,7 +136,10 @@
     <Content Include="Content\AdminStyles\ControlContent.css" />
     <Content Include="Content\AdminStyles\ControlUsers.css" />
     <Content Include="Content\AdminStyles\EditContent.css" />
+    <Content Include="Content\AdminStyles\EditProfile.css" />
     <Content Include="Content\AdminStyles\EditUser.css" />
+    <Content Include="Content\AdminStyles\HeaderAdmin.css" />
+    <Content Include="Content\AdminStyles\Profile.css" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -2335,6 +2338,10 @@
     <Content Include="Views\Admin\EditContent.cshtml" />
     <Content Include="Views\Admin\AddContent.cshtml" />
     <Content Include="Views\Account\EditProfile.cshtml" />
+    <Content Include="Views\Admin\Profile.cshtml" />
+    <Content Include="Views\Admin\EditProfile.cshtml" />
+    <Content Include="Views\Shared\_HeaderAdmin.cshtml" />
+    <Content Include="Views\Shared\_LayoutPageAdmin.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

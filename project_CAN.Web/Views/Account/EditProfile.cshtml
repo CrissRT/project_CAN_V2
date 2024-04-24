@@ -1,13 +1,13 @@
 ﻿@using System.Web.Optimization
 
 @{
-    ViewBag.Title = "EditProfile";
+    ViewBag.Title = "Edit Profile";
     Layout = "~/Views/Shared/_LayoutPageUser.cshtml";
     var user = ViewBag.user;
     var apiCookie = Request.Cookies["X-KEY"].Value;
 }
 @model project_CAN.Web.Models.EditProfileView
-@Styles.Render("~/Content/css/editProfile")
+@Styles.Render("~/Content/css/user/editProfile")
 
 <div class="userEdit">
 @using (Html.BeginForm("EditProfile", "Account", FormMethod.Post))

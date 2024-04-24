@@ -33,7 +33,7 @@ namespace project_CAN.Web.Controllers
         }
         public ActionResult Profile()
         {
-            if (!isUserLogged())
+            if (isUserLogged() == -1)
             {
                 return RedirectToAction("Login", "Account");
             }
@@ -44,6 +44,7 @@ namespace project_CAN.Web.Controllers
             ViewBag.userName = profile.userName;
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EditProfile(EditProfileView editData)
@@ -58,7 +59,7 @@ namespace project_CAN.Web.Controllers
 
         public ActionResult EditProfile()
         {
-            if (!isUserLogged())
+            if (isUserLogged() == -1)
             {
                 return RedirectToAction("Login", "Account");
             }

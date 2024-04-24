@@ -21,12 +21,25 @@ namespace project_CAN.Web.Controllers
             _user = bl.GetSessionBL();
         }
 
-        public bool isUserLogged()
+        protected short isUserLogged()
+        {
+            var profile = userLogged();
+            if (profile != null)
+            {
+                if (profile.privilegies == URole.user) return 0;
+                else if (profile.privilegies == URole.moderator) return 1;
+                else if (profile.privilegies == URole.admin) return 2;
+            }
+
+            return -1;
+        }
+        
+        private UserMinimal userLogged()
         {
             SessionStatus();
             if ((string)System.Web.HttpContext.Current.Session["LoginStatus"] != "login")
             {
-                return false;
+                return null;
             }
             var apiCookie = Request.Cookies["X-KEY"];
 
@@ -36,32 +49,12 @@ namespace project_CAN.Web.Controllers
 
                 if (profile != null)
                 {
-                    return true;
+                    return profile;
                 }
             }
-            return false;
+            return null;
         }
 
-        protected bool isUserAdmin()
-        {
-            SessionStatus();
-            if ((string)System.Web.HttpContext.Current.Session["LoginStatus"] != "login")
-            {
-                return false;
-            }
-            var apiCookie = Request.Cookies["X-KEY"];
-
-            if (apiCookie != null)
-            {
-                var profile = _user.GetUserByCookie(apiCookie.Value);
-
-                if (profile != null && profile.privilegies == URole.admin)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
 
         protected int RetrieveUserID()
         {

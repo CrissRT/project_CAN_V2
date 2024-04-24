@@ -1,19 +1,11 @@
 ﻿@using System.Web.Optimization
 @{
     ViewBag.Title = "Control Users";
-    Layout = "~/Views/Shared/_LayoutBlankPage.cshtml";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
 }
 @Styles.Render("~/Content/css/admin/users")
 
-<body class="users">
-
-    <div class="barr">
-        <div class="inside-bar">
-            <a href="@Url.Action("ControlContent", "Admin")"><i class="bi bi-view-list"></i></a>
-            <a href="@Url.Action("Profile", "Account")"><i class="bi bi-person-circle"></i></a>
-        </div>
-    </div>
-
+<div class="users">
     <div class="searchUser">
         <div class="searchBarr">
             <i class="bi bi-search"></i>
@@ -51,4 +43,4 @@
         }
     </div>
 
-</body>
+</div>
