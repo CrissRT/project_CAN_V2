@@ -8,15 +8,15 @@ using project_CAN.Domain.Entities.User;
 
 namespace project_CAN.BusinessLogic.Interfaces
 {
-    public interface IAdmin
+    public interface IAdmin : IModerator
     {
         UsersAllData GetAllUsersExceptAdminFromDB(int excludeId);
         void DeleteUserFromDB(int id);
         UDBTable GetUserByIdFromDB(int id);
-        TutorialsAllData GetAllContentFromDB();
+        //TutorialsAllData GetAllContentFromDB();
         OperationOnUserResponse EditUserInDB(UserEdit data);
-        ContentResponse AddContentInDB(ContentDomainData data,string pathImagesContent);
+        //ContentResponse AddContentInDB(ContentDomainData data,string pathImagesContent);
 
-        void RemoveContentFromDB(int id, string pathImagesContent);
+        //void RemoveContentFromDB(int id, string pathImagesContent);
     }
 }

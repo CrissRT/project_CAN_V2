@@ -58,6 +58,7 @@
     <Compile Include="AdminBL.cs" />
     <Compile Include="BusinessLogic.cs" />
     <Compile Include="Core\AdminApi.cs" />
+    <Compile Include="Core\ModeratorApi.cs" />
     <Compile Include="Core\UserApi.cs" />
     <Compile Include="DBModel\DBImageContext.cs" />
     <Compile Include="DBModel\DBSessionContext.cs" />
@@ -65,7 +66,9 @@
     <Compile Include="DBModel\DBUserContext.cs" />
     <Compile Include="DBModel\DBVideoContext.cs" />
     <Compile Include="Interfaces\IAdmin.cs" />
+    <Compile Include="Interfaces\IModerator.cs" />
     <Compile Include="Interfaces\ISession.cs" />
+    <Compile Include="ModeratorBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SessionBL.cs" />
   </ItemGroup>

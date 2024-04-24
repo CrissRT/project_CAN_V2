@@ -2254,6 +2254,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\MainController.cs" />
+    <Compile Include="Controllers\ModeratorController.cs" />
     <Compile Include="Extension\HttpContextExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -2341,6 +2342,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\ModeratorStyles\" />
+    <Folder Include="Views\Moderator\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\project_CAN.BusinessLogic\project_CAN.BusinessLogic.csproj">

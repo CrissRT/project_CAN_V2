@@ -30,20 +30,5 @@ namespace project_CAN.BusinessLogic
         {
             return GetUserById(id);
         }
-
-        public ContentResponse AddContentInDB(ContentDomainData data, string pathImagesContent)
-        {
-            return AddContent(data, pathImagesContent);
-        }
-
-        public TutorialsAllData GetAllContentFromDB()
-        {
-            return GetAllContent();
-        }
-
-        public void RemoveContentFromDB(int id, string pathImagesContent)
-        {
-            RemoveContent(id, pathImagesContent);
-        }
     }
 }
