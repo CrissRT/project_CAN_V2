@@ -4,9 +4,10 @@
     Layout = "~/Views/Shared/_LayoutPageUser.cshtml";
 }
 @Styles.Render("~/Content/css/profile")
+
 <div class="profile">
 
-    <img src="../../images/person-circle.svg" />
+    <img src="../../images/person-circle.svg"/>
 
     <div class="profileContent">
 
@@ -41,11 +42,15 @@
         </div>
 
         <div class="contats">
+                
             <a href="https://www.instagram.com/numele_utilizatorului/"><i class="bi bi-instagram"></i></a>
             <a href="https://www.instagram.com/numele_utilizatorului/"><i class="bi bi-facebook"></i></a>
             <a href="https://www.instagram.com/numele_utilizatorului/"><i class="bi bi-telegram"></i></a>
+
+
         </div>
-        <button class="logOutProfile" onclick="location.href='@Url.Action("Logout", "Account")'">Logout</button>
+
+        <button class="logOutProfile">Logout</button>
     </div>
 
 </div>

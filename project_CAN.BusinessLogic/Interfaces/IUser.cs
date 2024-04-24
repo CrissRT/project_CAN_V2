@@ -3,12 +3,13 @@ using project_CAN.Domain.Entities.User;
 
 namespace project_CAN.BusinessLogic.Interfaces
 {
-    public interface ISession
+    public interface IUser
     {
-        UResponseLogin UserLoginSessionBL(ULoginData data);
+        UResponse UserLoginSessionBL(ULoginData data);
         HttpCookie GenCookie(string loginCredential);
         UserMinimal GetUserByCookie(string apiCookieValue);
+        UResponse UserRegistrationSessionBL(URegistrationData data);
 
-        UResponseLogin UserRegistrationSessionBL(URegistrationData  data);
+        UResponse EditProfileFromDB(EditProfile data);
     }
 }

@@ -39,10 +39,10 @@ namespace project_CAN.Web.Controllers
 
 
             var apiCookie = Request.Cookies["X-KEY"];
-            var profile = _session.GetUserByCookie(apiCookie.Value);
+            var profile = User.GetUserByCookie(apiCookie.Value);
 
             ViewBag.userName = profile.userName;
-            return View(ViewBag);
+            return View();
         }
         public ActionResult SignUp()
         {
@@ -60,10 +60,10 @@ namespace project_CAN.Web.Controllers
                 var data = Mapper.Map<URegistrationData>(registrationViewData);
 
                 //data.lastLogin = DateTime.Now;
-                var userRegister = _session.UserRegistrationSessionBL(data);
+                var userRegister = User.UserRegistrationSessionBL(data);
                 if (userRegister.Status)
                 {
-                    HttpCookie cookie = _session.GenCookie(registrationViewData.email);
+                    HttpCookie cookie = User.GenCookie(registrationViewData.email);
                     ControllerContext.HttpContext.Response.Cookies.Add(cookie);
 
                     return RedirectToAction("Index", "Main");
@@ -94,10 +94,10 @@ namespace project_CAN.Web.Controllers
 
                 data.lastLogin = DateTime.Now;
 
-                var userLogin = _session.UserLoginSessionBL(data);
+                var userLogin = User.UserLoginSessionBL(data);
                 if (userLogin.Status)
                 {
-                    HttpCookie cookie = _session.GenCookie(login.credential);
+                    HttpCookie cookie = User.GenCookie(login.credential);
                     ControllerContext.HttpContext.Response.Cookies.Add(cookie);
                     
                     return RedirectToAction("Index", "Main");

@@ -13,12 +13,12 @@ namespace project_CAN.Web.Controllers
 {
     public class BaseController : Controller
     {
-        protected readonly ISession _session;
+        protected readonly IUser User;
 
         public BaseController()
         {
             var bl = new BussinesLogic();
-            _session = bl.GetSessionBL();
+            User = bl.GetSessionBL();
         }
 
         public bool isUserLogged()
@@ -32,7 +32,7 @@ namespace project_CAN.Web.Controllers
 
             if (apiCookie != null)
             {
-                var profile = _session.GetUserByCookie(apiCookie.Value);
+                var profile = User.GetUserByCookie(apiCookie.Value);
 
                 if (profile != null)
                 {
@@ -53,7 +53,7 @@ namespace project_CAN.Web.Controllers
 
             if (apiCookie != null)
             {
-                var profile = _session.GetUserByCookie(apiCookie.Value);
+                var profile = User.GetUserByCookie(apiCookie.Value);
 
                 if (profile != null && profile.privilegies == URole.admin)
                 {
@@ -68,7 +68,7 @@ namespace project_CAN.Web.Controllers
             var apiCookie = Request.Cookies["X-KEY"];
             if (apiCookie != null)
             {
-                var profile = _session.GetUserByCookie(apiCookie.Value);
+                var profile = User.GetUserByCookie(apiCookie.Value);
                 if (profile != null)
                 {
                     return profile.userId;
@@ -82,7 +82,7 @@ namespace project_CAN.Web.Controllers
             var apiCookie = Request.Cookies["X-KEY"];
             if (apiCookie != null)
             {
-                var profile = _session.GetUserByCookie(apiCookie.Value);
+                var profile = User.GetUserByCookie(apiCookie.Value);
                 if (profile != null)
                 {
                     System.Web.HttpContext.Current.SetMySessionObject(profile);

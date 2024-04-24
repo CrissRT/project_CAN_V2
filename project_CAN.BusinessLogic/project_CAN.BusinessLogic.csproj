@@ -67,10 +67,10 @@
     <Compile Include="DBModel\DBVideoContext.cs" />
     <Compile Include="Interfaces\IAdmin.cs" />
     <Compile Include="Interfaces\IModerator.cs" />
-    <Compile Include="Interfaces\ISession.cs" />
+    <Compile Include="Interfaces\IUser.cs" />
     <Compile Include="ModeratorBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SessionBL.cs" />
+    <Compile Include="UserBL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\project_CAN.Domain\project_CAN.Domain.csproj">

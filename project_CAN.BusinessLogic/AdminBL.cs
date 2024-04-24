@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using project_CAN.BusinessLogic.Core;
 using project_CAN.BusinessLogic.Interfaces;
 using project_CAN.Domain.Entities.Admin;
@@ -45,6 +46,31 @@ namespace project_CAN.BusinessLogic
         public void RemoveContentFromDB(int id, string pathImagesContent)
         {
             RemoveContent(id, pathImagesContent);
+        }
+
+        public UResponse UserLoginSessionBL(ULoginData data)
+        {
+            return UserLoginAction(data);
+        }
+
+        public HttpCookie GenCookie(string loginCredential)
+        {
+            return Cookie(loginCredential);
+        }
+
+        public UserMinimal GetUserByCookie(string apiCookieValue)
+        {
+            return UserCookie(apiCookieValue);
+        }
+
+        public UResponse UserRegistrationSessionBL(URegistrationData data)
+        {
+            return UserRegistrationAction(data);
+        }
+
+        public UResponse EditProfileFromDB(EditProfile data)
+        {
+            return EditProfile(data);
         }
     }
 }

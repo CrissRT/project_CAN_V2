@@ -5,9 +5,9 @@ using System.Web;
 
 namespace project_CAN.BusinessLogic
 {
-    public class SessionBL : UserApi, ISession
+    public class UserBL : UserApi, IUser
     {
-        public UResponseLogin UserLoginSessionBL(ULoginData data)
+        public UResponse UserLoginSessionBL(ULoginData data)
         {
             return UserLoginAction(data);
         }
@@ -22,9 +22,14 @@ namespace project_CAN.BusinessLogic
             return UserCookie(apiCookieValue);
         }
 
-        public UResponseLogin UserRegistrationSessionBL(URegistrationData data)
+        public UResponse UserRegistrationSessionBL(URegistrationData data)
         {
             return UserRegistrationAction(data);
+        }
+
+        public UResponse EditProfileFromDB(EditProfile data)
+        {
+            return EditProfile(data);
         }
     }
 }

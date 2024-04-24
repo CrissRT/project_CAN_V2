@@ -4,9 +4,9 @@ namespace project_CAN.BusinessLogic
 {
     public class BussinesLogic
     {
-        public ISession GetSessionBL()
+        public IUser GetSessionBL()
         {
-            return new SessionBL();
+            return new UserBL();
         }
 
         public IAdmin GetAdminBL()

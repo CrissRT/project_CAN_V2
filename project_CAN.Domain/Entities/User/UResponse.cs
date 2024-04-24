@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace project_CAN.Domain.Entities.User
 {
-    public class UResponseLogin
+    public class UResponse
     {
         public bool Status { get; set; }
         public string StatusMsg { get; set; }

@@ -53,10 +53,11 @@
     <Compile Include="Entities\Admin\UserEdit.cs" />
     <Compile Include="Entities\Admin\UsersAllData.cs" />
     <Compile Include="Entities\Enums\URole.cs" />
+    <Compile Include="Entities\User\EditProfile.cs" />
     <Compile Include="Entities\User\SessionDBTable.cs" />
     <Compile Include="Entities\User\UDBTable.cs" />
     <Compile Include="Entities\User\ULoginData.cs" />
-    <Compile Include="Entities\User\UResponseLogin.cs" />
+    <Compile Include="Entities\User\UResponse.cs" />
     <Compile Include="Entities\User\UserMinimal.cs" />
     <Compile Include="Entities\User\URegistrationData.cs" />
     <Compile Include="project_CANDataSet.Designer.cs">
@@ -95,6 +96,8 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Entities\Moderator\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
@@ -50,17 +51,17 @@ namespace project_CAN.BusinessLogic.Core
                 var user = db.Users.FirstOrDefault(u => u.userId == data.userId);
 
                 // Update user properties only if they are not null
-                if (data.userName != null)
+                if (data.userName != null && data.userName.Length > 3 && data.userName.Length <= 50)
                 {
                     user.userName = data.userName;
                 }
-
-                if (data.email != null)
+                var validate = new EmailAddressAttribute();
+                if (data.email != null && validate.IsValid(data.email))
                 {
                     user.email = data.email;
                 }
 
-                if (data.password != null)
+                if (data.password != null && data.password.Length > 8 && data.password.Length <= 50)
                 {
                     user.password = data.password;
                 }

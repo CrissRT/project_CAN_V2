@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace project_CAN.BusinessLogic.Interfaces
 {
-    public interface IModerator
+    public interface IModerator : IUser
     {
         TutorialsAllData GetAllContentFromDB();
         ContentResponse AddContentInDB(ContentDomainData data, string pathImagesContent);
