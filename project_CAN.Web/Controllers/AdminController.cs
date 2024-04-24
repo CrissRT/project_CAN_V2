@@ -95,7 +95,7 @@ namespace project_CAN.Web.Controllers
             }
             _adminBL.RemoveContentFromDB(id, pathImagesContent);
 
-            return View();
+            return RedirectToAction("ControlContent", "Admin");
         }
 
         public ActionResult EditUser(int id)

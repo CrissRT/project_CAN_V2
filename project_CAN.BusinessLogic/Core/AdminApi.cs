@@ -122,39 +122,45 @@ namespace project_CAN.BusinessLogic.Core
             int insertedImageId, insertedVideoLinkId;
             using (var db = new DBImageContext())
             {
-                var existingImage = db.Images.FirstOrDefault(itemDB => itemDB.imageName == data.image.FileName);
-                if (existingImage == null)
+                // Generate a unique ID (GUID)
+                string uniqueId = Guid.NewGuid().ToString();
+
+                // Get the file extension of the uploaded file
+                string fileExtension = Path.GetExtension(data.image.FileName);
+
+                // Combine the unique ID and file extension to create the new file name
+                string newFileName = uniqueId + fileExtension;
+
+                // Construct the new file path with the new file name
+                string newFilePath = Path.Combine(pathImagesContent, newFileName);
+
+                var image = new DBImageTable
                 {
-                    var image = new DBImageTable
-                    {
-                        imageName = Path.GetFileName(data.image.FileName),
-                    };
+                    imageName = newFileName,
+                };
 
-                    // Saving image on server
-                    try
+                // Saving image on server
+                try
+                {
+                    if (!Directory.Exists(pathImagesContent))
                     {
-                        if (!Directory.Exists(pathImagesContent))
-                        {
-                            Directory.CreateDirectory(pathImagesContent);
-                        }
-                        
-                        data.image.SaveAs(Path.Combine(pathImagesContent, data.image.FileName));
+                        Directory.CreateDirectory(pathImagesContent);
                     }
-                    catch (Exception ex)
-                    {
-                        // Log the exception
-                        return new ContentResponse
-                            { Status = false, StatusMsg = "Exception occurred while saving image: " + ex.Message };
-                    }
-
-                    //Saving image path and name on DB
-                    db.Images.Add(image);
-                    db.SaveChanges();
-                    // Retrieve the ID of the inserted image
-                    insertedImageId = image.imageId;
+                    
+                    data.image.SaveAs(newFilePath);
                 }
-                else 
-                    insertedImageId = existingImage.imageId;
+                catch (Exception ex)
+                {
+                    // Log the exception
+                    return new ContentResponse
+                        { Status = false, StatusMsg = "Exception occurred while saving image: " + ex.Message };
+                }
+
+                //Saving image path and name on DB
+                db.Images.Add(image);
+                db.SaveChanges();
+                // Retrieve the ID of the inserted image
+                insertedImageId = image.imageId;
             }
 
             using (var db = new DBVideoContext())
