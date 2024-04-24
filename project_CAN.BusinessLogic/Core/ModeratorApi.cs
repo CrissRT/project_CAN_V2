@@ -11,9 +11,9 @@ using project_CAN.Domain.Entities.Admin;
 
 namespace project_CAN.BusinessLogic.Core
 {
-    public class ModeratorApi
+    public class ModeratorApi : UserApi
     {
-        public TutorialsAllData GetAllContent()
+        protected internal TutorialsAllData GetAllContent()
         {
             using (var db = new DBTutorialContext())
             {
@@ -25,7 +25,7 @@ namespace project_CAN.BusinessLogic.Core
             }
         }
 
-        public ContentResponse AddContent(ContentDomainData data, string pathImagesContent)
+        protected internal ContentResponse AddContent(ContentDomainData data, string pathImagesContent)
         {
             if (data == null) return new ContentResponse { Status = false, StatusMsg = "Datele nu au fost gasite!" };
 
@@ -116,7 +116,7 @@ namespace project_CAN.BusinessLogic.Core
             return new ContentResponse { Status = true, StatusMsg = "Content adaugat!" };
         }
 
-        public void RemoveContent(int id, string pathImagesContent)
+        protected internal void RemoveContent(int id, string pathImagesContent)
         {
             int imageId, videoId;
             using (var db = new DBTutorialContext())

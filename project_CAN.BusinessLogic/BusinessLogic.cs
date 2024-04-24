@@ -13,5 +13,10 @@ namespace project_CAN.BusinessLogic
         {
             return new AdminBL();
         }
+
+        public IModerator GetModeratorBL()
+        {
+            return new ModeratorBL();
+        }
     }
 }

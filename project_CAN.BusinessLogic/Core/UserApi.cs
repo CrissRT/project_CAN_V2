@@ -16,7 +16,7 @@ namespace project_CAN.BusinessLogic.Core
 {
     public class UserApi
     {
-        internal UResponseLogin UserRegistrationAction(URegistrationData dataUserDomain)
+        protected internal UResponseLogin UserRegistrationAction(URegistrationData dataUserDomain)
         {
             UDBTable userTable;
 
@@ -80,7 +80,7 @@ namespace project_CAN.BusinessLogic.Core
             }
             return new UResponseLogin { Status = true, StatusMsg = "Registrare cu success"};
         }
-        internal UResponseLogin UserLoginAction(ULoginData dataUserDomain)
+        protected internal UResponseLogin UserLoginAction(ULoginData dataUserDomain)
         {
             UDBTable userTable;
             var pass = LoginHelper.HashGen(dataUserDomain.password);
@@ -141,7 +141,7 @@ namespace project_CAN.BusinessLogic.Core
             }
         }
 
-        internal HttpCookie Cookie(string loginCredential)
+        protected internal HttpCookie Cookie(string loginCredential)
         {
             var apiCookie = new HttpCookie("X-KEY")
             {
@@ -200,7 +200,7 @@ namespace project_CAN.BusinessLogic.Core
             return apiCookie;
         }
 
-        internal UserMinimal UserCookie(string cookie)
+        protected internal UserMinimal UserCookie(string cookie)
         {
             SessionDBTable session = null;
             UDBTable currentUser = null;
@@ -228,9 +228,7 @@ namespace project_CAN.BusinessLogic.Core
             if (currentUser == null) return null;
             Mapper.Reset();
             Mapper.Initialize(cfg => cfg.CreateMap<UDBTable, UserMinimal>());
-            var userminimal = Mapper.Map<UserMinimal>(currentUser);
-
-            return userminimal;
+            return Mapper.Map<UserMinimal>(currentUser);
         }
 
     }

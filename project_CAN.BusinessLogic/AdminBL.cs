@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using project_CAN.BusinessLogic.Core;
@@ -29,6 +30,21 @@ namespace project_CAN.BusinessLogic
         public UDBTable GetUserByIdFromDB(int id)
         {
             return GetUserById(id);
+        }
+
+        public ContentResponse AddContentInDB(ContentDomainData data, string pathImagesContent)
+        {
+            return AddContent(data, pathImagesContent);
+        }
+
+        public TutorialsAllData GetAllContentFromDB()
+        {
+            return GetAllContent();
+        }
+
+        public void RemoveContentFromDB(int id, string pathImagesContent)
+        {
+            RemoveContent(id, pathImagesContent);
         }
     }
 }
