@@ -205,7 +205,7 @@ namespace project_CAN.BusinessLogic.Core
         protected internal UResponse EditProfile(EditProfile data)
         {
             UDBTable currentUser = GetUserFromCookie(data.apiCookie);
-            if (currentUser == null) return null;
+            if (currentUser == null) return new UResponse { Status = false, StatusMsg = "Sesiunea utilizatorul nu a fost gasit!"};
 
             using (var db = new DBUserContext())
             {
@@ -228,6 +228,7 @@ namespace project_CAN.BusinessLogic.Core
                     currentUser.password = data.password;
                 }
                 string changes= string.Join(", ", changesList.ToArray());
+                db.Entry(currentUser).State = EntityState.Modified;
                 db.SaveChanges();
                 return new UResponse { Status = true, StatusMsg = $"Schimbare salvata a {changes}!" };
             }

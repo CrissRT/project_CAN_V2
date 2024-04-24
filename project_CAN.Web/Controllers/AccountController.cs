@@ -12,6 +12,7 @@ using project_CAN.Web.Extension;
 
 //using project_CAN.Web.Extension;
 using project_CAN.Web.Models;
+using project_CAN.Web.Models.User;
 
 namespace project_CAN.Web.Controllers
 {
@@ -28,7 +29,7 @@ namespace project_CAN.Web.Controllers
             }
 
             // Redirect to the login page or any other page after logout
-            return RedirectToAction("Index", "Main");
+            return RedirectToAction("Index", "Home");
         }
         public ActionResult Profile()
         {
@@ -37,13 +38,37 @@ namespace project_CAN.Web.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
-
             var apiCookie = Request.Cookies["X-KEY"];
-            var profile = User.GetUserByCookie(apiCookie.Value);
+            var profile = _user.GetUserByCookie(apiCookie.Value);
 
             ViewBag.userName = profile.userName;
             return View();
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditProfile(EditProfileView editData)
+        {
+            Mapper.Reset();
+            Mapper.Initialize(cfg => cfg.CreateMap<EditProfileView, EditProfile>());
+            var data = Mapper.Map<EditProfile>(editData);
+            var response = _user.EditProfileFromDB(data);
+            TempData["message"] = response.StatusMsg;
+            return RedirectToAction("EditProfile", "Account");
+        }
+
+        public ActionResult EditProfile()
+        {
+            if (!isUserLogged())
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var profile = _user.GetUserByCookie(Request.Cookies["X-KEY"].Value);
+
+            ViewBag.user = profile;
+            return View();
+        }
+
         public ActionResult SignUp()
         {
             return View();
@@ -60,13 +85,13 @@ namespace project_CAN.Web.Controllers
                 var data = Mapper.Map<URegistrationData>(registrationViewData);
 
                 //data.lastLogin = DateTime.Now;
-                var userRegister = User.UserRegistrationSessionBL(data);
+                var userRegister = _user.UserRegistrationSessionBL(data);
                 if (userRegister.Status)
                 {
-                    HttpCookie cookie = User.GenCookie(registrationViewData.email);
+                    HttpCookie cookie = _user.GenCookie(registrationViewData.email);
                     ControllerContext.HttpContext.Response.Cookies.Add(cookie);
 
-                    return RedirectToAction("Index", "Main");
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
@@ -94,13 +119,13 @@ namespace project_CAN.Web.Controllers
 
                 data.lastLogin = DateTime.Now;
 
-                var userLogin = User.UserLoginSessionBL(data);
+                var userLogin = _user.UserLoginSessionBL(data);
                 if (userLogin.Status)
                 {
-                    HttpCookie cookie = User.GenCookie(login.credential);
+                    HttpCookie cookie = _user.GenCookie(login.credential);
                     ControllerContext.HttpContext.Response.Cookies.Add(cookie);
                     
-                    return RedirectToAction("Index", "Main");
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {

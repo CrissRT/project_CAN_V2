@@ -31,7 +31,7 @@ namespace project_CAN.Web.Controllers
     {
         if (!isUserAdmin())
         {
-            return RedirectToAction("Index", "Main");
+            return RedirectToAction("Index", "Home");
         }
 
         ViewBag.users = _adminBL.GetAllUsersExceptAdminFromDB(RetrieveUserID());
@@ -43,7 +43,7 @@ namespace project_CAN.Web.Controllers
     {
         if (!isUserAdmin())
         {
-            return RedirectToAction("Index", "Main");
+            return RedirectToAction("Index", "Home");
         }
 
         ViewBag.path = insideProjectDirectory;
@@ -56,7 +56,7 @@ namespace project_CAN.Web.Controllers
     {
         if (!isUserAdmin())
         {
-            return RedirectToAction("Index", "Main");
+            return RedirectToAction("Index", "Home");
         }
 
         return View();
@@ -66,7 +66,7 @@ namespace project_CAN.Web.Controllers
     [ValidateAntiForgeryToken]
     public ActionResult AddContent(ContentView viewModel)
     {
-        if (!isUserAdmin()) return RedirectToAction("Index", "Main");
+        if (!isUserAdmin()) return RedirectToAction("Index", "Home");
         Mapper.Reset();
         Mapper.Initialize(cfg => cfg.CreateMap<ContentView, ContentDomainData>());
         var data = Mapper.Map<ContentDomainData>(viewModel);
@@ -83,7 +83,7 @@ namespace project_CAN.Web.Controllers
     {
         if (!isUserAdmin())
         {
-            return RedirectToAction("Index", "Main");
+            return RedirectToAction("Index", "Home");
         }
 
         return View();
@@ -93,7 +93,7 @@ namespace project_CAN.Web.Controllers
     {
         if (!isUserAdmin())
         {
-            return RedirectToAction("Index", "Main");
+            return RedirectToAction("Index", "Home");
         }
 
         _adminBL.RemoveContentFromDB(id, pathImagesContent);
@@ -105,7 +105,7 @@ namespace project_CAN.Web.Controllers
     {
         if (!isUserAdmin())
         {
-            return RedirectToAction("Index", "Main");
+            return RedirectToAction("Index", "Home");
         }
 
         ViewBag.user = _adminBL.GetUserByIdFromDB(id);
@@ -121,7 +121,7 @@ namespace project_CAN.Web.Controllers
         var data = Mapper.Map<UserEdit>(editData);
         if (!isUserAdmin())
         {
-            return RedirectToAction("Index", "Main");
+            return RedirectToAction("Index", "Home");
         }
 
         var response = _adminBL.EditUserInDB(data);
@@ -138,7 +138,7 @@ namespace project_CAN.Web.Controllers
     {
         if (!isUserAdmin())
         {
-            return RedirectToAction("Index", "Main");
+            return RedirectToAction("Index", "Home");
         }
 
         _adminBL.DeleteUserFromDB(id);

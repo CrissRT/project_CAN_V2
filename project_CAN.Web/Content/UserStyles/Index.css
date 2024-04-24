@@ -253,7 +253,7 @@
 /* y */
 @media screen and (max-height: 700px) {
     .logo {
-        height: 140;
+        height: 140px;
     }
 }
 

@@ -68,7 +68,6 @@ namespace project_CAN.BusinessLogic.Core
 
                 user.privilegies = data.privilegies;
                 user.isBlocked = data.isBlocked;
-
                 db.SaveChanges();
             }
 

@@ -9,9 +9,9 @@ using project_CAN.Domain.Enums;
 
 namespace project_CAN.Web.Controllers
 {
-    public class MainController : BaseController
+    public class HomeController : BaseController
     {
-        // GET: Main
+        // GET: Home
         public ActionResult Index()
         {
             if (isUserAdmin())

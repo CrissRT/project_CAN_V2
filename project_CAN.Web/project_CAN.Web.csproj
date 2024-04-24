@@ -2206,6 +2206,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\UserStyles\EditProfile.css" />
     <Content Include="Content\favicon.ico" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\Site.css" />
@@ -2253,7 +2254,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Controllers\MainController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ModeratorController.cs" />
     <Compile Include="Extension\HttpContextExtensions.cs" />
     <Compile Include="Global.asax.cs">
@@ -2261,8 +2262,9 @@
     </Compile>
     <Compile Include="Models\Admin\ContentView.cs" />
     <Compile Include="Models\Admin\UserEditView.cs" />
-    <Compile Include="Models\UserLoginView.cs" />
-    <Compile Include="Models\UserRegistrationView.cs" />
+    <Compile Include="Models\EditProfileView.cs" />
+    <Compile Include="Models\User\UserLoginView.cs" />
+    <Compile Include="Models\User\UserRegistrationView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -2309,7 +2311,7 @@
     <Content Include="Scripts\bootstrap\dist\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Scripts\bootstrap\dist\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Scripts\bootstrap\dist\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="Views\Main\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\Profile.cshtml" />
     <Content Include="Views\Account\SignUp.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
@@ -2332,6 +2334,7 @@
     <Content Include="Views\Admin\EditUser.cshtml" />
     <Content Include="Views\Admin\EditContent.cshtml" />
     <Content Include="Views\Admin\AddContent.cshtml" />
+    <Content Include="Views\Account\EditProfile.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2342,6 +2345,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\ModeratorStyles\" />
+    <Folder Include="Models\Moderator\" />
     <Folder Include="Views\Moderator\" />
   </ItemGroup>
   <ItemGroup>

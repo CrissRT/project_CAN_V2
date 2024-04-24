@@ -2,7 +2,7 @@
 @using System.Web.UI.WebControls
 @model project_CAN.Web.Models.Admin.UserEditView
 @{
-    ViewBag.Title = "Edit User";
+    ViewBag.Title = "Edit _user";
     Layout = "~/Views/Shared/_LayoutBlankPage.cshtml";
     var user = @ViewBag.user;
 }
@@ -57,7 +57,7 @@
 
                 <label for="role">Rolul:</label>
 
-                <label for="User">User</label>
+                <label for="_user">_user</label>
                 @Html.RadioButtonFor(model => model.privilegies, 0, new { id = "User", name = "role" })
 
                 <label for="Mod">Moderator</label>

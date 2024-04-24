@@ -1,7 +1,6 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace project_CAN.Web.Models
+namespace project_CAN.Web.Models.User
 {
     public class UserLoginView
     {

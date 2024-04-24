@@ -1,5 +1,5 @@
 ﻿@using System.Web.Optimization
-@model project_CAN.Web.Models.UserRegistrationView
+@model project_CAN.Web.Models.User.UserRegistrationView
 @{
     ViewBag.Title = "Sign Up";
     Layout = "~/Views/Shared/_LayoutBlankPage.cshtml";
@@ -13,7 +13,7 @@
         <div class="singupContent">
             <h1>Inregestrare</h1>
             <div class="login">
-                <p>Username:</p>
+                <p>_username:</p>
                 @Html.TextBoxFor(model => model.username)
                 @Html.ValidationMessageFor(model => model.username, "")
             </div>
