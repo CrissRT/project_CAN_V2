@@ -3,62 +3,78 @@
 @{
     ViewBag.Title = "Edit Content";
     Layout = "~/Views/Shared/_LayoutBlankPage.cshtml";
+    var content = ViewBag.content;
+    var relativePath = Path.Combine(ViewBag.path, content.Image.imageName);
 }
+@model project_CAN.Web.Models.Admin.ContentView
 @Styles.Render("~/Content/css/admin/editContent")
 <body class="editCoursesPage">
 
     <div class="prevCourses">
-        <img src="../../images/movement.png" />
-        <h2>Tehnici de mișcare</h2>
-        <p>În ciuda importanței obiectivului în joc, dacă nu știi să te miști corect. Mai mult decât atât, vorbim nu numai despre mișcări tactice în timp util pe hartă și falsuri, ci și în sensul literal al mișcărilor - alergare, mișcări mici și sărituri. Tehnica strafe din CS:GO pare complicată în teorie, dar de fapt este destul de simplu de învățat. Strafes Mișcările la stânga și la dreapta se numesc mișcare, de îndată ce simți când modelul se oprește în timpul mișcării tale, poți trage cu precizie, cu cât mișcările tale sunt verificate, cu atât mai puține șanse are adversarul tău. Fiecare jucător experimentat cu împușcături multiplayer folosește strafe scurte pentru a îngreuna inamicul să țintească și pentru a nu deveni o țintă ușoară pentru el să rămână într-un singur loc. De acord, a intra în capul unui inamic în mișcare este o sarcină mult mai dificilă decât a lovi o singură țintă uniformă. Începătorii fac o mare greșeală dacă văd un inamic și nu-l lovesc prima dată, doar se ghemuiesc și continuă să tragă în rafale scurte. Această tehnică nu este eficientă deoarece jucătorul se află într-un dezavantaj, doar stând în fața ochilor inamicului. În plus, viteza de mișcare în ghemuit nu vă permite să schimbați rapid poziția sau să folosiți acoperirea pentru a distruge inamicul, iar timpul să vă ridicați și să părăsiți linia țintită nu va mai fi.</p>
-        <iframe class="video" width="660" height="385" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+        <img src="@Url.Content(relativePath)" />
+        <h2>@content.title</h2>
+        <p>@content.description</p>
+        @*<iframe width="420" height="315" src="https://www.youtube.com/embed/eI4an8aSsgw">
+            </iframe>*@
+        <iframe width="560" height="315" src="@content.Video.videoLink" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </div>
 
     <div class="editCourses">
+        @using (Html.BeginForm("EditContent", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.tutorialId, new { @Value = content.tutorialId})
+            <a href="@Url.Action("ControlContent", "Admin")" style="color: black;"><i class="bi bi-arrow-left-square"></i></a>
 
-        <i class="bi bi-arrow-left-square"></i>
+            <div class="editCoursesTitle">
+                @*<input type="text" placeholder="Titlu">*@
+                @Html.TextBoxFor(model => model.title, new { placeholder = "Titlu" })
+                @Html.ValidationMessageFor(model => model.title)
+            </div>
 
-        <di class="editCoursesTitle">
-            <input type="text" placeholder="Titlu">
-        </di>
+            <div class="editCoursesText">
+                @*<textarea name="text" placeholder="Continutul"></textarea>*@
+                @Html.TextAreaFor(model => model.description, new { name = "text", placeholder = "Continutul" })
+                @Html.ValidationMessageFor(model => model.description)
+            </div>
 
-        <di class="editCoursesText">
-            <textarea name="text" placeholder="Continutul"></textarea>
-        </di>
+            <div class="editCoursesVideo">
+                @*<input type="text" placeholder="Linkul Videului">*@
+                @Html.TextBoxFor(model => model.videoLink, new { placeholder = "Linkul Video-ului" })
+                @Html.ValidationMessageFor(model => model.videoLink)
+            </div>
 
-        <di class="editCoursesVideo">
-            <input type="text" placeholder="Lincul Videului">
-        </di>
+            <div class="editCoursesImg">
+                <label for="uploadFile">Adauga o imagine:</label>
+                @*<input type="file" name="uploadFile" onchange="previewImage(event)">*@
+                @Html.TextBoxFor(model => model.image, new { type = "file", name = "uploadFile" })
+                @Html.ValidationMessageFor(model => model.image)
+            </div>
 
-        <di class="editCoursesImg">
-            <label for="uploadFile">Adauga o imagine:</label>
-            <input type="file" name="uploadFile" onchange="previewImage(event)">
-        </di>
+            <div class="previewImage"></div>
 
-        <div class="previewImage"></div>
-
-        <button type="button" class="btn btn-secondary btn-lg">Salveaza</button>
-
+            <button type="submit" class="btn btn-secondary btn-lg">Salveaza</button>
+        }
     </div>
 
     <script>
-            function previewImage(event) {
-                var preview = document.querySelector('.previewDbImage');
-                preview.innerHTML = ''; // Clear previous preview
+        function previewImage(event) {
+            var preview = document.querySelector('.previewDbImage');
+            preview.innerHTML = ''; // Clear previous preview
 
-                var file = event.target.files[0];
-                if (file) {
-                    var reader = new FileReader();
-                    reader.onload = function(e) {
-                        var img = document.createElement('img');
-                        img.src = e.target.result;
-                        img.style.maxWidth = '100%';
-                        img.style.maxHeight = '100%';
-                        preview.appendChild(img);
-                    }
-                    reader.readAsDataURL(file);
+            var file = event.target.files[0];
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.style.maxWidth = '100%';
+                    img.style.maxHeight = '100%';
+                    preview.appendChild(img);
                 }
+                reader.readAsDataURL(file);
             }
+        }
     </script>
 
 

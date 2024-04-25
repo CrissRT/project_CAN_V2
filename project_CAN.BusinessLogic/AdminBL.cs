@@ -8,6 +8,7 @@ using System.Web;
 using project_CAN.BusinessLogic.Core;
 using project_CAN.BusinessLogic.Interfaces;
 using project_CAN.Domain.Entities.Admin;
+using project_CAN.Domain.Entities.Moderator;
 using project_CAN.Domain.Entities.User;
 
 namespace project_CAN.BusinessLogic
@@ -47,7 +48,7 @@ namespace project_CAN.BusinessLogic
         {
             RemoveContent(id, pathImagesContent);
         }
-
+        
         public UResponse UserLoginSessionBL(ULoginData data)
         {
             return UserLoginAction(data);
@@ -71,6 +72,16 @@ namespace project_CAN.BusinessLogic
         public UResponse EditProfileFromDB(EditProfile data)
         {
             return EditProfile(data);
+        }
+
+        public DBTutorialTable GetContentByIdFromDB(int id)
+        {
+            return GetContentById(id);
+        }
+
+        public ContentResponse EditContentInDB(ContentDomainData data, string pathImagesContent)
+        {
+            return EditContent(data, pathImagesContent);
         }
     }
 }

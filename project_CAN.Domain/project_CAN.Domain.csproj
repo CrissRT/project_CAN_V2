@@ -43,13 +43,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\Admin\DBTutorialTable.cs" />
-    <Compile Include="Entities\Admin\ContentDomainData.cs" />
-    <Compile Include="Entities\Admin\ContentResponse.cs" />
-    <Compile Include="Entities\Admin\DBImageTable.cs" />
-    <Compile Include="Entities\Admin\DBVideoTable.cs" />
+    <Compile Include="Entities\Moderator\DBTutorialTable.cs" />
+    <Compile Include="Entities\Moderator\ContentDomainData.cs" />
+    <Compile Include="Entities\Moderator\ContentResponse.cs" />
+    <Compile Include="Entities\Moderator\DBImageTable.cs" />
+    <Compile Include="Entities\Moderator\DBVideoTable.cs" />
     <Compile Include="Entities\Admin\OperationOnUserResponse.cs" />
-    <Compile Include="Entities\Admin\TutorialsAllData.cs" />
+    <Compile Include="Entities\Moderator\TutorialsAllData.cs" />
     <Compile Include="Entities\Admin\UserEdit.cs" />
     <Compile Include="Entities\Admin\UsersAllData.cs" />
     <Compile Include="Entities\Enums\URole.cs" />
@@ -96,8 +96,6 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Entities\Moderator\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

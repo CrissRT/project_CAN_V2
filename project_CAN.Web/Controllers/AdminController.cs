@@ -13,6 +13,7 @@ using System.Web.UI.WebControls;
 using project_CAN.Domain.Entities.Admin;
 using project_CAN.Web.Models;
 using System.IO;
+using project_CAN.Domain.Entities.Moderator;
 
 namespace project_CAN.Web.Controllers
 {
@@ -118,19 +119,31 @@ namespace project_CAN.Web.Controllers
             return View();
         }
 
-        public ActionResult EditContent()
+        public ActionResult EditContent(int id)
         {
             if (isUserLogged() != 2)
             {
                 return RedirectToAction("Index", "Home");
             }
+            ViewBag.path = insideProjectDirectory;
+            ViewBag.content = _adminBL.GetContentByIdFromDB(id);
 
             return View();
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult EditContent(ContentView content)
         {
+            if (isUserLogged() != 2) return RedirectToAction("Index", "Home");
+            Mapper.Reset();
+            Mapper.Initialize(cfg => cfg.CreateMap<ContentView, ContentDomainData>());
+            var data = Mapper.Map<ContentDomainData>(content);
+            var response = _adminBL.EditContentInDB(data, pathImagesContent);
+            if (response.Status)
+            {
+                return RedirectToAction("ControlContent", "Admin");
+            }
 
             return RedirectToAction("EditContent", "Admin");
         }

@@ -1,10 +1,7 @@
-﻿using project_CAN.Domain.Entities.User;
-using project_CAN.Domain.Enums;
-using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace project_CAN.Domain.Entities.Admin
+namespace project_CAN.Domain.Entities.Moderator
 {
     [Table("tutorialTable")]
     public class DBTutorialTable

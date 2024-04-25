@@ -17,10 +17,12 @@
             <div class="coursesTitle">
                 @*<input type="text" placeholder="Titlu">*@
                 @Html.TextBoxFor(model => model.title, new { placeholder = "Titlu" })
+                @Html.ValidationMessageFor(model => model.title)
             </div>
             <div class="coursesText">
                 @*<textarea name="text" placeholder="Continutul"></textarea>*@
                 @Html.TextAreaFor(model => model.description, new { name = "text", placeholder = "Continutul" })
+                @Html.ValidationMessageFor(model => model.description)
             </div>
             <div class="coursesVideo">
                 @Html.TextBoxFor(model => model.videoLink, new { placeholder = "Linkul Video-ului" })
@@ -30,6 +32,7 @@
             <div class="coursesImg">
                 <label for="uploadFile">Adauga o imagine:</label>
                 @Html.TextBoxFor(model => model.image, new { type = "file", id = "UploadFile" })
+                @Html.ValidationMessageFor(model => model.image)
                 <div class="previewImage"></div> <!-- Added a container for preview -->
             </div>
 

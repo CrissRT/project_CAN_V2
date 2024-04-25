@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
+﻿using System.Web;
 
-namespace project_CAN.Domain.Entities.Admin
+namespace project_CAN.Domain.Entities.Moderator
 {
     public class ContentDomainData
     {
@@ -13,5 +8,7 @@ namespace project_CAN.Domain.Entities.Admin
         public string description { get; set; }
         public string videoLink { get; set; }
         public HttpPostedFileBase image { get; set; }
+
+        public int tutorialId { get; set; }
     }
 }

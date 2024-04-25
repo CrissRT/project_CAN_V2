@@ -19,14 +19,13 @@
         @foreach (var content in ViewBag.content.TutorialTable)
         {
             <div class="adminCourseView">
-                @*<img src="../images/movement.png" />*@
                 @{
                     var relativePath = Path.Combine(ViewBag.path, content.Image.imageName);
                 }
                 <img src="@Url.Content(relativePath)" />
                 <h2>@content.title</h2>
                 <div class="editRemoveCourse">
-                    <div class="edit"><a href="@Url.Action("EditContent", "Admin")" style="color: black;"><i class="bi bi-pencil"></i></a></div>
+                    <div class="edit"><a href="@Url.Action("EditContent", "Admin", new {id = content.tutorialId})" style="color: black;"><i class="bi bi-pencil"></i></a></div>
                     <div class="remove"><a href="@Url.Action("RemoveContent", "Admin", new { id = content.tutorialId })" style="color: black;"><i class="bi bi-file-earmark-minus"></i></a></div>
                 </div>
             </div>

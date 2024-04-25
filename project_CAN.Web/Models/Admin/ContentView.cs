@@ -7,6 +7,7 @@ namespace project_CAN.Web.Models.Admin
 {
     public class ContentView
     {
+        public int tutorialId { get; set; }
         public string title { get; set; }
         public string description { get; set; }
         public string videoLink { get; set; }

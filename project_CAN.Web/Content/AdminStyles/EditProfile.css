@@ -3,6 +3,8 @@
     align-items: center;
     justify-content: center;
     width: 100%;
+    background-image: url(../../images/backGround.svg);
+    height: 100%;
 }
 
 .userEditContent {
@@ -58,7 +60,7 @@
     margin-top: 10px;
 }
 
-.input {
+input {
     border: none;
     outline: none;
 }

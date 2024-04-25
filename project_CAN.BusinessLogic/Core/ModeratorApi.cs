@@ -8,12 +8,133 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using project_CAN.BusinessLogic.DBModel;
 using project_CAN.Domain.Entities.Admin;
+using project_CAN.Domain.Entities.Moderator;
 
 namespace project_CAN.BusinessLogic.Core
 {
     public class ModeratorApi : UserApi
     {
-        protected internal TutorialsAllData GetAllContent()
+
+        protected DBTutorialTable GetContentById(int id)
+        {
+            using (var db = new DBTutorialContext())
+            {
+                var contentTutorialTable = db.Content
+                    .Include(itemDB => itemDB.Image)
+                    .Include(itemDB => itemDB.Video)
+                    .FirstOrDefault(itemDB => itemDB.tutorialId == id);
+
+                if (contentTutorialTable == null) return null;
+
+                return contentTutorialTable;
+            }
+        }
+
+        protected ContentResponse EditContent(ContentDomainData data, string pathImagesContent)
+        {
+            if (data == null) return new ContentResponse { Status = false, StatusMsg = "Datele nu au fost gasite!" };
+            DBTutorialTable tutorial;
+            using (var db = new DBTutorialContext())
+            {
+                tutorial = db.Content.Include(t => t.Image)
+                    .Include(t => t.Video)
+                    .FirstOrDefault(t => t.tutorialId == data.tutorialId);
+                if (tutorial == null) return new ContentResponse { Status = false, StatusMsg = "Tutorialul nu a fost gasit!" };
+            }
+
+            if (data.videoLink != null && IsYouTubeLink(data.videoLink))
+            {
+
+                using (var db = new DBVideoContext())
+                {
+                    var existingVideo = db.Videos.FirstOrDefault(itemDB => itemDB.videoLinkId == tutorial.videoLinkId);
+                    if (existingVideo != null)
+                    {
+                        existingVideo.videoLink = data.videoLink;
+                        db.SaveChanges();
+                    }
+                }
+            }
+
+            if (data.title != null)
+            {
+                tutorial.title = data.title;
+            }
+
+            if (data.description != null)
+            {
+                tutorial.description = data.description;
+            }
+
+            if (data.image != null && data.image.ContentLength != 0 && data.image.ContentType.StartsWith("image"))
+            {
+                using (var db = new DBImageContext())
+                {
+                    var image = db.Images.FirstOrDefault(itemDB => itemDB.imageId == tutorial.imageId);
+                    if (image != null)
+                    {
+                        try
+                        {
+                            string imagePath = Path.Combine(pathImagesContent, image.imageName);
+                            // Check if the file exists
+                            if (File.Exists(imagePath))
+                            {
+                                // Delete the file
+                                File.Delete(imagePath);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            return new ContentResponse { Status = false, StatusMsg = "Exception occurred while deleting image: " + ex.Message };
+                        }
+
+                        // Generate a unique ID (GUID)
+                        string uniqueId = Guid.NewGuid().ToString();
+
+                        // Get the file extension of the uploaded file
+                        string fileExtension = Path.GetExtension(data.image.FileName);
+
+                        // Combine the unique ID and file extension to create the new file name
+                        string newFileName = uniqueId + fileExtension;
+
+                        // Construct the new file path with the new file name
+                        string newFilePath = Path.Combine(pathImagesContent, newFileName);
+
+                        image.imageName = newFileName;
+
+                        // Saving image on server
+                        try
+                        {
+                            if (!Directory.Exists(pathImagesContent))
+                            {
+                                Directory.CreateDirectory(pathImagesContent);
+                            }
+
+                            data.image.SaveAs(newFilePath);
+                        }
+                        catch (Exception ex)
+                        {
+                            // Log the exception
+                            return new ContentResponse
+                                { Status = false, StatusMsg = "Exception occurred while saving image: " + ex.Message };
+                        }
+
+                        db.SaveChanges();
+                    }
+                }
+            }
+
+            using (var db = new DBTutorialContext())
+            {
+                db.Entry(tutorial).State = EntityState.Modified;
+                db.SaveChanges();
+                return new ContentResponse { Status = true, StatusMsg = "Tutorialul a fost editat!" };
+            }
+            return null;
+        }
+
+
+        protected TutorialsAllData GetAllContent()
         {
             using (var db = new DBTutorialContext())
             {
@@ -83,16 +204,10 @@ namespace project_CAN.BusinessLogic.Core
 
             using (var db = new DBVideoContext())
             {
-                var existingVideo = db.Videos.FirstOrDefault(itemDB => itemDB.videoLink == data.videoLink);
-                if (existingVideo == null)
-                {
-                    var video = new DBVideoTable { videoLink = data.videoLink };
-                    db.Videos.Add(video);
-                    db.SaveChanges();
-                    insertedVideoLinkId = video.videoLinkId;
-                }
-                else
-                    insertedVideoLinkId = existingVideo.videoLinkId;
+                var video = new DBVideoTable { videoLink = data.videoLink };
+                db.Videos.Add(video);
+                db.SaveChanges();
+                insertedVideoLinkId = video.videoLinkId;
             }
 
             using (var db = new DBTutorialContext())

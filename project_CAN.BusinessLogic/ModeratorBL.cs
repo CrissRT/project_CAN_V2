@@ -7,12 +7,22 @@ using System.Web;
 using project_CAN.BusinessLogic.Core;
 using project_CAN.BusinessLogic.Interfaces;
 using project_CAN.Domain.Entities.Admin;
+using project_CAN.Domain.Entities.Moderator;
 using project_CAN.Domain.Entities.User;
 
 namespace project_CAN.BusinessLogic
 {
     public class ModeratorBL : ModeratorApi, IModerator
     {
+        public DBTutorialTable GetContentByIdFromDB(int id)
+        {
+            return GetContentById(id);
+        }
+
+        public ContentResponse EditContentInDB(ContentDomainData data, string pathImagesContent)
+        {
+            return EditContent(data, pathImagesContent);
+        }
         public ContentResponse AddContentInDB(ContentDomainData data, string pathImagesContent)
         {
             return AddContent(data, pathImagesContent);

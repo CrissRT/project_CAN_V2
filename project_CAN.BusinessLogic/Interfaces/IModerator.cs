@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using project_CAN.Domain.Entities.Moderator;
 
 namespace project_CAN.BusinessLogic.Interfaces
 {
@@ -12,5 +13,9 @@ namespace project_CAN.BusinessLogic.Interfaces
         TutorialsAllData GetAllContentFromDB();
         ContentResponse AddContentInDB(ContentDomainData data, string pathImagesContent);
         void RemoveContentFromDB(int id, string pathImagesContent);
+
+        DBTutorialTable GetContentByIdFromDB(int id);
+
+        ContentResponse EditContentInDB(ContentDomainData data, string pathImagesContent);
     }
 }

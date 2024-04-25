@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using project_CAN.Domain.Entities.Admin;
+using project_CAN.Domain.Entities.Moderator;
 using project_CAN.Domain.Entities.User;
 
 namespace project_CAN.BusinessLogic.DBModel
