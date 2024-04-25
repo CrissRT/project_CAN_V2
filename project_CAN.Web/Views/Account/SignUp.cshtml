@@ -11,9 +11,9 @@
     {
         @Html.AntiForgeryToken()
         <div class="singupContent">
-            <h1>Inregestrare</h1>
+            <h1>Înregistrare</h1>
             <div class="login">
-                <p>_username:</p>
+                <p>Username:</p>
                 @Html.TextBoxFor(model => model.username)
                 @Html.ValidationMessageFor(model => model.username, "")
             </div>
