@@ -19,13 +19,13 @@ namespace project_CAN.BusinessLogic
             return GetContentById(id);
         }
 
-        public TutorialResponse EditTutorialInDB(TutorialDomainData data, string pathImagesContent)
+        public TutorialResponse EditTutorialInDB(TutorialDomainData data, string pathImagesTutorial)
         {
-            return EditContent(data, pathImagesContent);
+            return EditContent(data, pathImagesTutorial);
         }
-        public TutorialResponse AddContentInDB(TutorialDomainData data, string pathImagesContent)
+        public TutorialResponse AddContentInDB(TutorialDomainData data, string pathImagesTutorial)
         {
-            return AddContent(data, pathImagesContent);
+            return AddContent(data, pathImagesTutorial);
         }
 
         public TutorialsAllData GetAllTutorialFromDB()

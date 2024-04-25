@@ -30,16 +30,20 @@ namespace project_CAN.BusinessLogic.Core
             }
         }
 
-        protected TutorialResponse EditContent(TutorialDomainData data, string pathImagesContent)
+        protected TutorialResponse EditContent(TutorialDomainData data, string pathImagesTutorial)
         {
             if (data == null) return new TutorialResponse { Status = false, StatusMsg = "Datele nu au fost gasite!" };
-            DBTutorialTable tutorial;
+            DBTutorialTable tutorial = null;
             using (var db = new DBTutorialContext())
             {
+                var tutorials =  db.Tutorial.Count(t => t.title == data.title);
+                if (tutorials > 1) return new TutorialResponse { Status = false, StatusMsg = "Tutorialul cu acest titlu exista deja!" };
                 tutorial = db.Tutorial.Include(t => t.Image)
                     .Include(t => t.Video)
                     .FirstOrDefault(t => t.tutorialId == data.tutorialId);
                 if (tutorial == null) return new TutorialResponse { Status = false, StatusMsg = "Tutorialul nu a fost gasit!" };
+
+
             }
 
             if (data.videoLink != null && IsYouTubeLink(data.videoLink))
@@ -73,20 +77,29 @@ namespace project_CAN.BusinessLogic.Core
                     var image = db.Images.FirstOrDefault(itemDB => itemDB.imageId == tutorial.imageId);
                     if (image != null)
                     {
+                        string imagePath = Path.Combine(pathImagesTutorial, image.imageName);
                         try
                         {
-                            string imagePath = Path.Combine(pathImagesContent, image.imageName);
+                            if (!Directory.Exists(pathImagesTutorial))
+                            {
+                                Directory.CreateDirectory(pathImagesTutorial);
+                            }
+
                             // Check if the file exists
                             if (File.Exists(imagePath))
                             {
                                 // Delete the file
                                 File.Delete(imagePath);
                             }
+
                         }
                         catch (Exception ex)
                         {
-                            return new TutorialResponse { Status = false, StatusMsg = "Exception occurred while deleting image: " + ex.Message };
+                            // Log the exception
+                            return new TutorialResponse
+                                { Status = false, StatusMsg = "Exception occurred while saving image: " + ex.Message };
                         }
+
 
                         // Generate a unique ID (GUID)
                         string uniqueId = Guid.NewGuid().ToString();
@@ -98,16 +111,16 @@ namespace project_CAN.BusinessLogic.Core
                         string newFileName = uniqueId + fileExtension;
 
                         // Construct the new file path with the new file name
-                        string newFilePath = Path.Combine(pathImagesContent, newFileName);
+                        string newFilePath = Path.Combine(pathImagesTutorial, newFileName);
 
                         image.imageName = newFileName;
 
                         // Saving image on server
                         try
                         {
-                            if (!Directory.Exists(pathImagesContent))
+                            if (!Directory.Exists(pathImagesTutorial))
                             {
-                                Directory.CreateDirectory(pathImagesContent);
+                                Directory.CreateDirectory(pathImagesTutorial);
                             }
 
                             data.image.SaveAs(newFilePath);
@@ -146,7 +159,7 @@ namespace project_CAN.BusinessLogic.Core
             }
         }
 
-        protected internal TutorialResponse AddContent(TutorialDomainData data, string pathImagesContent)
+        protected internal TutorialResponse AddContent(TutorialDomainData data, string pathImagesTutorial)
         {
             if (data == null) return new TutorialResponse { Status = false, StatusMsg = "Datele nu au fost gasite!" };
 
@@ -171,7 +184,7 @@ namespace project_CAN.BusinessLogic.Core
                 string newFileName = uniqueId + fileExtension;
 
                 // Construct the new file path with the new file name
-                string newFilePath = Path.Combine(pathImagesContent, newFileName);
+                string newFilePath = Path.Combine(pathImagesTutorial, newFileName);
 
                 var image = new DBImageTable
                 {
@@ -181,9 +194,9 @@ namespace project_CAN.BusinessLogic.Core
                 // Saving image on server
                 try
                 {
-                    if (!Directory.Exists(pathImagesContent))
+                    if (!Directory.Exists(pathImagesTutorial))
                     {
-                        Directory.CreateDirectory(pathImagesContent);
+                        Directory.CreateDirectory(pathImagesTutorial);
                     }
 
                     data.image.SaveAs(newFilePath);
@@ -231,7 +244,7 @@ namespace project_CAN.BusinessLogic.Core
             return new TutorialResponse { Status = true, StatusMsg = "Tutorial adaugat!" };
         }
 
-        protected internal void RemoveTutorial(int id, string pathImagesContent)
+        protected internal void RemoveTutorial(int id, string pathImagesTutorial)
         {
             int imageId, videoId;
             using (var db = new DBTutorialContext())
@@ -254,7 +267,7 @@ namespace project_CAN.BusinessLogic.Core
                         var imageEntity = imagesDB.Images.FirstOrDefault(i => i.imageId == imageId);
                         try
                         {
-                            string imagePath = Path.Combine(pathImagesContent, imageEntity.imageName);
+                            string imagePath = Path.Combine(pathImagesTutorial, imageEntity.imageName);
                             // Check if the file exists
                             if (File.Exists(imagePath))
                             {

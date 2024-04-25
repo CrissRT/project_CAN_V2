@@ -12,8 +12,8 @@ namespace project_CAN.Web.Controllers
 
         protected readonly string insideProjectDirectory = "~/Content/ImagesTutorial";
 
-        protected readonly string pathImagesContent =
-            Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Tutorial", "ImagesContent");
+        protected readonly string pathImagesTutorial =
+            Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Content", "ImagesTutorial");
         // GET: Moderator
         //public ActionResult Profile()
         //{

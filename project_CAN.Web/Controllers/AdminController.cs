@@ -21,8 +21,8 @@ namespace project_CAN.Web.Controllers
     {
         protected readonly string insideProjectDirectory = "~/Content/ImagesTutorial";
 
-        protected readonly string pathImagesContent =
-            Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Tutorial", "ImagesContent");
+        protected readonly string pathImagesTutorial =
+            Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Content", "ImagesTutorial");
         private readonly IAdmin _adminBL;
         
         public AdminController()
@@ -110,7 +110,7 @@ namespace project_CAN.Web.Controllers
             Mapper.Reset();
             Mapper.Initialize(cfg => cfg.CreateMap<ContentView, TutorialDomainData>());
             var data = Mapper.Map<TutorialDomainData>(viewModel);
-            var addedContent = _adminBL.AddContentInDB(data, pathImagesContent);
+            var addedContent = _adminBL.AddContentInDB(data, pathImagesTutorial);
             if (addedContent.Status)
             {
                 return RedirectToAction("ControlContent", "Admin");
@@ -139,7 +139,7 @@ namespace project_CAN.Web.Controllers
             Mapper.Reset();
             Mapper.Initialize(cfg => cfg.CreateMap<ContentView, TutorialDomainData>());
             var data = Mapper.Map<TutorialDomainData>(tutorial);
-            var response = _adminBL.EditTutorialInDB(data, pathImagesContent);
+            var response = _adminBL.EditTutorialInDB(data, pathImagesTutorial);
             if (response.Status)
             {
                 return RedirectToAction("ControlContent", "Admin");
@@ -155,7 +155,7 @@ namespace project_CAN.Web.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            _adminBL.RemoveTutorialFromDB(id, pathImagesContent);
+            _adminBL.RemoveTutorialFromDB(id, pathImagesTutorial);
 
             return RedirectToAction("ControlContent", "Admin");
         }

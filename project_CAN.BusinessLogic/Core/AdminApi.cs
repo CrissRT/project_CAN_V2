@@ -17,9 +17,9 @@ namespace project_CAN.BusinessLogic.Core
 {
     public class AdminApi : ModeratorApi
     {
-        //private readonly string pathImagesContent = @"C:\Images\";
-        //private readonly string pathImagesContent = AppDomain.CurrentDomain.BaseDirectory;
-        //private readonly string pathImagesContent = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Tutorial", "ImagesContent");
+        //private readonly string pathImagesTutorial = @"C:\Images\";
+        //private readonly string pathImagesTutorial = AppDomain.CurrentDomain.BaseDirectory;
+        //private readonly string pathImagesTutorial = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Content", "ImagesTutorial");
         internal void DeleteUser(int id)
         {
             using (var db = new DBSessionContext())

@@ -277,8 +277,3 @@
     -webkit-background-clip: text;
     color: transparent;
 }
-
-button > a {
-    text-decoration: none;
-    color: white;
-}
