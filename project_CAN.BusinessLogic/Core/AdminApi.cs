@@ -19,7 +19,7 @@ namespace project_CAN.BusinessLogic.Core
     {
         //private readonly string pathImagesContent = @"C:\Images\";
         //private readonly string pathImagesContent = AppDomain.CurrentDomain.BaseDirectory;
-        //private readonly string pathImagesContent = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Content", "ImagesContent");
+        //private readonly string pathImagesContent = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Tutorial", "ImagesContent");
         internal void DeleteUser(int id)
         {
             using (var db = new DBSessionContext())

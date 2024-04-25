@@ -12,7 +12,7 @@ namespace project_CAN.BusinessLogic.DBModel
         {
         }
 
-        public virtual DbSet<DBTutorialTable> Content { get; set; }
+        public virtual DbSet<DBTutorialTable> Tutorial { get; set; }
     }
 
 }

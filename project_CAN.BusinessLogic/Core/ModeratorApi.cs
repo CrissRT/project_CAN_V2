@@ -19,7 +19,7 @@ namespace project_CAN.BusinessLogic.Core
         {
             using (var db = new DBTutorialContext())
             {
-                var contentTutorialTable = db.Content
+                var contentTutorialTable = db.Tutorial
                     .Include(itemDB => itemDB.Image)
                     .Include(itemDB => itemDB.Video)
                     .FirstOrDefault(itemDB => itemDB.tutorialId == id);
@@ -30,16 +30,16 @@ namespace project_CAN.BusinessLogic.Core
             }
         }
 
-        protected ContentResponse EditContent(ContentDomainData data, string pathImagesContent)
+        protected TutorialResponse EditContent(TutorialDomainData data, string pathImagesContent)
         {
-            if (data == null) return new ContentResponse { Status = false, StatusMsg = "Datele nu au fost gasite!" };
+            if (data == null) return new TutorialResponse { Status = false, StatusMsg = "Datele nu au fost gasite!" };
             DBTutorialTable tutorial;
             using (var db = new DBTutorialContext())
             {
-                tutorial = db.Content.Include(t => t.Image)
+                tutorial = db.Tutorial.Include(t => t.Image)
                     .Include(t => t.Video)
                     .FirstOrDefault(t => t.tutorialId == data.tutorialId);
-                if (tutorial == null) return new ContentResponse { Status = false, StatusMsg = "Tutorialul nu a fost gasit!" };
+                if (tutorial == null) return new TutorialResponse { Status = false, StatusMsg = "Tutorialul nu a fost gasit!" };
             }
 
             if (data.videoLink != null && IsYouTubeLink(data.videoLink))
@@ -85,7 +85,7 @@ namespace project_CAN.BusinessLogic.Core
                         }
                         catch (Exception ex)
                         {
-                            return new ContentResponse { Status = false, StatusMsg = "Exception occurred while deleting image: " + ex.Message };
+                            return new TutorialResponse { Status = false, StatusMsg = "Exception occurred while deleting image: " + ex.Message };
                         }
 
                         // Generate a unique ID (GUID)
@@ -115,7 +115,7 @@ namespace project_CAN.BusinessLogic.Core
                         catch (Exception ex)
                         {
                             // Log the exception
-                            return new ContentResponse
+                            return new TutorialResponse
                                 { Status = false, StatusMsg = "Exception occurred while saving image: " + ex.Message };
                         }
 
@@ -128,17 +128,17 @@ namespace project_CAN.BusinessLogic.Core
             {
                 db.Entry(tutorial).State = EntityState.Modified;
                 db.SaveChanges();
-                return new ContentResponse { Status = true, StatusMsg = "Tutorialul a fost editat!" };
+                return new TutorialResponse { Status = true, StatusMsg = "Tutorialul a fost editat!" };
             }
             return null;
         }
 
 
-        protected TutorialsAllData GetAllContent()
+        protected TutorialsAllData GetAllTutorial()
         {
             using (var db = new DBTutorialContext())
             {
-                var allTutorials = db.Content
+                var allTutorials = db.Tutorial
                     .Include(itemDB => itemDB.Image)
                     .Include(itemDB => itemDB.Video)
                     .ToList();
@@ -146,17 +146,17 @@ namespace project_CAN.BusinessLogic.Core
             }
         }
 
-        protected internal ContentResponse AddContent(ContentDomainData data, string pathImagesContent)
+        protected internal TutorialResponse AddContent(TutorialDomainData data, string pathImagesContent)
         {
-            if (data == null) return new ContentResponse { Status = false, StatusMsg = "Datele nu au fost gasite!" };
+            if (data == null) return new TutorialResponse { Status = false, StatusMsg = "Datele nu au fost gasite!" };
 
-            if (data.videoLink == null || !IsYouTubeLink(data.videoLink)) return new ContentResponse { Status = false, StatusMsg = "Video linkul nu a fost gasit!" };
+            if (data.videoLink == null || !IsYouTubeLink(data.videoLink)) return new TutorialResponse { Status = false, StatusMsg = "Video linkul nu a fost gasit!" };
 
-            if (data.title == null) return new ContentResponse { Status = false, StatusMsg = "Titlul nu a fost gasit!" };
+            if (data.title == null) return new TutorialResponse { Status = false, StatusMsg = "Titlul nu a fost gasit!" };
 
-            if (data.description == null) return new ContentResponse { Status = false, StatusMsg = "Descrierea tutorialului nu a fost gasita!" };
+            if (data.description == null) return new TutorialResponse { Status = false, StatusMsg = "Descrierea tutorialului nu a fost gasita!" };
 
-            if (data.image == null || data.image.ContentLength == 0 || !data.image.ContentType.StartsWith("image")) return new ContentResponse { Status = false, StatusMsg = "Imaginea nu a fost gasita!" };
+            if (data.image == null || data.image.ContentLength == 0 || !data.image.ContentType.StartsWith("image")) return new TutorialResponse { Status = false, StatusMsg = "Imaginea nu a fost gasita!" };
 
             int insertedImageId, insertedVideoLinkId;
             using (var db = new DBImageContext())
@@ -191,7 +191,7 @@ namespace project_CAN.BusinessLogic.Core
                 catch (Exception ex)
                 {
                     // Log the exception
-                    return new ContentResponse
+                    return new TutorialResponse
                     { Status = false, StatusMsg = "Exception occurred while saving image: " + ex.Message };
                 }
 
@@ -212,9 +212,9 @@ namespace project_CAN.BusinessLogic.Core
 
             using (var db = new DBTutorialContext())
             {
-                var contentTutorialTable = db.Content.FirstOrDefault(itemDB => itemDB.title == data.title);
+                var contentTutorialTable = db.Tutorial.FirstOrDefault(itemDB => itemDB.title == data.title);
 
-                if (contentTutorialTable != null) return new ContentResponse { Status = false, StatusMsg = "Content Found with this title" };
+                if (contentTutorialTable != null) return new TutorialResponse { Status = false, StatusMsg = "Tutorial Found with this title" };
 
                 contentTutorialTable = new DBTutorialTable
                 {
@@ -224,26 +224,26 @@ namespace project_CAN.BusinessLogic.Core
                     videoLinkId = insertedVideoLinkId
                 };
 
-                db.Content.Add(contentTutorialTable);
+                db.Tutorial.Add(contentTutorialTable);
                 db.SaveChanges();
             }
 
-            return new ContentResponse { Status = true, StatusMsg = "Content adaugat!" };
+            return new TutorialResponse { Status = true, StatusMsg = "Tutorial adaugat!" };
         }
 
-        protected internal void RemoveContent(int id, string pathImagesContent)
+        protected internal void RemoveTutorial(int id, string pathImagesContent)
         {
             int imageId, videoId;
             using (var db = new DBTutorialContext())
             {
-                var tutorial = db.Content.FirstOrDefault(t => t.tutorialId == id);
+                var tutorial = db.Tutorial.FirstOrDefault(t => t.tutorialId == id);
                 imageId = tutorial.imageId;
                 videoId = tutorial.videoLinkId;
 
-                var countImages = db.Content.Count(o => o.imageId == imageId);
-                var countVideosLink = db.Content.Count(s => s.videoLinkId == videoId);
+                var countImages = db.Tutorial.Count(o => o.imageId == imageId);
+                var countVideosLink = db.Tutorial.Count(s => s.videoLinkId == videoId);
 
-                db.Content.Remove(tutorial);
+                db.Tutorial.Remove(tutorial);
                 db.SaveChanges();
 
 

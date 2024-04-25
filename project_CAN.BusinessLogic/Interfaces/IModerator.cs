@@ -10,12 +10,12 @@ namespace project_CAN.BusinessLogic.Interfaces
 {
     public interface IModerator : IUser
     {
-        TutorialsAllData GetAllContentFromDB();
-        ContentResponse AddContentInDB(ContentDomainData data, string pathImagesContent);
-        void RemoveContentFromDB(int id, string pathImagesContent);
+        TutorialsAllData GetAllTutorialFromDB();
+        TutorialResponse AddContentInDB(TutorialDomainData data, string pathImagesContent);
+        void RemoveTutorialFromDB(int id, string pathImagesTutorial);
 
-        DBTutorialTable GetContentByIdFromDB(int id);
+        DBTutorialTable GetTutorialByIdFromDB(int id);
 
-        ContentResponse EditContentInDB(ContentDomainData data, string pathImagesContent);
+        TutorialResponse EditTutorialInDB(TutorialDomainData data, string pathImagesContent);
     }
 }

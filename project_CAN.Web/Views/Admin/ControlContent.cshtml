@@ -1,7 +1,7 @@
 ﻿@using System.Web.Optimization
 
 @{
-    ViewBag.Title = "Control Content";
+    ViewBag.Title = "Control Tutorial";
     Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
     
 }
@@ -16,7 +16,7 @@
     </div>
 
     <div class="courseList">
-        @foreach (var content in ViewBag.content.TutorialTable)
+        @foreach (var content in ViewBag.tutorial.TutorialTable)
         {
             <div class="adminCourseView">
                 @{

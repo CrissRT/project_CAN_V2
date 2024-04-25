@@ -19,10 +19,10 @@ namespace project_CAN.Web.Controllers
 {
     public class AdminController : BaseController
     {
-        protected readonly string insideProjectDirectory = "~/Content/ImagesContent";
+        protected readonly string insideProjectDirectory = "~/Content/ImagesTutorial";
 
         protected readonly string pathImagesContent =
-            Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Content", "ImagesContent");
+            Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Tutorial", "ImagesContent");
         private readonly IAdmin _adminBL;
         
         public AdminController()
@@ -87,7 +87,7 @@ namespace project_CAN.Web.Controllers
             }
 
             ViewBag.path = insideProjectDirectory;
-            ViewBag.content = _adminBL.GetAllContentFromDB();
+            ViewBag.tutorial = _adminBL.GetAllTutorialFromDB();
 
             return View();
         }
@@ -108,8 +108,8 @@ namespace project_CAN.Web.Controllers
         {
             if (isUserLogged() != 2) return RedirectToAction("Index", "Home");
             Mapper.Reset();
-            Mapper.Initialize(cfg => cfg.CreateMap<ContentView, ContentDomainData>());
-            var data = Mapper.Map<ContentDomainData>(viewModel);
+            Mapper.Initialize(cfg => cfg.CreateMap<ContentView, TutorialDomainData>());
+            var data = Mapper.Map<TutorialDomainData>(viewModel);
             var addedContent = _adminBL.AddContentInDB(data, pathImagesContent);
             if (addedContent.Status)
             {
@@ -126,20 +126,20 @@ namespace project_CAN.Web.Controllers
                 return RedirectToAction("Index", "Home");
             }
             ViewBag.path = insideProjectDirectory;
-            ViewBag.content = _adminBL.GetContentByIdFromDB(id);
+            ViewBag.tutorial = _adminBL.GetTutorialByIdFromDB(id);
 
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditContent(ContentView content)
+        public ActionResult EditContent(ContentView tutorial)
         {
             if (isUserLogged() != 2) return RedirectToAction("Index", "Home");
             Mapper.Reset();
-            Mapper.Initialize(cfg => cfg.CreateMap<ContentView, ContentDomainData>());
-            var data = Mapper.Map<ContentDomainData>(content);
-            var response = _adminBL.EditContentInDB(data, pathImagesContent);
+            Mapper.Initialize(cfg => cfg.CreateMap<ContentView, TutorialDomainData>());
+            var data = Mapper.Map<TutorialDomainData>(tutorial);
+            var response = _adminBL.EditTutorialInDB(data, pathImagesContent);
             if (response.Status)
             {
                 return RedirectToAction("ControlContent", "Admin");
@@ -155,7 +155,7 @@ namespace project_CAN.Web.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            _adminBL.RemoveContentFromDB(id, pathImagesContent);
+            _adminBL.RemoveTutorialFromDB(id, pathImagesContent);
 
             return RedirectToAction("ControlContent", "Admin");
         }

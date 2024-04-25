@@ -2,7 +2,7 @@
 
 namespace project_CAN.Domain.Entities.Moderator
 {
-    public class ContentDomainData
+    public class TutorialDomainData
     {
         public string title { get; set; }
         public string description { get; set; }

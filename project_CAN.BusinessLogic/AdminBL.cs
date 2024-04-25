@@ -34,19 +34,19 @@ namespace project_CAN.BusinessLogic
             return GetUserById(id);
         }
 
-        public ContentResponse AddContentInDB(ContentDomainData data, string pathImagesContent)
+        public TutorialResponse AddContentInDB(TutorialDomainData data, string pathImagesContent)
         {
             return AddContent(data, pathImagesContent);
         }
 
-        public TutorialsAllData GetAllContentFromDB()
+        public TutorialsAllData GetAllTutorialFromDB()
         {
-            return GetAllContent();
+            return GetAllTutorial();
         }
 
-        public void RemoveContentFromDB(int id, string pathImagesContent)
+        public void RemoveTutorialFromDB(int id, string pathImagesTutorial)
         {
-            RemoveContent(id, pathImagesContent);
+            RemoveTutorial(id, pathImagesTutorial);
         }
         
         public UResponse UserLoginSessionBL(ULoginData data)
@@ -74,12 +74,12 @@ namespace project_CAN.BusinessLogic
             return EditProfile(data);
         }
 
-        public DBTutorialTable GetContentByIdFromDB(int id)
+        public DBTutorialTable GetTutorialByIdFromDB(int id)
         {
             return GetContentById(id);
         }
 
-        public ContentResponse EditContentInDB(ContentDomainData data, string pathImagesContent)
+        public TutorialResponse EditTutorialInDB(TutorialDomainData data, string pathImagesContent)
         {
             return EditContent(data, pathImagesContent);
         }

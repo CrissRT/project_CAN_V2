@@ -1,9 +1,9 @@
 ﻿@using System.Web.Optimization
 
 @{
-    ViewBag.Title = "Edit Content";
+    ViewBag.Title = "Edit Tutorial";
     Layout = "~/Views/Shared/_LayoutBlankPage.cshtml";
-    var content = ViewBag.content;
+    var content = ViewBag.tutorial;
     var relativePath = Path.Combine(ViewBag.path, content.Image.imageName);
 }
 @model project_CAN.Web.Models.Admin.ContentView
