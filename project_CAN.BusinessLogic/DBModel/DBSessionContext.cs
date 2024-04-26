@@ -11,16 +11,5 @@ namespace project_CAN.BusinessLogic.DBModel
         }
 
         public virtual DbSet<SessionDBTable> Sessions { get; set; }
-
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<SessionDBTable>()
-                .HasRequired(s => s.User)
-                .WithMany()
-                .HasForeignKey(s => s.userId); // Configure foreign key
-
-            base.OnModelCreating(modelBuilder);
-        }
-
     }
 }
