@@ -16,12 +16,12 @@ namespace project_CAN.BusinessLogic
     {
         public DBTutorialTable GetTutorialByIdFromDB(int id)
         {
-            return GetContentById(id);
+            return GetTutorialById(id);
         }
 
         public TutorialResponse EditTutorialInDB(TutorialDomainData data, string pathImagesTutorial)
         {
-            return EditContent(data, pathImagesTutorial);
+            return EditTutorial(data, pathImagesTutorial);
         }
         public TutorialResponse AddContentInDB(TutorialDomainData data, string pathImagesTutorial)
         {

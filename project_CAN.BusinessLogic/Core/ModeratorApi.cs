@@ -15,7 +15,7 @@ namespace project_CAN.BusinessLogic.Core
     public class ModeratorApi : UserApi
     {
 
-        protected DBTutorialTable GetContentById(int id)
+        protected DBTutorialTable GetTutorialById(int id)
         {
             using (var db = new DBTutorialContext())
             {
@@ -30,7 +30,7 @@ namespace project_CAN.BusinessLogic.Core
             }
         }
 
-        protected TutorialResponse EditContent(TutorialDomainData data, string pathImagesTutorial)
+        protected TutorialResponse EditTutorial(TutorialDomainData data, string pathImagesTutorial)
         {
             if (data == null) return new TutorialResponse { Status = false, StatusMsg = "Datele nu au fost gasite!" };
             DBTutorialTable tutorial = null;
