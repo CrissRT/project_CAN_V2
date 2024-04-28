@@ -79,7 +79,7 @@ namespace project_CAN.Web.Controllers
             return View();
         }
 
-        public ActionResult ControlContent()
+        public ActionResult ControlTutorial()
         {
             if (isUserLogged() != 2)
             {
@@ -92,7 +92,7 @@ namespace project_CAN.Web.Controllers
             return View();
         }
 
-        public ActionResult AddContent()
+        public ActionResult AddTutorial()
         {
             if (isUserLogged() != 2)
             {
@@ -104,22 +104,22 @@ namespace project_CAN.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddContent(ContentView viewModel)
+        public ActionResult AddTutorial(TutorialView viewModel)
         {
             if (isUserLogged() != 2) return RedirectToAction("Index", "Home");
             Mapper.Reset();
-            Mapper.Initialize(cfg => cfg.CreateMap<ContentView, TutorialDomainData>());
+            Mapper.Initialize(cfg => cfg.CreateMap<TutorialView, TutorialDomainData>());
             var data = Mapper.Map<TutorialDomainData>(viewModel);
             var addedContent = _adminBL.AddContentInDB(data, pathImagesTutorial);
             if (addedContent.Status)
             {
-                return RedirectToAction("ControlContent", "Admin");
+                return RedirectToAction("ControlTutorial", "Admin");
             }
 
             return View();
         }
 
-        public ActionResult EditContent(int id)
+        public ActionResult EditTutorial(int id)
         {
             if (isUserLogged() != 2)
             {
@@ -133,19 +133,19 @@ namespace project_CAN.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditContent(ContentView tutorial)
+        public ActionResult EditTutorial(TutorialView tutorial)
         {
             if (isUserLogged() != 2) return RedirectToAction("Index", "Home");
             Mapper.Reset();
-            Mapper.Initialize(cfg => cfg.CreateMap<ContentView, TutorialDomainData>());
+            Mapper.Initialize(cfg => cfg.CreateMap<TutorialView, TutorialDomainData>());
             var data = Mapper.Map<TutorialDomainData>(tutorial);
             var response = _adminBL.EditTutorialInDB(data, pathImagesTutorial);
             if (response.Status)
             {
-                return RedirectToAction("ControlContent", "Admin");
+                return RedirectToAction("ControlTutorial", "Admin");
             }
 
-            return RedirectToAction("EditContent", "Admin");
+            return RedirectToAction("EditTutorial", "Admin");
         }
 
         public ActionResult RemoveContent(int id)
@@ -157,7 +157,7 @@ namespace project_CAN.Web.Controllers
 
             _adminBL.RemoveTutorialFromDB(id, pathImagesTutorial);
 
-            return RedirectToAction("ControlContent", "Admin");
+            return RedirectToAction("ControlTutorial", "Admin");
         }
 
         public ActionResult EditUser(int id)

@@ -5,14 +5,14 @@
     Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
     
 }
-@Styles.Render("~/Content/css/admin/content")
+@Styles.Render("~/Content/css/admin/tutorial")
 
 <div class="adminPage">
     <div class="CourseBarr">
         <div class="courseSearch">
             <i class="bi bi-search"></i>
         </div>
-        <a href="@Url.Action("AddContent", "Admin")" style="color: black;"><i class="bi bi-file-earmark-plus"></i></a>
+        <a href="@Url.Action("AddTutorial", "Admin")" style="color: black;"><i class="bi bi-file-earmark-plus"></i></a>
     </div>
 
     <div class="courseList">
@@ -25,7 +25,7 @@
                 <img src="@Url.Content(relativePath)" />
                 <h2>@content.title</h2>
                 <div class="editRemoveCourse">
-                    <div class="edit"><a href="@Url.Action("EditContent", "Admin", new {id = content.tutorialId})" style="color: black;"><i class="bi bi-pencil"></i></a></div>
+                    <div class="edit"><a href="@Url.Action("EditTutorial", "Admin", new {id = content.tutorialId})" style="color: black;"><i class="bi bi-pencil"></i></a></div>
                     <div class="remove"><a href="@Url.Action("RemoveContent", "Admin", new { id = content.tutorialId })" style="color: black;"><i class="bi bi-file-earmark-minus"></i></a></div>
                 </div>
             </div>

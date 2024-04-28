@@ -132,10 +132,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\AdminStyles\AddContent.css" />
-    <Content Include="Content\AdminStyles\ControlContent.css" />
+    <Content Include="Content\AdminStyles\AddTutorial.css" />
+    <Content Include="Content\AdminStyles\ControlTutorial.css" />
     <Content Include="Content\AdminStyles\ControlUsers.css" />
-    <Content Include="Content\AdminStyles\EditContent.css" />
+    <Content Include="Content\AdminStyles\EditTutorial.css" />
     <Content Include="Content\AdminStyles\EditProfile.css" />
     <Content Include="Content\AdminStyles\EditUser.css" />
     <Content Include="Content\AdminStyles\HeaderAdmin.css" />
@@ -2263,7 +2263,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Admin\ContentView.cs" />
+    <Compile Include="Models\Admin\TutorialView.cs" />
     <Compile Include="Models\Admin\UserEditView.cs" />
     <Compile Include="Models\EditProfileView.cs" />
     <Compile Include="Models\User\UserLoginView.cs" />
@@ -2320,7 +2320,7 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\_LayoutBlankPage.cshtml" />
     <Content Include="Views\Admin\ControlUsers.cshtml" />
-    <Content Include="Views\Admin\ControlContent.cshtml" />
+    <Content Include="Views\Admin\ControlTutorial.cshtml" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
     <Content Include="Scripts\bootstrap.esm.min.js.map" />
@@ -2335,8 +2335,8 @@
     <Content Include="Scripts\jQuery.3.7.1\Tools\install.ps1" />
     <Content Include="Scripts\jQuery.3.7.1\Tools\uninstall.ps1" />
     <Content Include="Views\Admin\EditUser.cshtml" />
-    <Content Include="Views\Admin\EditContent.cshtml" />
-    <Content Include="Views\Admin\AddContent.cshtml" />
+    <Content Include="Views\Admin\EditTutorial.cshtml" />
+    <Content Include="Views\Admin\AddTutorial.cshtml" />
     <Content Include="Views\Account\EditProfile.cshtml" />
     <Content Include="Views\Admin\Profile.cshtml" />
     <Content Include="Views\Admin\EditProfile.cshtml" />

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace project_CAN.Web.Models.Admin
 {
-    public class ContentView
+    public class TutorialView
     {
         public int tutorialId { get; set; }
         public string title { get; set; }

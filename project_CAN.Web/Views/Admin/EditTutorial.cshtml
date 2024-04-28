@@ -6,8 +6,8 @@
     var content = ViewBag.tutorial;
     var relativePath = Path.Combine(ViewBag.path, content.Image.imageName);
 }
-@model project_CAN.Web.Models.Admin.ContentView
-@Styles.Render("~/Content/css/admin/editContent")
+@model project_CAN.Web.Models.Admin.TutorialView
+@Styles.Render("~/Content/css/admin/editTutorial")
 <body class="editCoursesPage">
 
     <div class="prevCourses">
@@ -20,11 +20,11 @@
     </div>
 
     <div class="editCourses">
-        @using (Html.BeginForm("EditContent", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        @using (Html.BeginForm("EditTutorial", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
             @Html.HiddenFor(model => model.tutorialId, new { @Value = content.tutorialId})
-            <a href="@Url.Action("ControlContent", "Admin")" style="color: black;"><i class="bi bi-arrow-left-square"></i></a>
+            <a href="@Url.Action("ControlTutorial", "Admin")" style="color: black;"><i class="bi bi-arrow-left-square"></i></a>
 
             <div class="editCoursesTitle">
                 @*<input type="text" placeholder="Titlu">*@

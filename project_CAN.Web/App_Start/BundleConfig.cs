@@ -48,17 +48,17 @@ namespace project_CAN
             bundles.Add(new StyleBundle("~/Content/css/admin/users").Include(
                 "~/Content/AdminStyles/ControlUsers.css"));
 
-            bundles.Add(new StyleBundle("~/Content/css/admin/content").Include(
-                "~/Content/AdminStyles/ControlContent.css"));
+            bundles.Add(new StyleBundle("~/Content/css/admin/tutorial").Include(
+                "~/Content/AdminStyles/ControlTutorial.css"));
 
             bundles.Add(new StyleBundle("~/Content/css/admin/editUser").Include(
                 "~/Content/AdminStyles/EditUser.css"));
 
-            bundles.Add(new StyleBundle("~/Content/css/admin/editContent").Include(
-                "~/Content/AdminStyles/EditContent.css"));
+            bundles.Add(new StyleBundle("~/Content/css/admin/editTutorial").Include(
+                "~/Content/AdminStyles/EditTutorial.css"));
 
-            bundles.Add(new StyleBundle("~/Content/css/admin/addContent").Include(
-                "~/Content/AdminStyles/AddContent.css"));
+            bundles.Add(new StyleBundle("~/Content/css/admin/addTutorial").Include(
+                "~/Content/AdminStyles/AddTutorial.css"));
 
             bundles.Add(new StyleBundle("~/Content/css/user/editProfile").Include(
                 "~/Content/UserStyles/EditProfile.css"));

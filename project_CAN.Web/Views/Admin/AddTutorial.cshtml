@@ -1,18 +1,18 @@
 ﻿@using System.Web.Optimization
 
 @{
-    ViewBag.Title = "AddContent";
+    ViewBag.Title = "AddTutorial";
     Layout = "~/Views/Shared/_LayoutBlankPage.cshtml";
 }
-@Styles.Render("~/Content/css/admin/addContent")
-@model project_CAN.Web.Models.Admin.ContentView
+@Styles.Render("~/Content/css/admin/addTutorial")
+@model project_CAN.Web.Models.Admin.TutorialView
 <body class="addCourses">
-    @using (Html.BeginForm("AddContent", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("AddTutorial", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
         <div class="addCoursesContent">
 
-            <a href="@Url.Action("ControlContent", "Admin")" style="color: black;"><i class="bi bi-arrow-left-square"></i></a>
+            <a href="@Url.Action("ControlTutorial", "Admin")" style="color: black;"><i class="bi bi-arrow-left-square"></i></a>
 
             <div class="coursesTitle">
                 @*<input type="text" placeholder="Titlu">*@
