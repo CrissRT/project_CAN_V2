@@ -77,13 +77,30 @@
     <div class="userCourse">
 
         <div class="userCourseContent">
+            
+            @functions {
+
+                bool IsTutorialLiked(dynamic likedTutorial, int tutorialId)
+                {
+                    if (likedTutorial == null) return false;
+
+                    foreach (var liked in likedTutorial)
+                    {
+                        if (liked.Tutorial == null) continue;
+                        if (liked.Tutorial.tutorialId == tutorialId) return true;
+                    }
+
+                    return false;
+                }
+                
+            }
 
             @foreach (var content in ViewBag.tutorial.TutorialsList)
             {
+                bool isLiked = IsTutorialLiked(ViewBag.likedTutorial.LikesList, content.tutorialId);
+                //bool isLiked = false;
+                var relativePath = Path.Combine(ViewBag.path, content.Image.imageName);
                 <div class="freeCours">
-                    @{
-                        var relativePath = Path.Combine(ViewBag.path, content.Image.imageName);
-                    }
                     <div class="freeCourseImg">
                         <img src="@Url.Content(relativePath)" />
                     </div>
@@ -95,7 +112,7 @@
                         <button type="button" class="btn btn-secondary btn-lg" onclick="location.href='@Url.Action("WatchTutorial", "Account", new {tutorialId = content.tutorialId})'">Deschide</button>
                         <div class="icon-container">
                             <a href="#" class="like-dislike-btn" data-tutorial-id="@content.tutorialId" style="color: black;">
-                                <i class="bi bi-heart"></i>
+                                <i class="bi @(isLiked ? "bi-heart-fill" : "bi-heart")"></i>
                             </a>
                         </div>
                     </div>
@@ -117,26 +134,18 @@
             e.preventDefault(); // Prevent the default link behavior
 
             var tutorialId = $(this).data('tutorial-id');
-            var like = !$(this).hasClass('liked'); // Toggle between like and dislike based on current state
 
             var iconElement = $(this).find('i');
 
             $.ajax({
                 url: '@Url.Action("LikeAndDislike", "Account")',
                 type: 'POST',
-                data: { tutorialId: tutorialId },
-                success: function(data) {
-                    if (data.success) {
-                        // Update UI based on success response
-                        if (like) {
-                            // User liked the tutorial
-                            iconElement.removeClass('bi-heart').addClass('bi-heart-fill');
-                            $(this).addClass('liked'); // Add 'liked' class to indicate liked state
-                        } else {
-                            // User disliked the tutorial
-                            iconElement.removeClass('bi-heart-fill').addClass('bi-heart');
-                            $(this).removeClass('liked'); // Remove 'liked' class to indicate disliked state
-                        }
+                data: { tutorialId: tutorialId},
+                success: function (response) {
+                    if (response) {
+                        iconElement.removeClass('bi-heart').addClass('bi-heart-fill');
+                    } else {
+                        iconElement.removeClass('bi-heart-fill').addClass('bi-heart');
                     }
                 }
             });
