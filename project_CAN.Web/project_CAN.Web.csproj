@@ -2215,8 +2215,10 @@
     <Content Include="Content\Site.css" />
     <Content Include="Content\UserStyles\Index.css" />
     <Content Include="Content\UserStyles\Header.css" />
+    <Content Include="Content\UserStyles\LikedTutorials.css" />
     <Content Include="Content\UserStyles\Profile.css" />
     <Content Include="Content\UserStyles\SignUp.css" />
+    <Content Include="Content\UserStyles\WatchTutorial.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\Pe-icon-7-stroke.svg" />
     <Content Include="Global.asax" />
@@ -2342,6 +2344,8 @@
     <Content Include="Views\Admin\EditProfile.cshtml" />
     <Content Include="Views\Shared\_HeaderAdmin.cshtml" />
     <Content Include="Views\Shared\_LayoutPageAdmin.cshtml" />
+    <Content Include="Views\Account\WatchLikedListOfTutorials.cshtml" />
+    <Content Include="Views\Account\WatchTutorial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

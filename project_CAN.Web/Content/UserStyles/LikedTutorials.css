@@ -1,0 +1,117 @@
+﻿.valuedPage {
+    background-image: url(../../images/backGround.svg);
+    width: 100%;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.valuedPageContent {
+    width: 1000px;
+    height: 100%;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.valuedSearchBarr {
+    background-color: white;
+    width: 400px;
+    height: 50px;
+    border-radius: 20px;
+    border: 1.5px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding: 5px;
+}
+
+.bi-search {
+    font-size: 30px;
+    margin-right: 12px;
+}
+
+.valuedCourseList {
+    width: 100%;
+    height: 100%;
+    /* margin-top: 20px; */
+}
+
+.valuedCourseContent {
+    width: 100%;
+    height: 200px;
+    margin-top: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+    .valuedCourseContent:first-child {
+        margin-top: 0px;
+    }
+
+.ValuedCourseImg {
+    width: 30%;
+    height: 100%;
+}
+
+    .ValuedCourseImg > img {
+        width: 100%;
+        height: 100%;
+    }
+
+.ValuedCourseTitle {
+    width: 40%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+    .ValuedCourseTitle > p {
+        font-size: 20px;
+    }
+
+.ValuedCourseButtons {
+    width: 20%;
+    height: 100%;
+    border: 1px solid black;
+    border-right: none;
+    border-top: none;
+    border-bottom: none;
+}
+
+.ButtonView {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ButtonRemove {
+    width: 100%;
+    height: 50%;
+    border: 1px solid black;
+    border-left: none;
+    border-bottom: none;
+    border-right: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bi-heartbreak {
+    font-size: 50px;
+}
+
+.ButtonView > button {
+    margin-right: 0;
+}

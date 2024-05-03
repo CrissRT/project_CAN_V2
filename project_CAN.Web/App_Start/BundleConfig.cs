@@ -71,6 +71,12 @@ namespace project_CAN
 
             bundles.Add(new StyleBundle("~/Content/css/admin/profile").Include(
                 "~/Content/AdminStyles/Profile.css"));
+
+            bundles.Add(new StyleBundle("~/Content/css/user/likedTutorials").Include(
+                "~/Content/UserStyles/LikedTutorials.css"));
+
+            bundles.Add(new StyleBundle("~/Content/css/user/watchTutorial").Include(
+                "~/Content/UserStyles/WatchTutorial.css"));
         }
     }
 }

@@ -31,7 +31,26 @@ namespace project_CAN.Web.Controllers
             _user.LikeAndDislikeinDB(data);
         }
 
+        public ActionResult WatchLikedListOfTutorials()
+        {
+            if (isUserLogged() == -1)
+            {
+                return RedirectToAction("Login", "Account");
+            }
 
+            return View();
+        }
+
+        public ActionResult WatchTutorial()
+        {
+            if (isUserLogged() == -1)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            //var likedTutorials = _user.GetLikedTutorialsFromDB(RetrieveUserID());
+            return View();
+        }
 
         public ActionResult Logout()
         {
