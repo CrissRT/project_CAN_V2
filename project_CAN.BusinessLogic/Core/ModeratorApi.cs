@@ -145,20 +145,7 @@ namespace project_CAN.BusinessLogic.Core
             }
             return null;
         }
-
-
-        protected TutorialsAllData GetAllTutorial()
-        {
-            using (var db = new DBTutorialContext())
-            {
-                var allTutorials = db.Tutorial
-                    .Include(itemDB => itemDB.Image)
-                    .Include(itemDB => itemDB.Video)
-                    .ToList();
-                return new TutorialsAllData { TutorialTable = allTutorials };
-            }
-        }
-
+        
         protected internal TutorialResponse AddContent(TutorialDomainData data, string pathImagesTutorial)
         {
             if (data == null) return new TutorialResponse { Status = false, StatusMsg = "Datele nu au fost gasite!" };

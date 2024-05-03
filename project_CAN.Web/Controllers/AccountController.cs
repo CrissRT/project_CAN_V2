@@ -18,6 +18,21 @@ namespace project_CAN.Web.Controllers
 {
     public class AccountController : BaseController
     {
+
+        [HttpPost]
+        public void LikeAndDislike(int tutorialId)
+        {
+            var data = new LikesData
+            {
+                tutorialId = tutorialId,
+                userId = RetrieveUserID()
+            };
+
+            _user.LikeAndDislikeinDB(data);
+        }
+
+
+
         public ActionResult Logout()
         {
             // Invalidate the authentication cookie
@@ -40,8 +55,9 @@ namespace project_CAN.Web.Controllers
 
             var apiCookie = Request.Cookies["X-KEY"];
             var profile = _user.GetUserByCookie(apiCookie.Value);
-
+            
             ViewBag.userName = profile.userName;
+            ViewBag.likesCount = _user.CountAllUserLikesFromDb(RetrieveUserID());
             return View();
         }
 

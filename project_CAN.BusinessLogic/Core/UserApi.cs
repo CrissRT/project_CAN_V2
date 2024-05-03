@@ -11,11 +11,55 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using project_CAN.Domain.Enums;
+using project_CAN.Domain.Entities.Moderator;
 
 namespace project_CAN.BusinessLogic.Core
 {
     public class UserApi
     {
+        protected internal int CountAllUserLikes(int userId)
+        {
+            int likesCount = 0;
+            using (var db = new DBLikesContext())
+            {
+                likesCount = db.Likes.Count(itemDB => itemDB.userId == userId);
+            }
+
+            return likesCount;
+        }
+
+        protected internal TutorialsAllData GetAllTutorial()
+        {
+            using (var db = new DBTutorialContext())
+            {
+                var allTutorials = db.Tutorial
+                    .Include(itemDB => itemDB.Image)
+                    .Include(itemDB => itemDB.Video)
+                    .ToList();
+                return new TutorialsAllData { TutorialTable = allTutorials };
+            }
+        }
+        protected internal void LikeAndDislike(LikesData data)
+        {
+            using (var db = new DBLikesContext())
+            {
+                 LikesDBTable like = db.Likes.FirstOrDefault(itemDB => itemDB.userId == data.userId && itemDB.tutorialId == data.tutorialId);
+
+                if (like == null)
+                {
+                    db.Likes.Add(new LikesDBTable
+                    {
+                        userId = data.userId,
+                        tutorialId = data.tutorialId
+                    });
+                }
+                else
+                {
+                    db.Likes.Remove(like);
+                }
+            }
+
+        }
         protected internal UResponse UserRegistrationAction(URegistrationData dataUserDomain)
         {
             UDBTable userTable;

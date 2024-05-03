@@ -12,6 +12,7 @@ using AutoMapper;
 using project_CAN.BusinessLogic.DBModel;
 using project_CAN.Domain.Entities.Admin;
 using project_CAN.Domain.Entities.User;
+using project_CAN.Helpers;
 
 namespace project_CAN.BusinessLogic.Core
 {
@@ -63,7 +64,8 @@ namespace project_CAN.BusinessLogic.Core
 
                 if (data.password != null && data.password.Length > 8 && data.password.Length <= 50)
                 {
-                    user.password = data.password;
+                    var pass = LoginHelper.HashGen(data.password);
+                    user.password = pass;
                 }
 
                 user.privilegies = data.privilegies;

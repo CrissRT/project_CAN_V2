@@ -15,6 +15,11 @@ namespace project_CAN.BusinessLogic
 {
     public class AdminBL : AdminApi, IAdmin
     {
+        public int CountAllUserLikesFromDb(int userId)
+        {
+            return CountAllUserLikes(userId);
+        }
+
         public OperationOnUserResponse EditUserInDB(UserEdit data)
         {
             return EditUser(data);
@@ -72,6 +77,11 @@ namespace project_CAN.BusinessLogic
         public UResponse EditProfileFromDB(EditProfile data)
         {
             return EditProfile(data);
+        }
+
+        public void LikeAndDislikeinDB(LikesData data)
+        {
+            LikeAndDislike(data);
         }
 
         public DBTutorialTable GetTutorialByIdFromDB(int id)

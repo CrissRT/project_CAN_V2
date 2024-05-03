@@ -54,6 +54,9 @@
     <Compile Include="Entities\Admin\UsersAllData.cs" />
     <Compile Include="Entities\Enums\URole.cs" />
     <Compile Include="Entities\User\EditProfile.cs" />
+    <Compile Include="Entities\User\LikesAllData.cs" />
+    <Compile Include="Entities\User\LikesData.cs" />
+    <Compile Include="Entities\User\LikesDBTable.cs" />
     <Compile Include="Entities\User\SessionDBTable.cs" />
     <Compile Include="Entities\User\UDBTable.cs" />
     <Compile Include="Entities\User\ULoginData.cs" />

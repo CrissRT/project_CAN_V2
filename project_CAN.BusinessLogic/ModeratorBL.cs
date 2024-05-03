@@ -14,6 +14,17 @@ namespace project_CAN.BusinessLogic
 {
     public class ModeratorBL : ModeratorApi, IModerator
     {
+
+        public void LikeAndDislikeinDB(LikesData data)
+        {
+            LikeAndDislike(data);
+        }
+
+        public int CountAllUserLikesFromDb(int userId)
+        {
+            return CountAllUserLikes(userId);
+        }
+
         public DBTutorialTable GetTutorialByIdFromDB(int id)
         {
             return GetTutorialById(id);

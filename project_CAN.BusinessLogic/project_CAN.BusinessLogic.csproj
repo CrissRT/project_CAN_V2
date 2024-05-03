@@ -65,6 +65,7 @@
     <Compile Include="DBModel\DBTutorialContext.cs" />
     <Compile Include="DBModel\DBUserContext.cs" />
     <Compile Include="DBModel\DBVideoContext.cs" />
+    <Compile Include="DBModel\DBLikesContext.cs" />
     <Compile Include="Interfaces\IAdmin.cs" />
     <Compile Include="Interfaces\IModerator.cs" />
     <Compile Include="Interfaces\IUser.cs" />

@@ -2,11 +2,17 @@
 using project_CAN.BusinessLogic.Interfaces;
 using project_CAN.Domain.Entities.User;
 using System.Web;
+using project_CAN.Domain.Entities.Moderator;
 
 namespace project_CAN.BusinessLogic
 {
     public class UserBL : UserApi, IUser
     {
+        public TutorialsAllData GetAllTutorialFromDB()
+        {
+            return GetAllTutorial();
+        }
+
         public UResponse UserLoginSessionBL(ULoginData data)
         {
             return UserLoginAction(data);
@@ -30,6 +36,17 @@ namespace project_CAN.BusinessLogic
         public UResponse EditProfileFromDB(EditProfile data)
         {
             return EditProfile(data);
+        }
+
+
+        public void LikeAndDislikeinDB(LikesData data)
+        {
+            LikeAndDislike(data);
+        }
+
+        public int CountAllUserLikesFromDb(int userId)
+        {
+            return CountAllUserLikes(userId);
         }
     }
 }
