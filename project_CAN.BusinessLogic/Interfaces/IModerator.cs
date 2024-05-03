@@ -14,8 +14,6 @@ namespace project_CAN.BusinessLogic.Interfaces
         TutorialResponse AddContentInDB(TutorialDomainData data, string pathImagesTutorial);
         void RemoveTutorialFromDB(int id, string pathImagesTutorial);
 
-        DBTutorialTable GetTutorialByIdFromDB(int id);
-
         TutorialResponse EditTutorialInDB(TutorialDomainData data, string pathImagesTutorial);
     }
 }

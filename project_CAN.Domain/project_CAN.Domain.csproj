@@ -49,7 +49,7 @@
     <Compile Include="Entities\Moderator\DBImageTable.cs" />
     <Compile Include="Entities\Moderator\DBVideoTable.cs" />
     <Compile Include="Entities\Admin\OperationOnUserResponse.cs" />
-    <Compile Include="Entities\Moderator\TutorialsAllData.cs" />
+    <Compile Include="Entities\User\TutorialsAllData.cs" />
     <Compile Include="Entities\Admin\UserEdit.cs" />
     <Compile Include="Entities\Admin\UsersAllData.cs" />
     <Compile Include="Entities\Enums\URole.cs" />

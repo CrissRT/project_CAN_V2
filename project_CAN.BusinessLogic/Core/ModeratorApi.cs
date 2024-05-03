@@ -14,22 +14,6 @@ namespace project_CAN.BusinessLogic.Core
 {
     public class ModeratorApi : UserApi
     {
-
-        protected DBTutorialTable GetTutorialById(int id)
-        {
-            using (var db = new DBTutorialContext())
-            {
-                var contentTutorialTable = db.Tutorial
-                    .Include(itemDB => itemDB.Image)
-                    .Include(itemDB => itemDB.Video)
-                    .FirstOrDefault(itemDB => itemDB.tutorialId == id);
-
-                if (contentTutorialTable == null) return null;
-
-                return contentTutorialTable;
-            }
-        }
-
         protected TutorialResponse EditTutorial(TutorialDomainData data, string pathImagesTutorial)
         {
             if (data == null) return new TutorialResponse { Status = false, StatusMsg = "Datele nu au fost gasite!" };

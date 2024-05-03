@@ -18,6 +18,21 @@ namespace project_CAN.BusinessLogic.Core
     public class UserApi
     {
 
+        protected DBTutorialTable GetTutorialById(int id)
+        {
+            using (var db = new DBTutorialContext())
+            {
+                var contentTutorialTable = db.Tutorial
+                    .Include(itemDB => itemDB.Image)
+                    .Include(itemDB => itemDB.Video)
+                    .FirstOrDefault(itemDB => itemDB.tutorialId == id);
+
+                if (contentTutorialTable == null) return null;
+
+                return contentTutorialTable;
+            }
+        }
+
         protected internal LikesAllData GetAllUserLikes(int userId)
         {
             using (var db = new DBLikesContext())

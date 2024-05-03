@@ -47,7 +47,7 @@ namespace project_CAN.Web.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
-            //var likedTutorials = _user.GetLikedTutorialsFromDB(RetrieveUserID());
+            ViewBag.tutorial = _user.GetTutorialByIdFromDB(tutorialId);
             return View();
         }
 

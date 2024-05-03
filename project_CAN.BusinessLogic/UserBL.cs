@@ -53,5 +53,10 @@ namespace project_CAN.BusinessLogic
         {
             return GetAllUserLikes(userId);
         }
+
+        public DBTutorialTable GetTutorialByIdFromDB(int id)
+        {
+            return GetTutorialById(id);
+        }
     }
 }

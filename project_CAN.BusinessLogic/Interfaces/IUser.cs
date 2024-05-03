@@ -19,5 +19,7 @@ namespace project_CAN.BusinessLogic.Interfaces
         int CountAllUserLikesFromDb(int userId);
 
         LikesAllData GetLikedTutorialsFromDB(int userId);
+
+        DBTutorialTable GetTutorialByIdFromDB(int id);
     }
 }
