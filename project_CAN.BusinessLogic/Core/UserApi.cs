@@ -17,6 +17,20 @@ namespace project_CAN.BusinessLogic.Core
 {
     public class UserApi
     {
+
+        protected internal LikesAllData GetAllUserLikes(int userId)
+        {
+            using (var db = new DBLikesContext())
+            {
+                var likes = db.Likes
+                    .Include(itemDB => itemDB.Tutorial)
+                    .Include(itemDB => itemDB.Tutorial.Image)
+                    .Include(itemDB => itemDB.Tutorial.Video)
+                    .Where(itemDB => itemDB.userId == userId)
+                    .ToList();
+                return new LikesAllData { LikesList = likes };
+            }
+        }
         protected internal int CountAllUserLikes(int userId)
         {
             int likesCount = 0;
@@ -36,7 +50,7 @@ namespace project_CAN.BusinessLogic.Core
                     .Include(itemDB => itemDB.Image)
                     .Include(itemDB => itemDB.Video)
                     .ToList();
-                return new TutorialsAllData { TutorialTable = allTutorials };
+                return new TutorialsAllData { TutorialsList = allTutorials };
             }
         }
         protected internal void LikeAndDislike(LikesData data)
@@ -269,7 +283,8 @@ namespace project_CAN.BusinessLogic.Core
                 if (data.password != null && data.password.Length > 8 && data.password.Length <= 50)
                 {
                     changesList.Add(" parolei");
-                    currentUser.password = data.password;
+                    var pass = LoginHelper.HashGen(data.password);
+                    currentUser.password = pass;
                 }
                 string changes= string.Join(", ", changesList.ToArray());
                 db.Entry(currentUser).State = EntityState.Modified;

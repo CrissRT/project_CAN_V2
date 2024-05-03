@@ -31,7 +31,7 @@
 
             <div class="coursesImg">
                 <label for="uploadFile">Adauga o imagine:</label>
-                @Html.TextBoxFor(model => model.image, new { type = "file", id = "UploadFile" })
+                @Html.TextBoxFor(model => model.image, new { type = "file", id = "uploadFile" })
                 @Html.ValidationMessageFor(model => model.image)
                 <div class="previewImage"></div> <!-- Added a container for preview -->
             </div>
@@ -44,7 +44,7 @@
         // Function to preview the uploaded image
         document.getElementById('uploadFile').addEventListener('change', function (event) {
             var preview = document.querySelector('.previewDbImage');
-            preview.innerHTML = ''; // Clear previous preview
+            preview.innerHTML = null; // Clear previous preview
 
             var file = event.target.files[0];
             if (file) {

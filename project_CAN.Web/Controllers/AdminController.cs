@@ -14,15 +14,14 @@ using project_CAN.Domain.Entities.Admin;
 using project_CAN.Web.Models;
 using System.IO;
 using project_CAN.Domain.Entities.Moderator;
+using project_CAN.Web.Extension;
 
 namespace project_CAN.Web.Controllers
 {
     public class AdminController : BaseController
     {
-        protected readonly string insideProjectDirectory = "~/Content/ImagesTutorial";
-
-        protected readonly string pathImagesTutorial =
-            Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Content", "ImagesTutorial");
+        private readonly string insideProjectDirectory = ProjectDirectory.insideProjectDirectory;
+        private readonly string pathImagesTutorial = ProjectDirectory.pathImagesTutorial;
         private readonly IAdmin _adminBL;
         
         public AdminController()

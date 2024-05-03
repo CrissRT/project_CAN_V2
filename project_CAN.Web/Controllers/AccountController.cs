@@ -8,9 +8,6 @@ using project_CAN.BusinessLogic;
 using project_CAN.BusinessLogic.Interfaces;
 using project_CAN.Domain.Entities.User;
 using project_CAN.Web.Extension;
-
-
-//using project_CAN.Web.Extension;
 using project_CAN.Web.Models;
 using project_CAN.Web.Models.User;
 
@@ -18,6 +15,7 @@ namespace project_CAN.Web.Controllers
 {
     public class AccountController : BaseController
     {
+        private readonly string insideProjectDirectory = ProjectDirectory.insideProjectDirectory;
 
         [HttpPost]
         public void LikeAndDislike(int tutorialId)
@@ -37,11 +35,12 @@ namespace project_CAN.Web.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
-
+            ViewBag.path = insideProjectDirectory;
+            ViewBag.tutorial = _user.GetLikedTutorialsFromDB(RetrieveUserID());
             return View();
         }
 
-        public ActionResult WatchTutorial()
+        public ActionResult WatchTutorial(int tutorialId)
         {
             if (isUserLogged() == -1)
             {

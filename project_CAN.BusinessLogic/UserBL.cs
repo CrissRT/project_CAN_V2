@@ -48,5 +48,10 @@ namespace project_CAN.BusinessLogic
         {
             return CountAllUserLikes(userId);
         }
+
+        public LikesAllData GetLikedTutorialsFromDB(int userId)
+        {
+            return GetAllUserLikes(userId);
+        }
     }
 }

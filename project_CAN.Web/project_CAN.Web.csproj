@@ -2262,6 +2262,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ModeratorController.cs" />
     <Compile Include="Extension\HttpContextExtensions.cs" />
+    <Compile Include="Extension\ProjectDirectory.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

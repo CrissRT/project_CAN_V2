@@ -8,11 +8,14 @@ using System.Web;
 using System.Web.Mvc;
 using project_CAN.Domain.Entities.User;
 using project_CAN.Domain.Enums;
+using System.IO;
 
 namespace project_CAN.Web.Controllers
 {
     public class BaseController : Controller
     {
+        //protected readonly string insideProjectDirectory = "~/Content/ImagesTutorial";
+        //protected readonly string pathImagesTutorial = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Content", "ImagesTutorial");
         protected readonly IUser _user;
 
         public BaseController()

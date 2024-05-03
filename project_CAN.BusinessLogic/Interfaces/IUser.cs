@@ -17,5 +17,7 @@ namespace project_CAN.BusinessLogic.Interfaces
         void LikeAndDislikeinDB(LikesData data);
 
         int CountAllUserLikesFromDb(int userId);
+
+        LikesAllData GetLikedTutorialsFromDB(int userId);
     }
 }

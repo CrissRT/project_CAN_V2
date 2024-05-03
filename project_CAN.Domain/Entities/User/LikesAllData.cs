@@ -8,6 +8,6 @@ namespace project_CAN.Domain.Entities.User
 {
     public class LikesAllData
     {
-        public List<LikesDBTable> Likes { get; set; }
+        public List<LikesDBTable> LikesList { get; set; }
     }
 }
