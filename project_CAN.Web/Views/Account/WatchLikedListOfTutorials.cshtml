@@ -14,40 +14,34 @@
         </div> -->
 
         <div class="valuedCourseList">
-
-            <div class="valuedCourseContent">
-                <div class="ValuedCourseImg">
-                    <img src="../../images/movement.png" />
-                </div>
-                <div class="ValuedCourseTitle">
-                    <p>Mișcările de bază în CS:GO 2 sunt esențiale pentru succesul în joc și includ diverse tehnici care îmbunătățesc abilitatea de a evita focurile inamice.</p>
-                </div>
-                <div class="ValuedCourseButtons">
-                    <div class="ButtonView">
-                        <button type="button" class="btn btn-secondary btn-lg">Deschide</button>
-                    </div>
-                    <div class="ButtonRemove">
-                        <i class="bi bi-heartbreak"></i>
-                    </div>
-                </div>
-            </div>
-
-            <div class="valuedCourseContent">
-                <div class="ValuedCourseImg">
-                    <img src="../../images/movement.png" />
-                </div>
-                <div class="ValuedCourseTitle">
-                    <p>Mișcările de bază în CS:GO 2 sunt esențiale pentru succesul în joc și includ diverse tehnici care îmbunătățesc abilitatea de a evita focurile inamice.</p>
-                </div>
-                <div class="ValuedCourseButtons">
-                    <div class="ButtonView">
-                        <button type="button" class="btn btn-secondary btn-lg">Deschide</button>
-                    </div>
-                    <div class="ButtonRemove">
-                        <i class="bi bi-heartbreak"></i>
-                    </div>
-                </div>
-            </div>
+            @{
+                if (ViewBag.tutorial.LikesList.Count != 0)
+                {
+                    foreach (var content in ViewBag.tutorial.LikesList)
+                    {
+                        <div class="valuedCourseContent">
+                            <div class="ValuedCourseImg">
+                                @{
+                                    var relativePath = Path.Combine(ViewBag.path, content.Image.imageName);
+                                    var tutorialContent = content.tutorialContent;
+                                }
+                                <img src="@Url.Content(relativePath)" />
+                            </div>
+                            <div class="ValuedCourseTitle">
+                                <h2>@tutorialContent.title</h2>
+                            </div>
+                            <div class="ValuedCourseButtons">
+                                <div class="ButtonView">
+                                    <button type="button" class="btn btn-secondary btn-lg" onclick="location.href='@Url.Action("WatchTutorial", "Account", new {tutorialId = tutorialContent.tutorialId})'">Deschide</button>
+                                </div>
+                                <div class="ButtonRemove">
+                                    <a href="@Url.Action("LikeAndDislike", "Account", new {tutorialId = tutorialContent.tutorialId})" style="color: black;"><i class="bi bi-heartbreak"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            }
         </div>
     </div>
 </div>
