@@ -34,7 +34,10 @@ namespace project_CAN
                      "~/Content/bootstrap-icons-1.11.3/font/bootstrap-icons.css"));
 
             bundles.Add(new StyleBundle("~/Content/css/mainPage").Include(
-                     "~/Content/UserStyles/Index.css", "~/Content/UserStyles/Header.css"));
+                     "~/Content/UserStyles/Index.css"));
+
+            bundles.Add(new StyleBundle("~/Content/css/user/header").Include(
+                "~/Content/UserStyles/Header.css"));
 
             bundles.Add(new StyleBundle("~/Content/css/user/profile").Include(
                 "~/Content/UserStyles/Profile.css"));
@@ -77,6 +80,9 @@ namespace project_CAN
 
             bundles.Add(new StyleBundle("~/Content/css/user/watchTutorial").Include(
                 "~/Content/UserStyles/WatchTutorial.css"));
+
+            bundles.Add(new StyleBundle("~/Content/css/user/loggedIn").Include(
+                "~/Content/UserStyles/LoggedIn.css"));
         }
     }
 }

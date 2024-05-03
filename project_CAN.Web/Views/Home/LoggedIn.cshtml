@@ -1,16 +1,18 @@
 ﻿@using System.Web.Optimization
 
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Main Page";
     Layout = "~/Views/Shared/_LayoutPageUser.cshtml";
 }
-@Styles.Render("~/Content/css/mainPage")
 
+@Styles.Render("~/Content/css/user/loggedIn")
 <div class="mainPageContent">
+    <!-- logo -->
     <div class="logo">
-        <img src="../images/logoimages.svg" />
+        <img src="../../images/logoimages.svg" />
     </div>
 
+    <!-- enitialcurs -->
     <div class="esentialCourses">
 
         <div class="freeCourseBlock">
@@ -22,7 +24,7 @@
 
             <div class="freeCours">
                 <div class="freeCourseImg">
-                    <img src="../images/movement.png" />
+                    <img src="../../images/movement.png" />
                 </div>
                 <div class="freeCourseText">
                     <h2>Tehnici de mișcare</h2>
@@ -38,7 +40,7 @@
 
             <div class="freeCours">
                 <div class="freeCourseImg">
-                    <img src="../images/aim.png" />
+                    <img src="../../images/aim.png" />
                 </div>
                 <div class="freeCourseText">
                     <h2>Aiming-ul</h2>
@@ -54,7 +56,7 @@
 
             <div class="freeCours">
                 <div class="freeCourseImg">
-                    <img src="../images/shutin.png" />
+                    <img src="../../images/shutin.png" />
                 </div>
                 <div class="freeCourseText">
                     <h2>Spraying pattern</h2>
@@ -69,6 +71,39 @@
             </div>
 
         </div>
+
+    </div>
+    <!-- usercurs -->
+    <div class="userCourse">
+
+        <div class="userCourseContent">
+
+        @foreach (var content in ViewBag.tutorial.TutorialsList)
+        {
+            <div class="freeCours">
+                @{
+                    var relativePath = Path.Combine(ViewBag.path, content.Image.imageName);
+                }
+                <div class="freeCourseImg">
+                    <img src="@Url.Content(relativePath)" />
+                </div>
+                <div class="freeCourseText">
+                    <h2>@content.title</h2>
+                    <p>@content.description</p>
+                </div>
+                <div class="freeCourseButton">
+                    <button type="button" class="btn btn-secondary btn-lg" onclick="location.href='@Url.Action("WatchTutorial", "Account", new {tutorialId = content.tutorialId})'">Deschide</button>
+                    <div class="icon-container">
+                        <a href="@Url.Action("LikeAndDislike", "Account", new {tutorialId = content.tutorialId})" style="color: black;"><i class="bi bi-heart icon"></i></a>
+                    </div>
+                </div>
+            </div>
+        }
+        
+            <div class="empty-space"></div>
+        </div>
+
+
 
     </div>
 
