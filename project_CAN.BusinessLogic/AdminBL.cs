@@ -84,9 +84,9 @@ namespace project_CAN.BusinessLogic
             return EditProfile(data);
         }
 
-        public void LikeAndDislikeinDB(LikesData data)
+        public bool LikeAndDislikeinDB(LikesData data)
         {
-            LikeAndDislike(data);
+            return LikeAndDislike(data);
         }
 
         public DBTutorialTable GetTutorialByIdFromDB(int id)

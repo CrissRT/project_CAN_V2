@@ -17,16 +17,17 @@ namespace project_CAN.Web.Controllers
     {
         private readonly string insideProjectDirectory = ProjectDirectory.insideProjectDirectory;
 
+
         [HttpPost]
-        public void LikeAndDislike(int tutorialId)
+        public JsonResult LikeAndDislike(int tutorialId)
         {
             var data = new LikesData
             {
                 tutorialId = tutorialId,
                 userId = RetrieveUserID()
             };
-
-            _user.LikeAndDislikeinDB(data);
+            bool response = _user.LikeAndDislikeinDB(data);
+            return Json(response);
         }
 
         public ActionResult WatchLikedListOfTutorials()

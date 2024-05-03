@@ -14,7 +14,7 @@ namespace project_CAN.BusinessLogic.Interfaces
 
         UResponse EditProfileFromDB(EditProfile data);
 
-        void LikeAndDislikeinDB(LikesData data);
+        bool LikeAndDislikeinDB(LikesData data);
 
         int CountAllUserLikesFromDb(int userId);
 

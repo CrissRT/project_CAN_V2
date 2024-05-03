@@ -68,7 +68,7 @@ namespace project_CAN.BusinessLogic.Core
                 return new TutorialsAllData { TutorialsList = allTutorials };
             }
         }
-        protected internal void LikeAndDislike(LikesData data)
+        protected internal bool LikeAndDislike(LikesData data)
         {
             using (var db = new DBLikesContext())
             {
@@ -81,11 +81,16 @@ namespace project_CAN.BusinessLogic.Core
                         userId = data.userId,
                         tutorialId = data.tutorialId
                     });
+                    db.SaveChanges();
+
+                    return true;
                 }
                 else
                 {
                     db.Likes.Remove(like);
+                    db.SaveChanges();
                 }
+                return false;
             }
 
         }

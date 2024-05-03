@@ -9,7 +9,6 @@ namespace project_CAN.Domain.Entities.User
     {
         [Key]
         [Column(Order = 0)]
-        [ForeignKey("User")]
         public int userId { get; set; }
 
         [Key]
@@ -18,7 +17,6 @@ namespace project_CAN.Domain.Entities.User
         public int tutorialId { get; set; }
 
 
-        public virtual UDBTable User { get; set; }
 
         public virtual DBTutorialTable Tutorial { get; set; }
     }

@@ -78,27 +78,29 @@
 
         <div class="userCourseContent">
 
-        @foreach (var content in ViewBag.tutorial.TutorialsList)
-        {
-            <div class="freeCours">
-                @{
-                    var relativePath = Path.Combine(ViewBag.path, content.Image.imageName);
-                }
-                <div class="freeCourseImg">
-                    <img src="@Url.Content(relativePath)" />
-                </div>
-                <div class="freeCourseText">
-                    <h2>@content.title</h2>
-                    <p>@content.description</p>
-                </div>
-                <div class="freeCourseButton">
-                    <button type="button" class="btn btn-secondary btn-lg" onclick="location.href='@Url.Action("WatchTutorial", "Account", new {tutorialId = content.tutorialId})'">Deschide</button>
-                    <div class="icon-container">
-                        <a href="@Url.Action("LikeAndDislike", "Account", new {tutorialId = content.tutorialId})" style="color: black;"><i class="bi bi-heart icon"></i></a>
+            @foreach (var content in ViewBag.tutorial.TutorialsList)
+            {
+                <div class="freeCours">
+                    @{
+                        var relativePath = Path.Combine(ViewBag.path, content.Image.imageName);
+                    }
+                    <div class="freeCourseImg">
+                        <img src="@Url.Content(relativePath)" />
+                    </div>
+                    <div class="freeCourseText">
+                        <h2>@content.title</h2>
+                        <p>@content.description</p>
+                    </div>
+                    <div class="freeCourseButton">
+                        <button type="button" class="btn btn-secondary btn-lg" onclick="location.href='@Url.Action("WatchTutorial", "Account", new {tutorialId = content.tutorialId})'">Deschide</button>
+                        <div class="icon-container">
+                            <a href="#" class="like-dislike-btn" data-tutorial-id="@content.tutorialId" style="color: black;">
+                                <i class="bi bi-heart"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        }
+            }
         
             <div class="empty-space"></div>
         </div>
@@ -108,3 +110,36 @@
     </div>
 
 </div>
+
+<script>
+    $(document).ready(function() {
+        $('.like-dislike-btn').click(function(e) {
+            e.preventDefault(); // Prevent the default link behavior
+
+            var tutorialId = $(this).data('tutorial-id');
+            var like = !$(this).hasClass('liked'); // Toggle between like and dislike based on current state
+
+            var iconElement = $(this).find('i');
+
+            $.ajax({
+                url: '@Url.Action("LikeAndDislike", "Account")',
+                type: 'POST',
+                data: { tutorialId: tutorialId },
+                success: function(data) {
+                    if (data.success) {
+                        // Update UI based on success response
+                        if (like) {
+                            // User liked the tutorial
+                            iconElement.removeClass('bi-heart').addClass('bi-heart-fill');
+                            $(this).addClass('liked'); // Add 'liked' class to indicate liked state
+                        } else {
+                            // User disliked the tutorial
+                            iconElement.removeClass('bi-heart-fill').addClass('bi-heart');
+                            $(this).removeClass('liked'); // Remove 'liked' class to indicate disliked state
+                        }
+                    }
+                }
+            });
+        });
+    });
+</script>

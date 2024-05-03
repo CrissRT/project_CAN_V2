@@ -16,28 +16,55 @@
         <div class="valuedCourseList">
 
             @foreach (var content in ViewBag.tutorial.LikesList)
-           {
-               <div class="valuedCourseContent">
-                   <div class="ValuedCourseImg">
-                       @{
-                           var relativePath = Path.Combine(ViewBag.path, content.Image.imageName);
-                           var tutorialContent = content.tutorialContent;
-                       }
-                       <img src="@Url.Content(relativePath)" />
-                   </div>
-                   <div class="ValuedCourseTitle">
-                       <h2>@tutorialContent.title</h2>
-                   </div>
-                   <div class="ValuedCourseButtons">
-                       <div class="ButtonView">
-                           <button type="button" class="btn btn-secondary btn-lg" onclick="location.href='@Url.Action("WatchTutorial", "Account", new {tutorialId = tutorialContent.tutorialId})'">Deschide</button>
-                       </div>
-                       <div class="ButtonRemove">
-                           <a href="@Url.Action("LikeAndDislike", "Account", new {tutorialId = tutorialContent.tutorialId})" style="color: black;"><i class="bi bi-heartbreak"></i></a>
-                       </div>
-                   </div>
-               </div>
-           }
+            {
+                <div class="valuedCourseContent">
+                    <div class="ValuedCourseImg">
+                        @{
+                            var tutorialContent = content.Tutorial;
+                            var relativePath = Path.Combine(ViewBag.path, tutorialContent.Image.imageName);
+                        }
+                        <img src="@Url.Content(relativePath)" />
+                    </div>
+                    <div class="ValuedCourseTitle">
+                        <h2>@tutorialContent.title</h2>
+                    </div>
+                    <div class="ValuedCourseButtons">
+                        <div class="ButtonView">
+                            <button type="button" class="btn btn-secondary btn-lg" onclick="location.href='@Url.Action("WatchTutorial", "Account", new {tutorialId = tutorialContent.tutorialId})'">Deschide</button>
+                        </div>
+                        <div class="ButtonRemove">
+                            <a href="#" class="like-dislike-btn liked" data-tutorial-id="@tutorialContent.tutorialId" style="color: black;">
+                                <i class="bi bi-heart-fill"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $('.like-dislike-btn').click(function(e) {
+            e.preventDefault(); // Prevent the default link behavior
+
+            var tutorialId = $(this).data('tutorial-id');
+
+            var iconElement = $(this).find('i');
+
+            $.ajax({
+                url: '@Url.Action("LikeAndDislike", "Account")',
+                type: 'POST',
+                data: { tutorialId: tutorialId},
+                success: function (response) {
+                    if (response) {
+                        iconElement.removeClass('bi-heart').addClass('bi-heart-fill');
+                    } else {
+                        iconElement.removeClass('bi-heart-fill').addClass('bi-heart');
+                    }
+                }
+            });
+        });
+    });
+</script>

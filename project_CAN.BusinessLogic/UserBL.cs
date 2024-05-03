@@ -39,9 +39,9 @@ namespace project_CAN.BusinessLogic
         }
 
 
-        public void LikeAndDislikeinDB(LikesData data)
+        public bool LikeAndDislikeinDB(LikesData data)
         {
-            LikeAndDislike(data);
+            return LikeAndDislike(data);
         }
 
         public int CountAllUserLikesFromDb(int userId)
