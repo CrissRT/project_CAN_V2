@@ -21,7 +21,7 @@ namespace project_CAN.BusinessLogic.Core
             using (var db = new DBTutorialContext())
             {
                 var tutorials =  db.Tutorial.Count(t => t.title == data.title);
-                if (tutorials > 1) return new TutorialResponse { Status = false, StatusMsg = "Tutorialul cu acest titlu exista deja!" };
+                if (tutorials == 1) return new TutorialResponse { Status = false, StatusMsg = "Tutorialul cu acest titlu exista deja!" };
                 tutorial = db.Tutorial.Include(t => t.Image)
                     .Include(t => t.Video)
                     .FirstOrDefault(t => t.tutorialId == data.tutorialId);

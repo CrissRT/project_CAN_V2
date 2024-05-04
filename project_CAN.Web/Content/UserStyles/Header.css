@@ -13,6 +13,9 @@
     padding: 25px;
 }
 
+.bi-heart, .bi-heart-fill {
+    font-size: 40px;
+}
    
 .bi-house-fill {
     font-size: 40px;
