@@ -32,9 +32,9 @@
                 </div>
                 <div class="freeCourseButton">
                     <button type="button" class="btn btn-secondary btn-lg">Deschide</button>
-                    <div class="icon-container">
+                    @*<div class="icon-container">
                         <i class="bi bi-heart icon"></i>
-                    </div>
+                    </div>*@
                 </div>
             </div>
 
@@ -48,9 +48,9 @@
                 </div>
                 <div class="freeCourseButton">
                     <button type="button" class="btn btn-secondary btn-lg">Deschide</button>
-                    <div class="icon-container">
+                    @*<div class="icon-container">
                         <i class="bi bi-heart icon"></i>
-                    </div>
+                    </div>*@
                 </div>
             </div>
 
@@ -64,9 +64,9 @@
                 </div>
                 <div class="freeCourseButton">
                     <button type="button" class="btn btn-secondary btn-lg">Deschide</button>
-                    <div class="icon-container">
+                    @*<div class="icon-container">
                         <i class="bi bi-heart icon"></i>
-                    </div>
+                    </div>*@
                 </div>
             </div>
 
@@ -80,6 +80,8 @@
 
             @foreach (var content in ViewBag.tutorial.TutorialsList)
             {
+                bool isLiked = IsTutorialLiked(ViewBag.likedTutorial.LikesList, content.tutorialId);
+                var relativePath = Path.Combine(ViewBag.path, content.Image.imageName);
                 <div class="freeCours">
                     @{
                         var relativePath = Path.Combine(ViewBag.path, content.Image.imageName);
@@ -89,7 +91,6 @@
                     </div>
                     <div class="freeCourseText">
                         <h2>@content.title</h2>
-                        <p>@content.description</p>
                     </div>
                     <div class="freeCourseButton">
                         <button type="button" class="btn btn-secondary btn-lg" onclick="location.href='@Url.Action("WatchTutorial", "Account", new {tutorialId = content.tutorialId})'">Deschide</button>
