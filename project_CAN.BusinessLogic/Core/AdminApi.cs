@@ -34,7 +34,16 @@ namespace project_CAN.BusinessLogic.Core
                 db.SaveChanges();
             }
 
-            // Now, delete the user
+            using (var db = new DBLikesContext())
+            {
+                var likes = db.Likes.Where(l => l.userId == id).ToList();
+                foreach (var like in likes)
+                {
+                    db.Likes.Remove(like);
+                }
+                db.SaveChanges();
+            }
+
             using (var db = new DBUserContext())
             {
                 var user = db.Users.FirstOrDefault(u => u.userId == id);
