@@ -5,29 +5,37 @@ using project_CAN.Domain.Enums;
 
 namespace project_CAN.Domain.Entities.User
 {
+    [Table("userTable")]
     public class UDBTable
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public int userId { get; set; }
 
         [Required]
         [Display(Name = "Username")]
-        [StringLength(30, MinimumLength = 5, ErrorMessage = "Username cannot be longer than 30 characters.")]
-        public string Username { get; set; }
+        [StringLength(50, MinimumLength = 3, ErrorMessage = "Username cannot be longer than 50 characters.")]
+        public string userName { get; set; }
 
         [Required]
         [Display(Name = "Password")]
         [StringLength(50, MinimumLength = 8, ErrorMessage = "Password cannot be shorter than 8 characters.")]
-        public string Password { get; set; }
+        public string password { get; set; }
 
         [Required]
         [Display(Name = "Email Address")]
-        [StringLength(30)]
-        public string Email { get; set; }
+        [StringLength(256)]
+        public string email { get; set; }
 
+        [Required]
+        [Column(TypeName = "int")]
         public URole privilegies { get; set; }
 
-        public bool blocked { get; set; }
+        [Required]
+        public bool isBlocked { get; set; }
+
+        [Required]
+        [Column(TypeName = "datetime")]
+        public DateTime lastLogin { get; set; }
     }
 }

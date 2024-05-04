@@ -1,0 +1,46 @@
+﻿@using System.Web.Optimization
+@{
+    ViewBag.Title = "Control Users";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+@Styles.Render("~/Content/css/admin/users")
+
+<div class="users">
+    <div class="searchUser">
+        <div class="searchBarr">
+            <i class="bi bi-search"></i>
+        </div>
+    </div>
+
+    <div class="userList">
+        @foreach (var user in ViewBag.users.UsersData)
+        {
+            <div class="userData">
+                <div class="userIMG">
+                    <i class="bi bi-person-circle"></i>
+                </div>
+                <div class="userInfoBlock">
+                    <div class="infoFQ">
+                        <p>Username:</p>
+                        <p>Email:</p>
+                        <p>Ultima logare:</p>
+                    </div>
+                    <div class="userInfo">
+                        <p>@user.userName</p>
+                        <p>@user.email</p>
+                        <p>@user.lastLogin</p>
+                    </div>
+                </div>
+                <div class="userRemove">
+                    <a href="@Url.Action("DeleteUser", "Admin", new { id = user.userId })" style="color: black;">
+                        <i class="bi bi-person-x"></i>
+                    </a>
+                    <a href="@Url.Action("EditUser", "Admin", new { id = user.userId })" style="color: black;">
+                        <i class="bi bi-pencil-square"></i>
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+
+</div>

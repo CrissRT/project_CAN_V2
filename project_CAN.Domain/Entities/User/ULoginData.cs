@@ -9,9 +9,7 @@ namespace project_CAN.Domain.Entities.User
     public class ULoginData
     {
         public string password { get; set; }
-        public string email { get; set; }
-        public URole privilegies { get; set; }
-        
-
+        public string credential { get; set; }
+        public DateTime lastLogin { get; set; }
     }
 }

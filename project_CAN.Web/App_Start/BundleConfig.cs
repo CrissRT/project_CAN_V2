@@ -1,5 +1,8 @@
-﻿using System.Web;
+﻿using System.Data.Entity.Infrastructure;
+using System;
+using System.Web;
 using System.Web.Optimization;
+using System.Web.UI.WebControls;
 
 namespace project_CAN
 {
@@ -18,6 +21,9 @@ namespace project_CAN
             //          "~/Content/bootstrap.css",
             //          "~/Content/site.css"));
 
+            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+                "~/Scripts/jQuery.3.7.1/Content/Scripts/jquery-{version}.js"));
+
 
             // Bootstrap Bundles
             bundles.Add(new Bundle("~/bundles/bootstrap").Include("~/Scripts/bootstrap/dist/js/bootstrap.min.js"));
@@ -28,9 +34,12 @@ namespace project_CAN
                      "~/Content/bootstrap-icons-1.11.3/font/bootstrap-icons.css"));
 
             bundles.Add(new StyleBundle("~/Content/css/mainPage").Include(
-                     "~/Content/UserStyles/Index.css", "~/Content/UserStyles/Header.css"));
+                     "~/Content/UserStyles/Index.css"));
 
-            bundles.Add(new StyleBundle("~/Content/css/profile").Include(
+            bundles.Add(new StyleBundle("~/Content/css/user/header").Include(
+                "~/Content/UserStyles/Header.css"));
+
+            bundles.Add(new StyleBundle("~/Content/css/user/profile").Include(
                 "~/Content/UserStyles/Profile.css"));
 
             bundles.Add(new StyleBundle("~/Content/css/signup").Include(
@@ -39,6 +48,41 @@ namespace project_CAN
             bundles.Add(new StyleBundle("~/Content/css/login").Include(
                 "~/Content/UserStyles/Login.css"));
 
+            bundles.Add(new StyleBundle("~/Content/css/admin/users").Include(
+                "~/Content/AdminStyles/ControlUsers.css"));
+
+            bundles.Add(new StyleBundle("~/Content/css/admin/tutorial").Include(
+                "~/Content/AdminStyles/ControlTutorial.css"));
+
+            bundles.Add(new StyleBundle("~/Content/css/admin/editUser").Include(
+                "~/Content/AdminStyles/EditUser.css"));
+
+            bundles.Add(new StyleBundle("~/Content/css/admin/editTutorial").Include(
+                "~/Content/AdminStyles/EditTutorial.css"));
+
+            bundles.Add(new StyleBundle("~/Content/css/admin/addTutorial").Include(
+                "~/Content/AdminStyles/AddTutorial.css"));
+
+            bundles.Add(new StyleBundle("~/Content/css/user/editProfile").Include(
+                "~/Content/UserStyles/EditProfile.css"));
+
+            bundles.Add(new StyleBundle("~/Content/css/admin/editProfile").Include(
+                "~/Content/AdminStyles/EditProfile.css"));
+
+            bundles.Add(new StyleBundle("~/Content/css/admin/header").Include(
+                "~/Content/AdminStyles/HeaderAdmin.css"));
+
+            bundles.Add(new StyleBundle("~/Content/css/admin/profile").Include(
+                "~/Content/AdminStyles/Profile.css"));
+
+            bundles.Add(new StyleBundle("~/Content/css/user/likedTutorials").Include(
+                "~/Content/UserStyles/LikedTutorials.css"));
+
+            bundles.Add(new StyleBundle("~/Content/css/user/watchTutorial").Include(
+                "~/Content/UserStyles/WatchTutorial.css"));
+
+            bundles.Add(new StyleBundle("~/Content/css/user/loggedIn").Include(
+                "~/Content/UserStyles/LoggedIn.css"));
         }
     }
 }

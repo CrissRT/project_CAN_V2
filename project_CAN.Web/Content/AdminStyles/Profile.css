@@ -1,0 +1,214 @@
+﻿.profile {
+	width: 100%;
+	height: 100%;
+		background-image: url(../../images/backGround.svg);
+/*	background-image: url(~/images/backGround.svg);*/
+	background-repeat: no-repeat;
+	background-size: cover;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+
+	.profile > img {
+		width: 250px;
+		height: 250px;
+		background-color: white;
+		border-radius: 100%;
+		box-shadow: 5px 6px 30px 0 rgba(0, 0, 0, 0.15);
+		position: relative;
+		z-index: 2;
+	}
+
+.profileContent {
+	width: 450px;
+	height: fit-content;
+	background-color: white;
+	border-radius: 20px;
+	box-shadow: 5px 6px 30px 0 rgba(0, 0, 0, 0.15);
+	margin-top: -150px;
+	padding: 150px 35px 40px 35px;
+	position: relative;
+	z-index: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+	.profileContent > h1 {
+		margin-top: 10px;
+	}
+
+.generalSeting {
+	width: 100%;
+	height: 100px;
+	margin-top: 20px;
+}
+
+	.generalSeting > p {
+		margin-bottom: 5px;
+		margin-left: 15px;
+		font-size: 15px;
+	}
+
+.profileLine {
+	width: 100%;
+	height: 70px;
+	border-radius: 20px;
+	border: 1px solid black;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.lineButton {
+	width: 40%;
+	height: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+
+	.lineButton > .btn-secondary {
+		width: 120px;
+	}
+
+.lineContent {
+	width: 60%;
+	height: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+	.lineContent > p {
+		margin-bottom: 0;
+		font-size: 20px;
+		margin-left: 15px;
+	}
+
+	.lineContent > h2 {
+		margin-bottom: 0;
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+
+
+
+.contats {
+	width: 100%;
+	height: fit-content;
+	margin-top: 20px;
+	border-radius: 20px;
+	border: 1px solid black;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	padding: 5px;
+}
+
+
+.bi-instagram {
+	font-size: 40px;
+	margin-right: 15px;
+}
+
+.bi-facebook {
+	font-size: 40px;
+	margin-right: 15px;
+}
+
+.bi-telegram {
+	font-size: 40px;
+	margin-right: 15px;
+}
+
+.contactROW > a {
+	width: 150px;
+}
+
+.logOutProfile {
+	width: 100px;
+	height: 50px;
+	margin-top: 20px;
+	background-color: white;
+	border-radius: 20px;
+}
+
+
+@media screen and (max-width: 1200px) {
+
+	.profile > img {
+		width: 200px;
+		height: 200px;
+	}
+
+	.profileContent > h1 {
+		margin-top: 10px;
+		margin-bottom: 0;
+	}
+
+
+	.bi-instagram {
+		font-size: 30px;
+		margin-right: 15px;
+	}
+
+	.bi-facebook {
+		font-size: 30px;
+		margin-right: 15px;
+	}
+
+	.bi-telegram {
+		font-size: 30px;
+		margin-right: 15px;
+	}
+}
+
+@media screen and (max-height: 800px) {
+
+
+	.profile > img {
+		width: 200px;
+		height: 200px;
+	}
+
+	.profileContent > h1 {
+		margin-top: 10px;
+		margin-bottom: 0;
+	}
+
+	.bi-instagram {
+		font-size: 30px;
+		margin-right: 15px;
+	}
+
+	.bi-facebook {
+		font-size: 30px;
+		margin-right: 15px;
+	}
+
+	.bi-telegram {
+		font-size: 30px;
+		margin-right: 15px;
+	}
+}
+
+.btn > a {
+    text-decoration: none;
+    color: white;
+}
+
+
+.instagram-link {
+    background-image: linear-gradient(to right, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D, #F56040, #F77737, #FCAF45, #FFDC80);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+

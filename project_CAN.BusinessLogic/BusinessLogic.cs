@@ -1,12 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using project_CAN.BusinessLogic.Interfaces;
 
 namespace project_CAN.BusinessLogic
 {
-    internal class BusinessLogic
+    public class BussinesLogic
     {
+        public IUser GetSessionBL()
+        {
+            return new UserBL();
+        }
+
+        public IAdmin GetAdminBL()
+        {
+            return new AdminBL();
+        }
+
+        public IModerator GetModeratorBL()
+        {
+            return new ModeratorBL();
+        }
     }
 }

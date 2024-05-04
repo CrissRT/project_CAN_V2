@@ -1,0 +1,23 @@
+﻿@using System.Web.Optimization
+
+@{
+    ViewBag.Title = "Liked Tutorial";
+    Layout = "~/Views/Shared/_LayoutPageUser.cshtml";
+    var tutorial = ViewBag.tutorial;
+    var relativePath = Path.Combine(ViewBag.path, tutorial.Image.imageName);
+}
+@Styles.Render("~/Content/css/user/watchTutorial")
+
+<div class="course">
+    <div class="courseContent">
+        <h1>@tutorial.title</h1>
+        <img src="@Url.Content(relativePath)" />
+        <p>@tutorial.description</p>
+        <iframe width="560" height="315" src="@tutorial.Video.videoLink" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <div class="icon-container">
+            <a href="@Url.Action("LikeAndDislike", "Account", new {tutorialId = tutorial.tutorialId})" style="color: black;"><i class="bi bi-heartbreak"></i></a>
+        </div>
+    </div>
+
+</div>
+

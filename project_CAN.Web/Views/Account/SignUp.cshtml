@@ -1,46 +1,44 @@
 ﻿@using System.Web.Optimization
+@model project_CAN.Web.Models.User.UserRegistrationView
 @{
-    Layout = null;
     ViewBag.Title = "Sign Up";
+    Layout = "~/Views/Shared/_LayoutBlankPage.cshtml";
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title>@ViewBag.Title</title>
-    @Scripts.Render("~/bundles/bootstrap")
-    @Styles.Render("~/Content/css/bootstrap")
-    @Styles.Render("~/Content/css/signUp")
-</head>
+@Styles.Render("~/Content/css/signUp")
 
 <body class="singupPage">
-    <div class="singupContent">
-        <h1>Inregestrare</h1>
+    @using (Html.BeginForm("SignUp", "Account", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="singupContent">
+            <h1>Înregistrare</h1>
+            <div class="login">
+                <p>Username:</p>
+                @Html.TextBoxFor(model => model.username)
+                @Html.ValidationMessageFor(model => model.username, "")
+            </div>
 
-        <div class="login">
-            <p>login-ul:</p>
+            <div class="E-mail">
+                <p>E-mail:</p>
+                @Html.TextBoxFor(model => model.email, new { @type = "email" })
+                @Html.ValidationMessageFor(model => model.email, "")
+            </div>
+
+            <div class="parola">
+                <p>Parola:</p>
+                @Html.PasswordFor(model => model.password)
+                @Html.ValidationMessageFor(model => model.password, "")
+            </div>
+
+            <div class="parola">
+                <p>Repeta parola:</p>
+                @Html.PasswordFor(model => model.repeatPassword)
+                @Html.ValidationMessageFor(model => model.repeatPassword, "")
+            </div>
+            <div>@ViewBag.Error</div>
+            <button type="submit" class="btn btn-secondary btn-lg">Inregestrare</button>
         </div>
-
-        <div class="E-mail">
-            <p>login-ul:</p>
-        </div>
-
-        <div class="parola">
-            <p>Parola:</p>
-        </div>
-
-        <div class="parola">
-            <p>Repeta parola:</p>
-        </div>
-
-        <button type="button" class="btn btn-secondary btn-lg">Inregestreaza</button>
-
-    </div>
-
+    }
 </body>
-
-</html>
-
 
 

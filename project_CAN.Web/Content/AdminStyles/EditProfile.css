@@ -1,0 +1,66 @@
+﻿.userEdit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-image: url(../../images/backGround.svg);
+    height: 100%;
+}
+
+.userEditContent {
+    background-color: white;
+    width: 700px;
+    height: fit-content;
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.bi-arrow-left-square {
+    font-size: 40px;
+    position: absolute;
+    left: 20px;
+}
+
+.userEditContent > .bi-person-circle {
+    font-size: 80px;
+}
+
+.userName, .gmail, .pasword {
+    width: 300px;
+    height: 50px;
+    border: 1px solid black;
+    border-radius: 20px;
+    margin-top: 10px;
+}
+
+.userName, .pasword, .gmail, .banedStatus {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
+}
+
+.userName > label, .pasword > label, .gmail > label {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 500;
+    margin-right: 10px;
+}
+
+.userName > input, .pasword > input, .gmail > input {
+    margin-right: 20px;
+}
+
+.btn-secondary {
+    margin-top: 10px;
+}
+
+input {
+    border: none;
+    outline: none;
+}

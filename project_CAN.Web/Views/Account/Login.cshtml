@@ -1,42 +1,30 @@
-﻿@model project_CAN.Web.Models.UserLogin
-@using System.Web.Optimization
-@using System.Web.UI.WebControls
+﻿@using System.Web.Optimization
+@model project_CAN.Web.Models.User.UserLoginView
 @{
-    Layout = null;
-    ViewBag.Title = "Csbabgbang";
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutBlankPage.cshtml";
 }
-
-<html>
-<head>
-    <title>@ViewBag.Title</title>
-    @Scripts.Render("~/bundles/bootstrap")
-    @Styles.Render("~/Content/css/bootstrap")
-    @Styles.Render("~/Content/css/login")
-</head>
+@Styles.Render("~/Content/css/login")
 
 <body class="loginPage">
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Login", "Account", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
         <div class="loginContent">
             <h1>Logare</h1>
             <div class="login">
                 <p>Login-ul:</p>
-                @Html.EditorFor(model => model.Username)
-                @Html.ValidationMessageFor(model => model.Username)
+                @Html.TextBoxFor(model => model.credential)
+                @Html.ValidationMessageFor(model => model.credential)
             </div>
             <div class="parola">
                 <p>Parola:</p>
-                @Html.EditorFor(model => model.Password)
-                @Html.ValidationMessageFor(model => model.Password)
+                @Html.PasswordFor(model => model.password)
+                @Html.ValidationMessageFor(model => model.password)
             </div>
-            <button type="button" class="btn btn-secondary btn-lg">Logare</button>
+            <div id="error-div">@ViewBag.Error </div>
+            <button type="submit" class="btn btn-secondary btn-lg">Logare</button>
+            @Html.ActionLink("Sign Up", "SignUp", "Account")
         </div>
     }
-
 </body>
-
-</html>
-
-
-

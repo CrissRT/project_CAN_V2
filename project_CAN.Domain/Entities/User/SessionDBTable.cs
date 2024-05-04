@@ -8,19 +8,23 @@ using System.Threading.Tasks;
 
 namespace project_CAN.Domain.Entities.User
 {
+    [Table("sessionTable")]
     public class SessionDBTable
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int sessionId { get; set; }
 
-        [Required]
-        [Display(Name = "Username")]
-        [StringLength(30, MinimumLength = 5, ErrorMessage = "Username cannot be longer than 30 characters.")]
-        public string userId { get; set; }
+        [ForeignKey("User")]
+        public int userId { get; set; }
+
+        public virtual UDBTable User { get; set; }
 
         [Required]
-        [DataType(DataType.Date)]
-        public DateTime startTime { get; set; }
+        public string cookieValue { get; set; }
+
+        [Required]
+        public DateTime expireTime { get; set; }
+
     }
 }

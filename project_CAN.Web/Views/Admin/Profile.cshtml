@@ -1,0 +1,40 @@
+﻿@using System.Web.Optimization
+
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+@Styles.Render("~/Content/css/admin/profile")
+<div class="profile">
+
+    <img src="../../images/person-circle.svg"/>
+
+    <div class="profileContent">
+
+        <h1>@ViewBag.userName</h1>
+
+        <div class="generalSeting">
+            <p>Setari generale</p>
+            <div class="profileLine">
+                <div class="lineButton">
+                    <button type="button" class="btn btn-secondary btn-lg" onclick="location.href='@Url.Action("EditProfile", "Account")'">Aplica</button>
+                </div>
+
+                <div class="lineContent">
+                    <p>Modifica setarile contului</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="contats">
+            <a href="https://www.instagram.com/numele_utilizatorului/" class="instagram-link"><i class="bi bi-instagram"></i></a>
+            <a href="https://www.instagram.com/numele_utilizatorului/"><i class="bi bi-facebook"></i></a>
+            <a href="https://www.instagram.com/numele_utilizatorului/"><i class="bi bi-telegram"></i></a>
+
+
+        </div>
+        <button class="logOutProfile" onclick="location.href='@Url.Action("Logout", "Account")'">Logout</button>
+    </div>
+
+</div>
+

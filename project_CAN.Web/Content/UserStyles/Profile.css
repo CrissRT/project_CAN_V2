@@ -79,7 +79,6 @@
 
     .lineButton > .btn-secondary {
         width: 120px;
-        margin-right: 0;
     }
 
 .lineContent {
@@ -94,14 +93,12 @@
         margin-bottom: 0;
         font-size: 20px;
         margin-left: 15px;
-        margin-top: 0;
     }
 
     .lineContent > h2 {
         margin-bottom: 0;
         margin-left: 10px;
         margin-right: 10px;
-        margin-top: 0;
     }
 
 
@@ -112,20 +109,12 @@
     border-radius: 20px;
     border: 1px solid black;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     padding: 5px;
 }
 
-.contactROW {
-    width: 100%;
-    height: fit-content;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-}
 
 .bi-instagram {
     font-size: 40px;
@@ -145,6 +134,15 @@
 .contactROW > a {
     width: 150px;
 }
+
+.logOutProfile {
+    width: 100px;
+    height: 50px;
+    margin-top: 20px;
+    background-color: white;
+    border-radius: 20px;
+}
+
 
 @media screen and (max-width: 1200px) {
 
@@ -209,7 +207,7 @@
     }
 }
 
-@media screen and (max-height: 900px) {
+@media screen and (max-height: 800px) {
 
 
     .profile > img {
@@ -271,4 +269,11 @@
         font-size: 30px;
         margin-right: 15px;
     }
+}
+
+.instagram-link {
+    background-image: linear-gradient(to right, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D, #F56040, #F77737, #FCAF45, #FFDC80);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
 }
