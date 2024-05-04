@@ -41,27 +41,27 @@
             </div>
 
             <div class="banedStatus">
-                <label>Ban status:</label><br />
+                <label>Ban status:</label>
 
                 @Html.RadioButtonFor(model => model.isBlocked, true, new { id = "baned" })
-                <label for="baned">Blocked</label><br />
+                <label for="baned" class="banStatus">Blocked</label><br />
 
                 @Html.RadioButtonFor(model => model.isBlocked, false, new { id = "unBan" })
-                <label for="unBan">No blocked</label>
+                <label for="unBan" class="banStatus">No blocked</label>
             </div>
 
             <div class="roleStatus">
 
-                <label for="role">Rolul:</label>
+                <label>Rolul:</label>
 
-                <label for="User">User</label>
-                @Html.RadioButtonFor(model => model.privilegies, 0, new { id = "User", name = "role" })
+                <label for="User" class="role">User</label>
+                @Html.RadioButtonFor(model => model.privilegies, 0, new { id = "User"})
 
-                <label for="Mod">Moderator</label>
-                @Html.RadioButtonFor(model => model.privilegies, 1, new { id = "Mod", name = "role" })
+                <label for="Mod"  class="role">Moderator</label>
+                @Html.RadioButtonFor(model => model.privilegies, 1, new { id = "Mod" })
 
-                <label for="Admin">Admin</label>
-                @Html.RadioButtonFor(model => model.privilegies, 2, new { id = "Admin", name = "role" })
+                <label for="Admin" class="role">Admin</label>
+                @Html.RadioButtonFor(model => model.privilegies, 2, new { id = "Admin"})
 
             </div>
             
@@ -76,21 +76,48 @@
     }
 
     <script>
-            @{
-                var status = Json.Encode(ViewBag.user.isBlocked);
-            }
-             var banStatus = @Html.Raw(status).ToString().ToLower();
-            // Function to set the checked state based on banStatus
-            function setBanStatus() {
-                if (banStatus == 1) {
-                    document.getElementById("baned").checked = true;
-                } else {
-                    document.getElementById("unBan").checked = true;
-                }
-            }
 
-            // Call the function to initially set the ban status
+        document.querySelectorAll(".banStatus").forEach(function (element) {
+            element.addEventListener("click", function () {
+                document.querySelectorAll(".banStatus").forEach(function (el) {
+                    el.style.color = "grey";
+                });
+                element.style.color = "red";
+            });
+        });
+
+
+        @{
+            var status = Json.Encode(ViewBag.user.isBlocked);
+        }
+        var banStatus = @Html.Raw(status).ToString().ToLower();
+        // Function to set the checked state based on banStatus
+        function setBanStatus() {
+            document.querySelectorAll(".banStatus").forEach(function (el) {
+                el.style.color = "grey";
+            });
+            if (banStatus == 1) {
+                document.getElementById("baned").checked = true;
+                document.querySelector('label[for="baned"]').style.color = "red";
+            } else {
+                document.getElementById("unBan").checked = true;
+                document.querySelector('label[for="unBan"]').style.color = "red";
+            }
+        }
+
+        // Call the function to initially set the ban status
         setBanStatus();
+
+
+        document.querySelectorAll(".role").forEach(function (element) {
+            element.addEventListener("click", function () {
+                document.querySelectorAll(".role").forEach(function (el) {
+                    el.style.color = "grey";
+                });
+                element.style.color = "red";
+            });
+        });
+
 
 
         @{
@@ -100,12 +127,20 @@
 
         // Function to set the checked state based on privilegies
         function setPrivilegies() {
+            document.querySelectorAll(".role").forEach(function (el) {
+                el.style.color = "grey";
+            });
+
             if (privilegies === 0) {
                 document.getElementById("User").checked = true;
+                document.querySelector('label[for="User"]').style.color = "red";
+
             } else if (privilegies === 1) {
                 document.getElementById("Mod").checked = true;
+                document.querySelector('label[for="Mod"]').style.color = "red";
             } else if (privilegies === 2) {
                 document.getElementById("Admin").checked = true;
+                document.querySelector('label[for="Admin"]').style.color = "red";
             }
         }
 

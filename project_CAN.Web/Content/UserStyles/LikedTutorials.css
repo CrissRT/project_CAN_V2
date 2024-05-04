@@ -1,4 +1,8 @@
-﻿.valuedPage {
+﻿html, body, .valuedPage {
+    height: 100%;
+}
+
+.valuedPage {
     background-image: url(../../images/backGround.svg);
     width: 100%;
     padding: 30px;
@@ -38,7 +42,7 @@
 
 .valuedCourseList {
     width: 100%;
-    height: 100%;
+    height: fit-content;
     /* margin-top: 20px; */
 }
 

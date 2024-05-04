@@ -83,6 +83,13 @@
 
 input[type="radio"] {
     margin-right: 10px;
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+label {
+    cursor: pointer;
 }
 
     input[type="radio"]:last-child {
@@ -94,3 +101,4 @@ input{
     outline:none;
     border:none;
 }
+
