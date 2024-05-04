@@ -31,15 +31,15 @@
     border: 1px solid black;
     display: flex;
     padding: 10px;
-    margin-bottom: 12px;
+    margin-bottom: 5px;
 /*    justify-content: space-between;*/
 }
 
-	.login > p {
+/*	.login > p {
 		font-size: 20px;
 		color: gray;
 		margin: 0;
-	}
+	}*/
 
 .parola {
 	background-color: white;
@@ -49,17 +49,32 @@
 	border: 1px solid black;
 	display: flex;
 	padding: 10px;
-	margin-bottom: 20px;
+	margin-bottom: 5px;
 }
 
-.parola > p {
+/*.parola > p {
 	font-size: 20px;
 	color: gray;
 	margin: 0;
+}*/
+
+#error-div {
+	color: red;
+    margin-bottom: 12px;
+}
+
+.field-validation-error {
+	color: red;
+	margin-bottom: 12px;
 }
 
 input {
     border: none;
     outline: none;
-    width: 70%;
+    width: 100%;
+}
+
+a {
+    color: black;
+    cursor: pointer;
 }

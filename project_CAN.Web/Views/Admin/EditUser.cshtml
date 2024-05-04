@@ -28,19 +28,16 @@
             <div class="userName">
                 <label for="fname">Numele:</label>
                 @Html.TextBoxFor(model => model.userName, new { placeholder = user.userName, id = "fname", name = "fname" })
-                @Html.ValidationMessageFor(model => model.userName)
             </div>
 
             <div class="gmail">
                 <label for="email">Email:</label>
                 @Html.TextBoxFor(model => model.email, new { placeholder = user.email, type = "email", id = "email", name = "email" })
-                @Html.ValidationMessageFor(model => model.email)
             </div>
 
             <div class="pasword">
                 <label for="pass">Parola:</label>
                 @Html.PasswordFor(model => model.password, new { placeholder = "*****", type = "password", maxlength = "50", id = "pass", name = "pass" })
-                @Html.ValidationMessageFor(model => model.password)
             </div>
 
             <div class="banedStatus">
@@ -67,7 +64,11 @@
                 @Html.RadioButtonFor(model => model.privilegies, 2, new { id = "Admin", name = "role" })
 
             </div>
-
+            
+            @if (TempData["message"] != null)
+            {
+                <div class="alert alert-info">@TempData["message"]</div>
+            }
 
             <button type="submit" class="btn btn-secondary btn-lg">Salvare</button>
 
@@ -110,6 +111,17 @@
 
         // Call the function to initially set the privilegies status
         setPrivilegies();
+
+
+        var alert = document.querySelector(".alert");
+        var changingTrigger = document.querySelectorAll("input");
+        changingTrigger.forEach(function (element) {
+            element.addEventListener("input", function () {
+                if (alert) {
+                    alert.remove();
+                }
+            });
+        });
 
     </script>
 

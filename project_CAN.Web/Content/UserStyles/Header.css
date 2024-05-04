@@ -11,13 +11,10 @@
     border-right: none;
     border-left: none;
     padding: 25px;
+    background-image: url(../../images/backGround.svg);
 }
 
 .bi-heart, .bi-heart-fill {
-    font-size: 40px;
-}
-   
-.bi-house-fill {
     font-size: 40px;
 }
 
@@ -47,4 +44,8 @@
 .bi-person-circle {
     font-size: 40px;
     margin-left: 5px;
+}
+
+.bi-house-fill {
+    font-size: 40px;
 }

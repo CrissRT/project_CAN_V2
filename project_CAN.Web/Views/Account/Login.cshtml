@@ -10,21 +10,21 @@
     @using (Html.BeginForm("Login", "Account", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
-        <div class="loginContent">
-            <h1>Logare</h1>
-            <div class="login">
-                <p>Login-ul:</p>
-                @Html.TextBoxFor(model => model.credential)
-                @Html.ValidationMessageFor(model => model.credential)
-            </div>
-            <div class="parola">
-                <p>Parola:</p>
-                @Html.PasswordFor(model => model.password)
-                @Html.ValidationMessageFor(model => model.password)
-            </div>
-            <div id="error-div">@ViewBag.Error </div>
-            <button type="submit" class="btn btn-secondary btn-lg">Logare</button>
-            @Html.ActionLink("Sign Up", "SignUp", "Account")
+    <div class="loginContent">
+        <h1>Logare</h1>
+        <div class="login">
+            @Html.TextBoxFor(model => model.credential, new { placeholder = "Username/Email" })
         </div>
+        @Html.ValidationMessageFor(model => model.credential)
+
+        <div class="parola">
+            @Html.PasswordFor(model => model.password, new { placeholder = "Parola" })
+        </div>
+        @Html.ValidationMessageFor(model => model.password)
+
+        <div id="error-div">@ViewBag.Error </div>
+        <button type="submit" class="btn btn-secondary btn-lg">Logare</button>
+        @Html.ActionLink("Nu ai cont? Înregistrează-te", "SignUp", "Account")
+    </div>
     }
 </body>

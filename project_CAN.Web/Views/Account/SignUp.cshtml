@@ -10,34 +10,33 @@
     @using (Html.BeginForm("SignUp", "Account", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
-        <div class="singupContent">
-            <h1>Înregistrare</h1>
-            <div class="login">
-                <p>Username:</p>
-                @Html.TextBoxFor(model => model.username)
-                @Html.ValidationMessageFor(model => model.username, "")
-            </div>
+    <div class="singupContent">
+        <h1>Înregistrare</h1>
+        <div class="login">
+            @Html.TextBoxFor(model => model.username, new { placeholder = "Username" })
 
-            <div class="E-mail">
-                <p>E-mail:</p>
-                @Html.TextBoxFor(model => model.email, new { @type = "email" })
-                @Html.ValidationMessageFor(model => model.email, "")
-            </div>
-
-            <div class="parola">
-                <p>Parola:</p>
-                @Html.PasswordFor(model => model.password)
-                @Html.ValidationMessageFor(model => model.password, "")
-            </div>
-
-            <div class="parola">
-                <p>Repeta parola:</p>
-                @Html.PasswordFor(model => model.repeatPassword)
-                @Html.ValidationMessageFor(model => model.repeatPassword, "")
-            </div>
-            <div>@ViewBag.Error</div>
-            <button type="submit" class="btn btn-secondary btn-lg">Inregestrare</button>
         </div>
+        @Html.ValidationMessageFor(model => model.username)
+
+        <div class="E-mail">
+            @Html.TextBoxFor(model => model.email, new { @type = "email", placeholder = "Email" })
+        </div>
+            @Html.ValidationMessageFor(model => model.email, "")
+
+        <div class="parola">
+            @Html.PasswordFor(model => model.password, new { placeholder = "Parola" })
+        </div>
+        @Html.ValidationMessageFor(model => model.password)
+
+        <div class="parola">
+            @Html.PasswordFor(model => model.repeatPassword, new {placeholder = "Repetă Parola"})
+        </div>
+        @Html.ValidationMessageFor(model => model.repeatPassword)
+
+
+        <div id="error-div">@ViewBag.Error</div>
+        <button type="submit" class="btn btn-secondary btn-lg">Înregestrare</button>
+    </div>
     }
 </body>
 

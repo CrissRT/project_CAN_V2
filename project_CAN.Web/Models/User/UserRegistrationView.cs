@@ -4,22 +4,22 @@ namespace project_CAN.Web.Models.User
 {
     public class UserRegistrationView
     {
-        [Required]
-        [Display(Name = "Email")]
+        [Required(ErrorMessage = "{0} este necesar!")]
+        [Display(Name = "Email-ul")]
         public string email { get; set; }
 
-        [Required]
-        [Display(Name = "Username")]
+        [Required(ErrorMessage = "{0} este necesar!")]
+        [Display(Name = "Username-ul")]
         public string username { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "{0} este necesară!")]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Parola")]
         public string password { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "{0} este necesară!")]
         [DataType(DataType.Password)]
-        [Display(Name = "Repeat Password")]
+        [Display(Name = "Repeta parola")]
         public string repeatPassword { get; set; }
     }
 }

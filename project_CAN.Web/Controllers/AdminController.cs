@@ -183,12 +183,8 @@ namespace project_CAN.Web.Controllers
             }
 
             var response = _adminBL.EditUserInDB(data);
-            if (response.Status)
-            {
-                return RedirectToAction("ControlUsers", "Admin");
-            }
-
-            return RedirectToAction("EditUser", "Admin");
+            TempData["message"] = response.StatusMsg;
+            return RedirectToAction("EditUser", "Admin", new {id = data.userId});
         }
 
 

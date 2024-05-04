@@ -4,13 +4,13 @@ namespace project_CAN.Web.Models.User
 {
     public class UserLoginView
     {
-        [Required]
-        [Display(Name = "Email or Username")]
+        [Required(ErrorMessage = "{0} este necesar!")]
+        [Display(Name = "Email sau username")]
         public string credential { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "{0} este necesară!")]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Parola")]
         public string password { get; set; }
     }
 }

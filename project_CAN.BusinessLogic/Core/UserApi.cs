@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Web;
 using project_CAN.Domain.Enums;
 using project_CAN.Domain.Entities.Moderator;
+using project_CAN.Domain.Entities.Admin;
 
 namespace project_CAN.BusinessLogic.Core
 {
@@ -111,22 +112,22 @@ namespace project_CAN.BusinessLogic.Core
 
             if (dataUserDomain.username.Length > 50)
             {
-                return new UResponse { Status = false, StatusMsg = "Username trebuie sa contina maxim 50 caractere" };
+                return new UResponse { Status = false, StatusMsg = "Username nu trebuie să contină mai mult de 50 caractere" };
             }
 
             if (dataUserDomain.password.Length > 50)
             {
-                return new UResponse { Status = false, StatusMsg = "Parola trebuie sa contina maxim 50 caractere" };
+                return new UResponse { Status = false, StatusMsg = "Parola nu trebuie să contină mai mult de 50 caractere" };
             }
 
             if (dataUserDomain.password.Length < 8)
             {
-                return new UResponse { Status = false, StatusMsg = "Parola trebuie sa contina minim 8 caractere" };
+                return new UResponse { Status = false, StatusMsg = "Parola trebuie să contină minim 8 caractere" };
             }
 
             if (dataUserDomain.email.Length > 256)
             {
-                return new UResponse { Status = false, StatusMsg = "Email trebuie sa contina maxim 256 caractere" };
+                return new UResponse { Status = false, StatusMsg = "Email-ul nu trebuie să contină mai mult de 256 caractere" };
             }
 
 
@@ -134,14 +135,14 @@ namespace project_CAN.BusinessLogic.Core
 
             if (LoginHelper.HashGen(dataUserDomain.repeatPassword) != pass)
             {
-                return new UResponse { Status = false, StatusMsg = "Repeta Parola incorect" };
+                return new UResponse { Status = false, StatusMsg = "Repetă Parola este incorectă" };
             }
             
             using (var db = new DBUserContext())
             {
                 if (db.Users.Any(itemDB => itemDB.email == dataUserDomain.email) || db.Users.Any(itemDB => itemDB.userName == dataUserDomain.username))
                 {
-                    return new UResponse {Status = false, StatusMsg = "Utilizatorul deja exista"};
+                    return new UResponse {Status = false, StatusMsg = "Utilizatorul deja există"};
                 }
 
                 var newUser = new UDBTable
@@ -157,7 +158,7 @@ namespace project_CAN.BusinessLogic.Core
                 db.Users.Add(newUser);
                 db.SaveChanges();
             }
-            return new UResponse { Status = true, StatusMsg = "Registrare cu success"};
+            return new UResponse { Status = true, StatusMsg = "Înregistrare cu success"};
         }
         protected internal UResponse UserLoginAction(ULoginData dataUserDomain)
         {
@@ -173,12 +174,12 @@ namespace project_CAN.BusinessLogic.Core
 
                 if (userTable == null)
                 {
-                    return new UResponse { Status = false, StatusMsg = "Login-ul sau Parola este incorecta" };
+                    return new UResponse { Status = false, StatusMsg = "Login-ul sau Parola este incorectă" };
                 }
 
                 if (userTable.isBlocked)
                 {
-                    return new UResponse { Status = false, StatusMsg = "D-voastra sunteti blocat!" };
+                    return new UResponse { Status = false, StatusMsg = "D-voastră sunteți blocat!" };
                 }
 
                 using (var todo = new DBUserContext())
@@ -193,7 +194,6 @@ namespace project_CAN.BusinessLogic.Core
             // When user logins with username
             else
             {
-                //var pass = LoginHelper.HashGen(dataUserDomain.password);
                 using (var db = new DBUserContext())
                 {
                     userTable = db.Users.FirstOrDefault(itemDB => itemDB.userName == dataUserDomain.credential && itemDB.password == pass);
@@ -201,12 +201,12 @@ namespace project_CAN.BusinessLogic.Core
 
                 if (userTable == null)
                 {
-                    return new UResponse { Status = false, StatusMsg = "Login-ul sau Parola este incorecta" };
+                    return new UResponse { Status = false, StatusMsg = "Login-ul sau Parola este incorectă" };
                 }
 
                 if (userTable.isBlocked)
                 {
-                    return new UResponse { Status = false, StatusMsg = "D-voastra sunteti blocat!" };
+                    return new UResponse { Status = false, StatusMsg = "D-voastră sunteți blocat!" };
                 }
 
                 using (var todo = new DBUserContext())
@@ -283,29 +283,48 @@ namespace project_CAN.BusinessLogic.Core
         protected internal UResponse EditProfile(EditProfile data)
         {
             UDBTable currentUser = GetUserFromCookie(data.apiCookie);
-            if (currentUser == null) return new UResponse { Status = false, StatusMsg = "Sesiunea utilizatorul nu a fost gasit!"};
+            if (currentUser == null) return new UResponse { Status = false, StatusMsg = "Sesiunea utilizatorului nu a fost găsit!"};
 
             using (var db = new DBUserContext())
             {
                 var changesList = new List<string>();
-                if (data.userName != null && data.userName.Length > 3 && data.userName.Length <= 50)
+                if (data.userName != null)
                 {
                     changesList.Add("username-ului");
                     currentUser.userName = data.userName;
                 }
+
+                if (data.userName != null && (data.userName.Length < 3 || data.userName.Length > 50))
+                {
+                    return new UResponse { Status = false, StatusMsg = "Ați introdus lungimea incorectă a username-ului" };
+                }
+
+
                 var validate = new EmailAddressAttribute();
-                if (data.email != null && validate.IsValid(data.email))
+                if (data.email != null)
                 {
                     changesList.Add("email-ului");
                     currentUser.email = data.email;
                 }
 
-                if (data.password != null && data.password.Length > 8 && data.password.Length <= 50)
+                if (data.email != null && !validate.IsValid(data.email))
+                {
+                    return new UResponse { Status = false, StatusMsg = "Ați introdus format incorect a email-ului" };
+                }
+
+                if (data.password != null)
                 {
                     changesList.Add(" parolei");
                     var pass = LoginHelper.HashGen(data.password);
                     currentUser.password = pass;
                 }
+
+
+                if (data.password != null && (data.password.Length < 8 || data.password.Length > 50))
+                {
+                    return new UResponse { Status = false, StatusMsg = "Ați introdus lungimea incorectă a parolei" };
+                }
+
                 string changes= string.Join(", ", changesList.ToArray());
                 db.Entry(currentUser).State = EntityState.Modified;
                 db.SaveChanges();

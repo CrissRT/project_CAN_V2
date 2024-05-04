@@ -146,7 +146,7 @@ namespace project_CAN.Web.Controllers
                 }
                 else
                 {
-                    ViewBag.Error = "Ati introdus date incorecte!";
+                    ViewBag.Error = userRegister.StatusMsg;
                 }
             }
 
@@ -180,7 +180,7 @@ namespace project_CAN.Web.Controllers
                 }
                 else
                 {
-                    ViewBag.Error = "S-a petrecut o eroare!";
+                    ViewBag.Error = userLogin.StatusMsg;
                 }
             }
 
