@@ -30,7 +30,7 @@ namespace project_CAN.Web.Controllers
 
             ViewBag.path = insideProjectDirectory;
             ViewBag.tutorial = _user.GetAllTutorialFromDB();
-            ViewBag.likedTutorial = _user.GetLikedTutorialsFromDB(RetrieveUserID());
+
             return View();
         }
     }
