@@ -50,6 +50,20 @@ namespace project_CAN.Web.Controllers
 
             ViewBag.path = insideProjectDirectory;
             ViewBag.tutorial = _user.GetTutorialByIdFromDB(tutorialId);
+            bool isLiked = false;
+            var likedTutorials = _user.GetLikedTutorialsFromDB(RetrieveUserID());
+            foreach (var tutorial in likedTutorials.LikesList)
+            {
+                if (tutorial.Tutorial == null) continue;
+                if (tutorial.Tutorial.tutorialId == tutorialId)
+                {
+                    isLiked= true;
+                    break;
+                }
+            }
+
+            ViewBag.isliked = isLiked;
+
             return View();
         }
 
