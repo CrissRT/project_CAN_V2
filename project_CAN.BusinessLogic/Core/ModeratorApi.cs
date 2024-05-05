@@ -224,12 +224,21 @@ namespace project_CAN.BusinessLogic.Core
                 imageId = tutorial.imageId;
                 videoId = tutorial.videoLinkId;
 
+                using (var likesDB = new DBLikesContext())
+                {
+                    var likes = likesDB.Likes.Where(l => l.tutorialId == tutorial.tutorialId).ToList();
+                    foreach (var like in likes)
+                    {
+                        likesDB.Likes.Remove(like);
+                    }
+                    likesDB.SaveChanges();
+                }
+
                 var countImages = db.Tutorial.Count(o => o.imageId == imageId);
                 var countVideosLink = db.Tutorial.Count(s => s.videoLinkId == videoId);
 
                 db.Tutorial.Remove(tutorial);
                 db.SaveChanges();
-
 
                 if (countImages == 1)
                 {
