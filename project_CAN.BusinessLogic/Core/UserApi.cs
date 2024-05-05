@@ -13,11 +13,31 @@ using System.Web;
 using project_CAN.Domain.Enums;
 using project_CAN.Domain.Entities.Moderator;
 using project_CAN.Domain.Entities.Admin;
+using System.Text.RegularExpressions;
 
 namespace project_CAN.BusinessLogic.Core
 {
     public class UserApi
     {
+        protected internal TutorialsAllData SearchTutorials(string tutorial)
+        {
+            using (var db = new DBTutorialContext())
+            {
+                // Fetch all tutorials from the database
+                var allTutorials = db.Tutorial.ToList();
+
+                // Create a regex pattern for case-insensitive search
+                var regex = new Regex(tutorial, RegexOptions.IgnoreCase);
+
+                // Perform the filtering in-memory and take only the first 5 matched elements
+                var matchedTutorials = allTutorials
+                    .Where(itemDB => regex.IsMatch(itemDB.title))
+                    .Take(7)
+                    .ToList();
+
+                return new TutorialsAllData { TutorialsList = matchedTutorials };
+            }
+        }
 
         protected DBTutorialTable GetTutorialById(int id)
         {

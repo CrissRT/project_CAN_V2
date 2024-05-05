@@ -15,6 +15,11 @@ namespace project_CAN.BusinessLogic
 {
     public class AdminBL : AdminApi, IAdmin
     {
+        public TutorialsAllData SearchTutorialsInDB(string tutorial)
+        {
+            return SearchTutorials(tutorial);
+        }
+
         public int CountAllUserLikesFromDb(int userId)
         {
             return CountAllUserLikes(userId);

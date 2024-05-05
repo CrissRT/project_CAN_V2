@@ -14,7 +14,10 @@ namespace project_CAN.BusinessLogic
 {
     public class ModeratorBL : ModeratorApi, IModerator
     {
-
+        public TutorialsAllData SearchTutorialsInDB(string tutorial)
+        {
+            return SearchTutorials(tutorial);
+        }
         public bool LikeAndDislikeinDB(LikesData data)
         {
             return LikeAndDislike(data);

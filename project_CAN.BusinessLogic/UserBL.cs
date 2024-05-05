@@ -58,5 +58,10 @@ namespace project_CAN.BusinessLogic
         {
             return GetTutorialById(id);
         }
+
+        public TutorialsAllData SearchTutorialsInDB(string tutorial)
+        {
+            return SearchTutorials(tutorial);
+        }
     }
 }

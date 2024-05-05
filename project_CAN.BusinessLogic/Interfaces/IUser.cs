@@ -21,5 +21,7 @@ namespace project_CAN.BusinessLogic.Interfaces
         LikesAllData GetLikedTutorialsFromDB(int userId);
 
         DBTutorialTable GetTutorialByIdFromDB(int id);
+
+        TutorialsAllData SearchTutorialsInDB(string tutorial);
     }
 }

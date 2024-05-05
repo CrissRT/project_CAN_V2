@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using project_CAN.BusinessLogic;
+using project_CAN.Domain.Entities.Moderator;
+using project_CAN.Domain.Entities.User;
 using project_CAN.Domain.Enums;
 using project_CAN.Web.Extension;
 
@@ -33,5 +35,29 @@ namespace project_CAN.Web.Controllers
             ViewBag.likedTutorial = _user.GetLikedTutorialsFromDB(RetrieveUserID());
             return View();
         }
+
+        [HttpPost]
+        public JsonResult SearchTutorial(string tutorial)
+        {
+            var tutorials = _user.SearchTutorialsInDB(tutorial).TutorialsList;
+
+            // Create a list of objects containing title and ID
+            List<object> tutorialData = new List<object>();
+            foreach (var tutorialItem in tutorials)
+            {
+                // Create an anonymous object with title and ID properties
+                var tutorialInfo = new
+                {
+                    title = tutorialItem.title,
+                    tutorialId = tutorialItem.tutorialId
+                };
+                tutorialData.Add(tutorialInfo);
+            }
+
+            // Return JSON result containing the list of titles and IDs
+            return Json(tutorialData);
+        }
+
+
     }
 }
