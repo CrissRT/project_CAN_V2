@@ -39,23 +39,10 @@ namespace project_CAN.Web.Controllers
         [HttpPost]
         public JsonResult SearchTutorial(string tutorial)
         {
-            var tutorials = _user.SearchTutorialsInDB(tutorial).TutorialsList;
-
-            // Create a list of objects containing title and ID
-            List<object> tutorialData = new List<object>();
-            foreach (var tutorialItem in tutorials)
-            {
-                // Create an anonymous object with title and ID properties
-                var tutorialInfo = new
-                {
-                    title = tutorialItem.title,
-                    tutorialId = tutorialItem.tutorialId
-                };
-                tutorialData.Add(tutorialInfo);
-            }
+            var tutorials = _user.SearchTutorialsInDB(tutorial);
 
             // Return JSON result containing the list of titles and IDs
-            return Json(tutorialData);
+            return Json(tutorials);
         }
 
 

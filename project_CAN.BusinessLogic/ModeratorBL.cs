@@ -14,7 +14,7 @@ namespace project_CAN.BusinessLogic
 {
     public class ModeratorBL : ModeratorApi, IModerator
     {
-        public TutorialsAllData SearchTutorialsInDB(string tutorial)
+        public List<object> SearchTutorialsInDB(string tutorial)
         {
             return SearchTutorials(tutorial);
         }
@@ -42,9 +42,9 @@ namespace project_CAN.BusinessLogic
         {
             return EditTutorial(data, pathImagesTutorial);
         }
-        public TutorialResponse AddContentInDB(TutorialDomainData data, string pathImagesTutorial)
+        public TutorialResponse AddTutorialInDB(TutorialDomainData data, string pathImagesTutorial)
         {
-            return AddContent(data, pathImagesTutorial);
+            return AddTutorial(data, pathImagesTutorial);
         }
 
         public TutorialsAllData GetAllTutorialFromDB()

@@ -3,6 +3,7 @@ using project_CAN.BusinessLogic.Interfaces;
 using project_CAN.Domain.Entities.User;
 using System.Web;
 using project_CAN.Domain.Entities.Moderator;
+using System.Collections.Generic;
 
 namespace project_CAN.BusinessLogic
 {
@@ -59,7 +60,7 @@ namespace project_CAN.BusinessLogic
             return GetTutorialById(id);
         }
 
-        public TutorialsAllData SearchTutorialsInDB(string tutorial)
+        public List<object> SearchTutorialsInDB(string tutorial)
         {
             return SearchTutorials(tutorial);
         }

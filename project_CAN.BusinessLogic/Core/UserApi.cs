@@ -19,7 +19,7 @@ namespace project_CAN.BusinessLogic.Core
 {
     public class UserApi
     {
-        protected internal TutorialsAllData SearchTutorials(string tutorial)
+        protected internal List<object> SearchTutorials(string tutorial)
         {
             using (var db = new DBTutorialContext())
             {
@@ -35,7 +35,20 @@ namespace project_CAN.BusinessLogic.Core
                     .Take(7)
                     .ToList();
 
-                return new TutorialsAllData { TutorialsList = matchedTutorials };
+
+                List<object> tutorialData = new List<object>();
+                foreach (var tutorialItem in matchedTutorials)
+                {
+                    // Create an anonymous object with title and ID properties
+                    var tutorialInfo = new
+                    {
+                        title = tutorialItem.title,
+                        tutorialId = tutorialItem.tutorialId
+                    };
+                    tutorialData.Add(tutorialInfo);
+                }
+
+                return tutorialData;
             }
         }
 

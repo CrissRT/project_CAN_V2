@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System.Collections.Generic;
+using System.Web;
 using project_CAN.Domain.Entities.Moderator;
 using project_CAN.Domain.Entities.User;
 
@@ -22,6 +23,6 @@ namespace project_CAN.BusinessLogic.Interfaces
 
         DBTutorialTable GetTutorialByIdFromDB(int id);
 
-        TutorialsAllData SearchTutorialsInDB(string tutorial);
+        List<object> SearchTutorialsInDB(string tutorial);
     }
 }

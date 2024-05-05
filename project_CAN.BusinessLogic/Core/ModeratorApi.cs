@@ -130,7 +130,7 @@ namespace project_CAN.BusinessLogic.Core
             return null;
         }
         
-        protected internal TutorialResponse AddContent(TutorialDomainData data, string pathImagesTutorial)
+        protected internal TutorialResponse AddTutorial(TutorialDomainData data, string pathImagesTutorial)
         {
             if (data == null) return new TutorialResponse { Status = false, StatusMsg = "Datele nu au fost gasite!" };
 

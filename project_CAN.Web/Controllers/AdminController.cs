@@ -109,7 +109,7 @@ namespace project_CAN.Web.Controllers
             Mapper.Reset();
             Mapper.Initialize(cfg => cfg.CreateMap<TutorialView, TutorialDomainData>());
             var data = Mapper.Map<TutorialDomainData>(viewModel);
-            var addedContent = _adminBL.AddContentInDB(data, pathImagesTutorial);
+            var addedContent = _adminBL.AddTutorialInDB(data, pathImagesTutorial);
             if (addedContent.Status)
             {
                 return RedirectToAction("ControlTutorial", "Admin");

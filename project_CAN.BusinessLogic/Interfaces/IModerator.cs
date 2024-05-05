@@ -11,7 +11,7 @@ namespace project_CAN.BusinessLogic.Interfaces
     public interface IModerator : IUser
     {
         
-        TutorialResponse AddContentInDB(TutorialDomainData data, string pathImagesTutorial);
+        TutorialResponse AddTutorialInDB(TutorialDomainData data, string pathImagesTutorial);
         void RemoveTutorialFromDB(int id, string pathImagesTutorial);
 
         TutorialResponse EditTutorialInDB(TutorialDomainData data, string pathImagesTutorial);
