@@ -3,14 +3,16 @@
 @{
     ViewBag.Title = "Control Tutorial";
     Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
-    
+
 }
 @Styles.Render("~/Content/css/admin/tutorial")
 
 <div class="adminPage">
     <div class="CourseBarr">
-        <div class="courseSearch">
+        <div class="searchBar">
+            <input type="text" name="search" class="search" autocomplete="off" />
             <i class="bi bi-search"></i>
+            <div class="autocomplete-container"></div>
         </div>
         <a href="@Url.Action("AddTutorial", "Admin")" style="color: black;"><i class="bi bi-file-earmark-plus"></i></a>
     </div>
@@ -34,4 +36,60 @@
 
 
 </div>
+
+
+<script>
+    document.querySelector('.search').addEventListener('input', function (e) {
+        var search = e.target.value;
+        if (search.length > 0) {
+            fetch('/Home/SearchTutorial', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ tutorial: search })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    document.querySelector('.autocomplete-container').style.display = "block";
+                    document.querySelector('.searchBar').style.borderBottomLeftRadius = "0";
+                    document.querySelector('.searchBar').style.borderBottomRightRadius = "0";
+
+                    var container = document.querySelector('.autocomplete-container');
+                    container.innerHTML = '';
+                    if (data.length === 0) {
+                        var p = document.createElement('p');
+                        p.innerText = 'No results found';
+                        container.appendChild(p);
+                        return;
+                    }
+                    var ul = document.createElement('ul');
+
+                    data.forEach(function (item) {
+                        var li = document.createElement('li');
+                        var a = document.createElement('a');
+                        a.href = '/Account/WatchTutorial/?tutorialId=' + item.tutorialId;
+                        a.innerText = item.title;
+                        li.appendChild(a);
+                        container.appendChild(li);
+                    });
+
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
+        } else {
+            // Hide and clear the autocomplete container
+            document.querySelector('.autocomplete-container').innerHTML = '';
+            document.querySelector('.autocomplete-container').style.display = "none";
+            document.querySelector('.searchBar').style.borderBottomLeftRadius = "20px";
+            document.querySelector('.searchBar').style.borderBottomRightRadius = "20px";
+        }
+    });
+</script>
 

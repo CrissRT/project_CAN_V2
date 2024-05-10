@@ -47,6 +47,19 @@ namespace project_CAN.Web.Controllers
             return Json(tutorials);
         }
 
+        public ActionResult AimStaticView()
+        {
+            return View();
+        }
 
+        public ActionResult MovementStaticView()
+        {
+            return View();
+        }
+
+        public ActionResult SprayStaticView()
+        {
+            return View();
+        }
     }
 }

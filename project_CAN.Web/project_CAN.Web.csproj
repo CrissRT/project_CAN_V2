@@ -2375,6 +2375,9 @@
     <Content Include="Views\Moderator\Profile.cshtml" />
     <Content Include="Views\Shared\_HeaderModerator.cshtml" />
     <Content Include="Views\Shared\_LayoutPageModerator.cshtml" />
+    <Content Include="Views\Home\AimStaticView.cshtml" />
+    <Content Include="Views\Home\MovementStaticView.cshtml" />
+    <Content Include="Views\Home\SprayStaticView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
