@@ -7,24 +7,22 @@
     var relativePath = Path.Combine(ViewBag.path, content.Image.imageName);
 }
 @model project_CAN.Web.Models.Moderator.TutorialView
-@Styles.Render("~/Content/css/admin/editTutorial")
+@Styles.Render("~/Content/css/moderator/editTutorial")
 <body class="editCoursesPage">
 
     <div class="prevCourses">
         <img src="@Url.Content(relativePath)" />
         <h2>@content.title</h2>
         <p>@content.description</p>
-        @*<iframe width="420" height="315" src="https://www.youtube.com/embed/eI4an8aSsgw">
-            </iframe>*@
         <iframe width="560" height="315" src="@content.Video.videoLink" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </div>
 
     <div class="editCourses">
-        @using (Html.BeginForm("EditTutorial", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        @using (Html.BeginForm("EditTutorial", "Moderator", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
             @Html.HiddenFor(model => model.tutorialId, new { @Value = content.tutorialId})
-            <a href="@Url.Action("ControlTutorial", "Admin")" style="color: black;"><i class="bi bi-arrow-left-square"></i></a>
+            <a href="@Url.Action("ControlTutorial", "Moderator")" style="color: black;"><i class="bi bi-arrow-left-square"></i></a>
 
             <div class="editCoursesTitle">
                 @*<input type="text" placeholder="Titlu">*@

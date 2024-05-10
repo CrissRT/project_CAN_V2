@@ -1,0 +1,94 @@
+﻿    @using System.Web.Optimization
+
+@{
+    ViewBag.Title = "Control Tutorial";
+    Layout = "~/Views/Shared/_LayoutPageModerator.cshtml";
+    
+}
+@Styles.Render("~/Content/css/moderator/tutorial")
+
+<div class="moderatorPage">
+    <div class="CourseBarr">
+        <div class="searchBar">
+            <input type="text" name="search" class="search" autocomplete="off" />
+            <i class="bi bi-search"></i>
+            <div class="autocomplete-container"></div>
+        </div>
+        <a href="@Url.Action("AddTutorial", "Moderator")" style="color: black;"><i class="bi bi-file-earmark-plus"></i></a>
+    </div>
+
+    <div class="courseList">
+        @foreach (var content in ViewBag.tutorial.TutorialsList)
+        {
+            <div class="moderatorCourseView">
+                @{
+                    var relativePath = Path.Combine(ViewBag.path, content.Image.imageName);
+                }
+                <img src="@Url.Content(relativePath)" />
+                <h2>@content.title</h2>
+                <div class="editRemoveCourse">
+                    <div class="edit"><a href="@Url.Action("EditTutorial", "Moderator", new {id = content.tutorialId})" style="color: black;"><i class="bi bi-pencil"></i></a></div>
+                    <div class="remove"><a href="@Url.Action("RemoveContent", "Moderator", new { id = content.tutorialId })" style="color: black;"><i class="bi bi-file-earmark-minus"></i></a></div>
+                </div>
+            </div>
+        }
+    </div>
+
+
+</div>
+
+<script>
+    document.querySelector('.search').addEventListener('input', function (e) {
+        var search = e.target.value;
+        if (search.length > 0) {
+            fetch('/Home/SearchTutorial', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ tutorial: search })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    document.querySelector('.autocomplete-container').style.display = "block";
+                    document.querySelector('.searchBar').style.borderBottomLeftRadius = "0";
+                    document.querySelector('.searchBar').style.borderBottomRightRadius = "0";
+
+                    var container = document.querySelector('.autocomplete-container');
+                    container.innerHTML = '';
+                    if (data.length === 0) {
+                        var p = document.createElement('p');
+                        p.innerText = 'No results found';
+                        container.appendChild(p);
+                        return;
+                    }
+                    var ul = document.createElement('ul');
+
+                    data.forEach(function (item) {
+                        var li = document.createElement('li');
+                        var a = document.createElement('a');
+                        a.href = '/Account/WatchTutorial/?tutorialId=' + item.tutorialId;
+                        a.innerText = item.title;
+                        li.appendChild(a);
+                        container.appendChild(li);
+                    });
+
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
+        } else {
+            // Hide and clear the autocomplete container
+            document.querySelector('.autocomplete-container').innerHTML = '';
+            document.querySelector('.autocomplete-container').style.display = "none";
+            document.querySelector('.searchBar').style.borderBottomLeftRadius = "20px";
+            document.querySelector('.searchBar').style.borderBottomRightRadius = "20px";
+        }
+    });
+</script>
+

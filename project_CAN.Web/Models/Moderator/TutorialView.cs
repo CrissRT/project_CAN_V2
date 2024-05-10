@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Web;
 
-namespace project_CAN.Web.Models.Admin
+namespace project_CAN.Web.Models.Moderator
 {
     public class TutorialView
     {

@@ -21,7 +21,8 @@ namespace project_CAN.Web.Controllers
             int userLogged = isUserLogged();
             if (userLogged == 2) return RedirectToAction("ControlUsers", "Admin");
             else if (userLogged == 0) return RedirectToAction("LoggedIn", "Home");
-            
+            else if (isUserLogged() == 1) return RedirectToAction("ControlTutorial", "Moderator");
+
             return View();
         }
 
@@ -29,6 +30,7 @@ namespace project_CAN.Web.Controllers
         {
             if (isUserLogged() == -1) return RedirectToAction("Login", "Account");
             else if (isUserLogged() == 2) return RedirectToAction("ControlUsers", "Admin");
+            else if (isUserLogged() == 1) return RedirectToAction("ControlTutorial", "Moderator");
 
             ViewBag.path = insideProjectDirectory;
             ViewBag.tutorial = _user.GetAllTutorialFromDB();

@@ -15,6 +15,7 @@ using project_CAN.Web.Models;
 using System.IO;
 using project_CAN.Domain.Entities.Moderator;
 using project_CAN.Web.Extension;
+using project_CAN.Web.Models.Moderator;
 
 namespace project_CAN.Web.Controllers
 {

@@ -54,14 +54,23 @@ namespace project_CAN
             bundles.Add(new StyleBundle("~/Content/css/admin/tutorial").Include(
                 "~/Content/AdminStyles/ControlTutorial.css"));
 
+            bundles.Add(new StyleBundle("~/Content/css/moderator/tutorial").Include(
+                "~/Content/ModeratorStyles/ControlTutorial.css"));
+
             bundles.Add(new StyleBundle("~/Content/css/admin/editUser").Include(
                 "~/Content/AdminStyles/EditUser.css"));
 
             bundles.Add(new StyleBundle("~/Content/css/admin/editTutorial").Include(
                 "~/Content/AdminStyles/EditTutorial.css"));
 
+            bundles.Add(new StyleBundle("~/Content/css/moderator/editTutorial").Include(
+                "~/Content/ModeratorStyles/EditTutorial.css"));
+
             bundles.Add(new StyleBundle("~/Content/css/admin/addTutorial").Include(
                 "~/Content/AdminStyles/AddTutorial.css"));
+
+            bundles.Add(new StyleBundle("~/Content/css/moderator/addTutorial").Include(
+                "~/Content/ModeratorStyles/AddTutorial.css"));
 
             bundles.Add(new StyleBundle("~/Content/css/user/editProfile").Include(
                 "~/Content/UserStyles/EditProfile.css"));
@@ -69,11 +78,20 @@ namespace project_CAN
             bundles.Add(new StyleBundle("~/Content/css/admin/editProfile").Include(
                 "~/Content/AdminStyles/EditProfile.css"));
 
+            bundles.Add(new StyleBundle("~/Content/css/moderator/editProfile").Include(
+                "~/Content/ModeratorStyles/EditProfile.css"));
+
             bundles.Add(new StyleBundle("~/Content/css/admin/header").Include(
                 "~/Content/AdminStyles/HeaderAdmin.css"));
 
+            bundles.Add(new StyleBundle("~/Content/css/moderator/header").Include(
+                "~/Content/ModeratorStyles/HeaderModerator.css"));
+
             bundles.Add(new StyleBundle("~/Content/css/admin/profile").Include(
                 "~/Content/AdminStyles/Profile.css"));
+
+            bundles.Add(new StyleBundle("~/Content/css/moderator/profile").Include(
+                "~/Content/ModeratorStyles/Profile.css"));
 
             bundles.Add(new StyleBundle("~/Content/css/user/likedTutorials").Include(
                 "~/Content/UserStyles/LikedTutorials.css"));

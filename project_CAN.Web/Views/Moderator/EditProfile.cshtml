@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Edit Profile";
+    Layout = "~/Views/Shared/_LayoutPageModerator.cshtml";
+    var user = ViewBag.user;
+    var apiCookie = Request.Cookies["X-KEY"].Value;
+}
+@using System.Web.Optimization
+@model project_CAN.Web.Models.EditProfileView
+@Styles.Render("~/Content/css/moderator/editProfile")
+
+<div class="userEdit">
+    @using (Html.BeginForm("EditProfile", "Moderator", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.apiCookie, new { @Value = apiCookie })
+        <div class="userEditContent">
+            <a href="@Url.Action("Profile", "Moderator")" style="color: black;"><i class="bi bi-arrow-left-square"></i></a>
+            <i class="bi bi-person-circle"></i>
+
+            <div class="userName">
+                <label for="fname">Numele:</label>
+                @Html.TextBoxFor(model => model.userName, new { placeholder = user.userName, id = "fname", name = "fname" })
+                @Html.ValidationMessageFor(model => model.userName)
+            </div>
+
+            <div class="gmail">
+                <label for="email">Email:</label>
+                @Html.TextBoxFor(model => model.email, new { placeholder = user.email, type = "email", id = "email", name = "email" })
+                @Html.ValidationMessageFor(model => model.email)
+            </div>
+
+            <div class="pasword">
+                <label for="pass">Parola:</label>
+                @Html.PasswordFor(model => model.password, new { placeholder = "*****", type = "password", maxlength = "50", id = "pass", name = "pass" })
+                @Html.ValidationMessageFor(model => model.password)
+            </div>
+
+            <button type="submit" class="btn btn-secondary btn-lg">Salvare</button>
+            @if (TempData["message"] != null)
+            {
+                <div class="alert alert-info">@TempData["message"]</div>
+            }
+        </div>
+    }
+
+</div>

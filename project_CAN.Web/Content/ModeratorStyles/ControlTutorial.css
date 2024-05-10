@@ -1,0 +1,162 @@
+.moderatorPage {
+    background-image: url(../../images/backGround.svg);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.CourseBarr {
+    background-color: white;
+    width: 1000px;
+    height: 70px;
+    margin-top: 20px;
+    border: 1px solid black;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.searchBar {
+    background-color: white;
+    width: 400px;
+    height: 50px;
+    border-radius: 20px;
+    border: 1.5px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding: 5px;
+    position: relative;
+}
+
+.searchBar > .search {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    font-size: 20px;
+    padding-left: 10px;
+    /*    border-radius: 20px;*/
+}
+
+.autocomplete-container {
+    position: absolute;
+    top: 48px;
+    height: fit-content;
+    left: -1px;
+    width: 400px;
+    padding-left: 8px;
+    padding-right: 8px;
+    background-color: white;
+    border: 1.5px solid black;
+    border-top: none;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    display: none;
+}
+
+li {
+    list-style: none;
+    cursor: pointer;
+}
+
+    li a {
+        text-decoration: none;
+        color: black;
+        display: block;
+        padding: 10px;
+        border-bottom: 1px solid black;
+}
+
+.bi-search {
+    font-size: 30px;
+    margin-right: 12px;
+}
+
+.bi-file-earmark-plus {
+    font-size: 40px;
+}
+
+.courseList {
+    background-color: white;
+    width: 1000px;
+    overflow:hidden;
+    border: 1px solid black;
+    border-radius: 20px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.moderatorCourseView {
+    width: 100%;
+    height: 200px;
+    border: 1px solid black;
+    border-left: none;
+    border-right: none;
+    margin: -5px 0 10px 0;
+    display: flex;
+    flex-direction: row;
+}
+
+.moderatorCourseView:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+}
+
+.moderatorCourseView > img {
+    width: 400px;
+    height: 100%;
+    margin-right: 20px;
+}
+
+.moderatorCourseView > h2 {
+    width: 450px;
+    margin-right: 20px;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+}
+
+.editRemoveCourse {
+    width: 108px;
+    height: 100%;
+    border: 1px solid black;
+    border-top: none;
+    border-bottom: none;
+    border-right: none;
+}
+
+.edit {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bi-pencil {
+    font-size: 40px;
+}
+
+.remove {
+    width: 100%;
+    height: 50%;
+    border: 1px solid black;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bi-file-earmark-minus {
+    font-size: 40px;
+}

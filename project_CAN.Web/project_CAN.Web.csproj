@@ -2222,6 +2222,12 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\ModeratorStyles\AddTutorial.css" />
+    <Content Include="Content\ModeratorStyles\ControlTutorial.css" />
+    <Content Include="Content\ModeratorStyles\EditProfile.css" />
+    <Content Include="Content\ModeratorStyles\EditTutorial.css" />
+    <Content Include="Content\ModeratorStyles\HeaderModerator.css" />
+    <Content Include="Content\ModeratorStyles\Profile.css" />
     <Content Include="Content\UserStyles\EditProfile.css" />
     <Content Include="Content\favicon.ico" />
     <Content Include="Content\font-awesome.css" />
@@ -2280,7 +2286,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Admin\TutorialView.cs" />
+    <Compile Include="Models\Moderator\TutorialView.cs" />
     <Compile Include="Models\Admin\UserEditView.cs" />
     <Compile Include="Models\EditProfileView.cs" />
     <Compile Include="Models\User\UserLoginView.cs" />
@@ -2362,6 +2368,13 @@
     <Content Include="Views\Account\WatchLikedListOfTutorials.cshtml" />
     <Content Include="Views\Account\WatchTutorial.cshtml" />
     <Content Include="Views\Home\LoggedIn.cshtml" />
+    <Content Include="Views\Moderator\AddTutorial.cshtml" />
+    <Content Include="Views\Moderator\ControlTutorial.cshtml" />
+    <Content Include="Views\Moderator\EditProfile.cshtml" />
+    <Content Include="Views\Moderator\EditTutorial.cshtml" />
+    <Content Include="Views\Moderator\Profile.cshtml" />
+    <Content Include="Views\Shared\_HeaderModerator.cshtml" />
+    <Content Include="Views\Shared\_LayoutPageModerator.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2371,9 +2384,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\ModeratorStyles\" />
-    <Folder Include="Models\Moderator\" />
-    <Folder Include="Views\Moderator\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\project_CAN.BusinessLogic\project_CAN.BusinessLogic.csproj">

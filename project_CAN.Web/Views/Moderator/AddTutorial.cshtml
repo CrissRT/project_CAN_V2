@@ -1,38 +1,34 @@
 ﻿@using System.Web.Optimization
 
 @{
-    ViewBag.Title = "AddTutorial";
+    ViewBag.Title = "Add Tutorial";
     Layout = "~/Views/Shared/_LayoutBlankPage.cshtml";
 }
-@Styles.Render("~/Content/css/admin/addTutorial")
+@Styles.Render("~/Content/css/moderator/addTutorial")
 @model project_CAN.Web.Models.Moderator.TutorialView
 <body class="addCourses">
-    @using (Html.BeginForm("AddTutorial", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("AddTutorial", "Moderator", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
         <div class="addCoursesContent">
 
-            <a href="@Url.Action("ControlTutorial", "Admin")" style="color: black;"><i class="bi bi-arrow-left-square"></i></a>
+            <a href="@Url.Action("ControlTutorial", "Moderator")" style="color: black;"><i class="bi bi-arrow-left-square"></i></a>
 
             <div class="coursesTitle">
                 @*<input type="text" placeholder="Titlu">*@
                 @Html.TextBoxFor(model => model.title, new { placeholder = "Titlu" })
-                @Html.ValidationMessageFor(model => model.title)
             </div>
             <div class="coursesText">
                 @*<textarea name="text" placeholder="Continutul"></textarea>*@
                 @Html.TextAreaFor(model => model.description, new { name = "text", placeholder = "Continutul" })
-                @Html.ValidationMessageFor(model => model.description)
             </div>
             <div class="coursesVideo">
                 @Html.TextBoxFor(model => model.videoLink, new { placeholder = "Linkul Video-ului" })
-                @Html.ValidationMessageFor(model => model.videoLink)
             </div>
 
             <div class="coursesImg">
                 <label for="uploadFile">Adauga o imagine:</label>
                 @Html.TextBoxFor(model => model.image, new { type = "file", id = "uploadFile" })
-                @Html.ValidationMessageFor(model => model.image)
                 <div class="previewImage"></div> <!-- Added a container for preview -->
             </div>
 
