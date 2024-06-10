@@ -73,7 +73,7 @@
                     data.forEach(function (item) {
                         var li = document.createElement('li');
                         var a = document.createElement('a');
-                        a.href = '/Account/WatchTutorial/?tutorialId=' + item.tutorialId;
+                        a.href = '/Admin/EditTutorial?id=' + item.tutorialId;
                         a.innerText = item.title;
                         li.appendChild(a);
                         container.appendChild(li);
